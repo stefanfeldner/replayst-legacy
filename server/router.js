@@ -1,7 +1,11 @@
 const router = require('express').Router();
 
-const userController = require('./controllers/user');
+const { createUser, getOwnedGames, addOwnedGame } = require('./controllers/user');
 
-router.post('/register', userController.createUser);
+
+router.post('/register', createUser);
+
+router.get('/owned/:id', getOwnedGames);
+router.put('/owned/:id', addOwnedGame);
 
 module.exports = router;

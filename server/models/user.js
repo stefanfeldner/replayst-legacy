@@ -7,7 +7,7 @@ const newUser = Schema({
   email: { type: String, required: true },
   nickname: String,
   name: { type: String, required: true },
-  surname: { type: String, required: true },
+  surname: String,
   password: { type: String, required: true },
   owned: [Game],
   wishlist: [Game],

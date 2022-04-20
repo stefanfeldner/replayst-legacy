@@ -5,7 +5,7 @@ const settings = {
   useUnifiedTopology: true
 }
 
-mongoose.connect('mongodb://localhost:27017/replayst',
+mongoose.connect(process.env.LOCALDB,
   settings,
   (err) => {
     if (err) {
