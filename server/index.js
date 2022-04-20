@@ -1,0 +1,19 @@
+//require('dotenv').config();
+const Express = require('express');
+const cors = require('cors');
+const morgan = require('morgan');
+
+const app = Express();
+
+const corsConfig = {
+}
+
+const PORT = process.env.PORT || 3000;
+
+app.use(cors())
+  .use(morgan('short'))
+  .use(Express.json());
+
+app.listen(PORT, () => {
+  console.log(`Up and running at http://localhost:${PORT}`);
+});
