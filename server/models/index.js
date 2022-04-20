@@ -1,17 +1,17 @@
 const mongoose = require('mongoose');
 
 const settings = {
-  useNewUrlParses: true,
+  useNewUrlParser: true,
   useUnifiedTopology: true
 }
 
-mongoose.connect(process.env.LOCALDB,
+mongoose.connect('mongodb://localhost:27017/replayst',
   settings,
   (err) => {
     if (err) {
     console.log(`😞 Sorry, something went wrong! ${err}`);
     } else {
-      console.log(`🦆 Database (sessions) connected @ port ${DB_PORT}!`);
+      console.log(`🦆 Database (sessions) connected @ port 27017`);
     }
   }
 );

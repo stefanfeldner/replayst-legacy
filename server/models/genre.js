@@ -1,13 +1,19 @@
-const mongoose = require('./');
+// const mongoose = require('./');
 
-const Schema = new mongoose.Schema;
+// const { Schema } = mongoose;
 
-const newGenre = new Schema({
+// const newGenre = Schema({
+//   id: Number,
+//   slug: String,
+//   name: String
+// });
+
+//const Genre = mongoose.model('genre', newGenre);
+
+// module.exports = Genre;
+
+module.exports = {
   id: Number,
   slug: String,
   name: String
-});
-
-const Genre = mongoose.model('genre', newGenre);
-
-module.exports = Genre;
+}
