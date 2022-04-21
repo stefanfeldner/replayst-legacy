@@ -8,12 +8,12 @@ export default function HomeScreen() {
   const [nextUrl, setNextUrl] = useState('');
 
   useEffect(() => {
-    // getPopularGames()
-    //   .then((res) => {
-    //     setNextUrl(res.next);
-    //     setGames(res.results);
-    //   })
-    //   .then(console.log('\nUSE EFFETCT AND SERVER CALL\n')); // TODO delete line
+    getPopularGames()
+      .then((res) => {
+        setNextUrl(res.next);
+        setGames(res.results);
+      })
+      .then(console.log('\nUSE EFFETCT AND SERVER CALL\n')); // TODO delete line
   }, []);
 
   function infiniteScroll(url) {
@@ -50,29 +50,29 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'rgb(24, 16, 9)',
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   logo: {
     width: 305,
     height: 159,
-    marginBottom: 10,
+    marginBottom: 10
   },
   testDesc: {
     color: 'rgb(222, 219, 214)',
     fontSize: 18,
-    marginHorizontal: 15,
+    marginHorizontal: 15
   },
   button: {
     backgroundColor: 'blue',
     padding: 20,
     borderRadius: 5,
-    marginTop: 10,
+    marginTop: 10
   },
   buttonText: {
     fontSize: 20,
-    color: '#fff',
+    color: '#fff'
   },
   list: {
-    marginTop: 50,
-  },
+    marginTop: 50
+  }
 });

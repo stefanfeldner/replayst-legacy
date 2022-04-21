@@ -1,9 +1,18 @@
 const apiKEY = 'key=52aeccdf84eb44f8932573f1bb164204';
 const apiURL = 'https://api.rawg.io/api';
+const baseURL = 'http://localhost:3000';
 let page = 1;
 
 export function getPopularGames() {
   return fetch(`${apiURL}/games?${apiKEY}&${page}&page_size=40`)
+    .then((res) => (res.status < 400 ? res : Promise.reject(res)))
+    .then((res) => res.json())
+    .then((res) => filterTileResult(res))
+    .catch((err) => console.error(err, err.message));
+}
+
+export function getCollection(id) {
+  return fetch(`${baseURL}/owned/${id}`)
     .then((res) => (res.status < 400 ? res : Promise.reject(res)))
     .then((res) => res.json())
     .then((res) => filterTileResult(res))
@@ -20,7 +29,7 @@ export function fetchMore(url) {
 
 export function fetchOne(id, source) {
   let url = '';
-  source === 'DB' ? null : (url = `${apiURL}/games/${id}`); //TODO set url to fetch from DB
+  source === 'DB' ? null : (url = `${apiURL}/games/${id}?${apiKEY}`); //TODO set url to fetch from DB
   return fetch(url)
     .then((res) => (res.status < 400 ? res : Promise.reject(res)))
     .then((res) => res.json())
@@ -30,11 +39,13 @@ export function fetchOne(id, source) {
 
 function filterSingleGameResult(res) {
   const platformList = res.platforms.map((single) => single.platform);
-  return {
+  const filteredDesc = res.description.replace(/<[^>]*>?/gm, '');
+
+  const game = {
     id: res.id,
     name: res.name,
     slug: res.slug,
-    description: res.description,
+    description: filteredDesc,
     metacritic: res.metacritic,
     released: res.released,
     background_image: res.background_image,
@@ -43,6 +54,8 @@ function filterSingleGameResult(res) {
     platforms: platformList,
     developers: res.developers
   };
+
+  return game;
 }
 
 function filterTileResult(res) {

@@ -1,13 +1,24 @@
-import { Image, View, StyleSheet, Text } from 'react-native';
+import { Image, View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 export default function GameTile({ game }) {
+  const navigation = useNavigation();
   return (
-    <View style={styles.container}>
-      <Image source={{ url: game.background_image }} style={styles.tile} />
-      <View style={styles.desc}>
-        <Text style={styles.title}>{game.name}</Text>
+    <TouchableOpacity
+      onPress={() => {
+        navigation.navigate('Details', { id: game.id });
+      }}
+    >
+      <View style={styles.container}>
+        <Image source={{ url: game.background_image }} style={styles.tile} />
+        <View style={styles.desc}>
+          <Text style={styles.title}>
+            {game.name}
+            {game.id}
+          </Text>
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
