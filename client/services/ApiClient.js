@@ -6,6 +6,7 @@ export function getPopularGames() {
   return fetch(`${apiURL}/games?${apiKEY}&${page}&page_size=40`)
     .then((res) => (res.status < 400 ? res : Promise.reject(res)))
     .then((res) => res.json())
+    .then((res) => filterTileResult(res))
     .catch((err) => console.error(err, err.message));
 }
 
@@ -13,6 +14,7 @@ export function fetchMore(url) {
   return fetch(url)
     .then((res) => (res.status < 400 ? res : Promise.reject(res)))
     .then((res) => res.json())
+    .then((res) => filterTileResult(res))
     .catch((err) => console.error(err, err.message));
 }
 
@@ -26,7 +28,7 @@ export function fetchOne(id, source) {
     .catch((err) => console.error(err, err.message));
 }
 
-export function filterResult(res) {
+export function filterTileResult(res) {
   const basicTiles = res.results.map((game) => {
     return {
       id: game.id,

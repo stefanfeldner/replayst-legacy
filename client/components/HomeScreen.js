@@ -14,9 +14,8 @@ export default function HomeScreen() {
   useEffect(() => {
     // getPopularGames()
     //   .then((res) => {
-    //     const filtered = filterResult(res);
-    //     setNextUrl(filtered.next);
-    //     setGames(filtered.results);
+    //     setNextUrl(res.next);
+    //     setGames(res.results);
     //   })
     //   .then(console.log('\nUSE EFFETCT AND SERVER CALL\n')); // TODO delete line
   }, []);
