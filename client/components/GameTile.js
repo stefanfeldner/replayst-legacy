@@ -12,10 +12,7 @@ export default function GameTile({ game }) {
       <View style={styles.container}>
         <Image source={{ url: game.background_image }} style={styles.tile} />
         <View style={styles.desc}>
-          <Text style={styles.title}>
-            {game.name}
-            {game.id}
-          </Text>
+          <Text style={styles.title}>{game.name}</Text>
         </View>
       </View>
     </TouchableOpacity>

@@ -1,6 +1,4 @@
-const { SchemaTypes } = require('./');
 const mongoose = require('./');
-const Game = require('./game');
 
 const { Schema } = mongoose;
 

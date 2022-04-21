@@ -20,13 +20,15 @@ async function createUser(req, res) {
   }
 }
 
+// TODO refactor query with populated method
 async function getOwnedGames(req, res) {
   try {
     const { id } = req.params;
-    const { owned } = await User.findById(id);
-    res.status(200).send(owned);
+    const user = await User.findById(id).populate('owned');
+    console.log(user);
+    res.status(200).send(user.owned);
   } catch (err) {
-    res.status(500).send({ error, message: 'Server error, try again' });
+    res.status(500).send({ err, message: 'Server error, try again' });
   }
 }
 
@@ -34,46 +36,68 @@ async function getOwnedGames(req, res) {
 async function addOwnedGame(req, res) {
   try {
     const { id } = req.params;
-    const game = req.body;
-    game.platforms = req.body.platforms.map((list) => list.platform);
-    const added = await User.findByIdAndUpdate(
-      id,
-      { $push: { owned: game } },
-      { new: true }
-    );
-    res.status(201).send(added);
+    const game = await Game.findOne({ id: req.body.id });
+    console.log('GAME=> ', game);
+    if (!game) {
+      const newGame = await Game.create(req.body);
+      console.log('NEWGAME =>', newGame);
+      const user = await User.findByIdAndUpdate(
+        id,
+        { $push: { owned: newGame._id } },
+        { new: true }
+      );
+      res
+        .status(201)
+        .send({ owned: user.owned, message: 'added to collection' });
+    } else {
+      const user = await User.findByIdAndUpdate(
+        id,
+        { $push: { owned: game._id } },
+        { new: true }
+      );
+      res
+        .status(201)
+        .send({ owned: user.owned, message: 'added to collection' });
+    }
+    // game.platforms = req.body.platforms.map((list) => list.platform);
+    // const added = await User.findByIdAndUpdate(
+    //   id,
+    //   { $push: { owned: game } },
+    //   { new: true }
+    // );
+    // res.status(201).send(added);
   } catch (error) {
     res.status(500).send({ error, message: 'Server error, try again' });
   }
 }
 
 // TODO delete function and modules
-async function addGenres(req, res) {
-  try {
-    const { results } = req.body;
-    const genres = await Genre.create(results);
-    res.status(201).send(genres);
-  } catch (error) {
-    res.status(500).send({ error, message: 'Server error, try again' });
-  }
-}
+// async function addGenres(req, res) {
+//   try {
+//     const { results } = req.body;
+//     const genres = await Genre.create(results);
+//     res.status(201).send(genres);
+//   } catch (error) {
+//     res.status(500).send({ error, message: 'Server error, try again' });
+//   }
+// }
 
 // TODO delete function and modules
-async function addPlatforms(req, res) {
-  try {
-    const { results } = req.body;
-    const pf = results.map((res) => res.platforms).flat();
-    const platforms = await Platform.create(pf);
-    res.status(201).send(platforms);
-  } catch (error) {
-    res.status(500).send({ error, message: 'Server error, try again' });
-  }
-}
+// async function addPlatforms(req, res) {
+//   try {
+//     const { results } = req.body;
+//     const pf = results.map((res) => res.platforms).flat();
+//     const platforms = await Platform.create(pf);
+//     res.status(201).send(platforms);
+//   } catch (error) {
+//     res.status(500).send({ error, message: 'Server error, try again' });
+//   }
+// }
 
 module.exports = {
   createUser,
   addOwnedGame,
-  getOwnedGames,
-  addPlatforms,
-  addGenres
+  getOwnedGames
+  // addPlatforms,
+  // addGenres
 };

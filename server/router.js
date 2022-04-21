@@ -10,8 +10,8 @@ const {
 
 router.post('/register', createUser);
 
-router.post('/genres', addGenres);
-router.post('/platforms', addPlatforms);
+// router.post('/genres', addGenres); // TODO delete
+// router.post('/platforms', addPlatforms); TODO delete
 
 router.get('/owned/:id', getOwnedGames);
 router.put('/owned/:id', addOwnedGame);

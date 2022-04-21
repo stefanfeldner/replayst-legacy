@@ -1,6 +1,4 @@
 const mongoose = require('./');
-const Genre = require('./genre');
-const Platform = require('./platform');
 const Developer = require('./developer');
 
 const { Schema } = mongoose;
@@ -14,9 +12,10 @@ const newGame = Schema({
   released: String,
   background_image: String,
   website: String,
-  genres: [{ type: Schema.Types.ObjectId, ref: 'Genre' }], // CHECK POPULATION FOR REFACTORING
-  platforms: [{ type: Schema.Types.ObjectId, ref: 'Platform' }],
-  developers: [{ type: Schema.Types.ObjectId, ref: 'Developer' }]
+  // genres: [{ type: Schema.Types.ObjectId, ref: 'Genre' }], // CHECK POPULATION FOR REFACTORING
+  // platforms: [{ type: Schema.Types.ObjectId, ref: 'Platform' }],
+  developers: [Developer]
+  // developers: [{ type: Schema.Types.ObjectId, ref: 'Developer' }] // TO REFACTOR IN PRODUCTION
 });
 
 const Game = mongoose.model('Game', newGame);
