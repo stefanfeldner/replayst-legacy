@@ -60,7 +60,10 @@ async function addGenres(req, res) {
 // TODO delete function and modules
 async function addPlatforms(req, res) {
   try {
-    const platforms = await Platform.create(req.body);
+    const { results } = req.body;
+    const pf = results.map((res) => res.platforms).flat();
+    console.log(pf);
+    const platforms = await Platform.create(pf);
     res.status(201).send(platforms);
   } catch (error) {
     res.status(500).send({ error, message: 'Server error, try again' });

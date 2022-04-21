@@ -11,7 +11,7 @@ const {
 router.post('/register', createUser);
 
 router.post('/genres', addGenres);
-router.post('platforms', addPlatforms);
+router.post('/platforms', addPlatforms);
 
 router.get('/owned/:id', getOwnedGames);
 router.put('/owned/:id', addOwnedGame);
