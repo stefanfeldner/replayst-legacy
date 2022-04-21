@@ -22,6 +22,6 @@ export default function GameList({ games, infiniteScroll, nextUrl, setGames }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-  },
+    flex: 1
+  }
 });

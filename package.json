@@ -19,6 +19,7 @@
   "homepage": "https://github.com/grampassonnia/replayst#readme",
   "devDependencies": {
     "eslint-plugin-json": "^3.1.0",
+    "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-native": "^4.0.0"
   },
   "dependencies": {

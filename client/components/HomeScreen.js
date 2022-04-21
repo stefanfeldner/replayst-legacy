@@ -1,11 +1,7 @@
 import { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import GameList from './GameList';
-import {
-  getPopularGames,
-  fetchMore,
-  filterResult,
-} from '../services/ApiClient';
+import { getPopularGames, fetchMore } from '../services/ApiClient';
 
 export default function HomeScreen() {
   const [games, setGames] = useState([]);

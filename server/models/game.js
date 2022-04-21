@@ -7,6 +7,7 @@ const Developer = require('./developer');
 
 // const newGame = Schema({
 //   id: Number,
+//   name: String,
 //   slug: String,
 //   description: String,
 //   metacritic: Number,
@@ -23,6 +24,7 @@ const Developer = require('./developer');
 
 module.exports = {
   id: Number,
+  name: String,
   slug: String,
   description: String,
   metacritic: Number,
@@ -31,5 +33,5 @@ module.exports = {
   website: String,
   genres: [Genre],
   platforms: [Platform],
-  developers: [Developer],
+  developers: [Developer]
 };

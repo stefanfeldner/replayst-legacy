@@ -7,7 +7,11 @@
     "amd": true,
     "react-native/react-native": true
   },
-  "extends": ["eslint:recommended", "plugin:react-native/recommended"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommend",
+    "plugin:react-native/recommended"
+  ],
   "parserOptions": {
     "ecmaVersion": 9,
     "ecmaFeatures": {
@@ -16,13 +20,13 @@
     },
     "sourceType": "module"
   },
-  "plugins": ["react-native", "json"],
+  "plugins": ["react-native", "react", "json"],
   "settings": {
-      "react": {
-        "pragma": "React",
-        "version": "^16.5.2"
-      }
-    },
+    "react": {
+      "pragma": "React",
+      "version": "latest"
+    }
+  },
   "rules": {
     "indent": ["error", 2],
     "keyword-spacing": "error",

@@ -24,20 +24,37 @@ export function fetchOne(id, source) {
   return fetch(url)
     .then((res) => (res.status < 400 ? res : Promise.reject(res)))
     .then((res) => res.json())
-    .then((res) => filterResult(res))
+    .then((res) => filterSingleGameResult(res))
     .catch((err) => console.error(err, err.message));
 }
 
-export function filterTileResult(res) {
+function filterSingleGameResult(res) {
+  const platformList = res.platforms.map((single) => single.platform);
+  return {
+    id: res.id,
+    name: res.name,
+    slug: res.slug,
+    description: res.description,
+    metacritic: res.metacritic,
+    released: res.released,
+    background_image: res.background_image,
+    website: res.website,
+    genres: res.genres,
+    platforms: platformList,
+    developers: res.developers
+  };
+}
+
+function filterTileResult(res) {
   const basicTiles = res.results.map((game) => {
     return {
       id: game.id,
       name: game.name,
-      background_image: game.background_image,
+      background_image: game.background_image
     };
   });
   return {
     next: res.next,
-    results: basicTiles,
+    results: basicTiles
   };
 }
