@@ -47,6 +47,7 @@ async function addOwnedGame(req, res) {
   }
 }
 
+// TODO delete function and modules
 async function addGenres(req, res) {
   try {
     const genres = await Genre.create(req.body);
@@ -56,6 +57,7 @@ async function addGenres(req, res) {
   }
 }
 
+// TODO delete function and modules
 async function addPlatforms(req, res) {
   try {
     const platforms = await Platform.create(req.body);
