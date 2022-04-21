@@ -5,11 +5,7 @@ const { Schema } = mongoose;
 const newPlatform = Schema({
   id: Number,
   slug: String,
-  name: String,
-  owned: {
-    type: Boolean,
-    default: false
-  }
+  name: String
 });
 
 const Platform = mongoose.model('platform', newPlatform);

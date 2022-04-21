@@ -39,7 +39,8 @@ export function fetchOne(id, source) {
 
 function filterSingleGameResult(res) {
   const platformList = res.platforms.map((single) => single.platform);
-  const filteredDesc = res.description.replace(/<[^>]*>?/gm, '');
+  let filteredDesc = res.description.replace(/<[^>]*>?/gm, '');
+  filteredDesc = filteredDesc.slice().replace(/(&#39;s)/gm, '');
 
   const game = {
     id: res.id,

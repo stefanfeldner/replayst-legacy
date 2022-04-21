@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Image, StyleSheet, Text, ScrollView } from 'react-native';
+import { Image, StyleSheet, Text, ScrollView, View } from 'react-native';
 import { fetchOne } from '../services/ApiClient';
 import { DateTime } from 'luxon';
 
@@ -15,22 +15,24 @@ export default function GameDetails(props) {
       {!game ? (
         <Text>Loading...</Text>
       ) : (
-        <ScrollView>
+        <ScrollView style={styles.container}>
           <Image source={{ url: game.background_image }} style={styles.image} />
           {game.developers.map((dev) => (
-            <Text key={dev.id}>{dev.name}</Text>
+            <Text style={styles.textCol} key={dev.id}>
+              {dev.name}
+            </Text>
           ))}
-          <Text style={styles.title}>{game.name}</Text>
+          <Text style={[styles.title, styles.textCol]}>{game.name}</Text>
           {game.genres.map((genre) => (
             <Text key={genre.id}>{genre.name}</Text>
           ))}
           {game.platforms.map((p) => (
             <Text key={p.id}>{p.name}</Text>
           ))}
-          <Text>
+          <Text style={styles.textCol}>
             Release date: {DateTime.fromISO(game.released).toLocaleString()}
           </Text>
-          <Text>{game.description}</Text>
+          <Text style={[styles.textCol, styles.desc]}>{game.description}</Text>
         </ScrollView>
       )}
     </>
@@ -48,5 +50,11 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24
+  },
+  textCol: {
+    color: 'rgb(222, 219, 214)'
+  },
+  desc: {
+    padding: 15
   }
 });
