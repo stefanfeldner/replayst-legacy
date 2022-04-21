@@ -1,6 +1,7 @@
 // const mongoose = require('./');
 const Genre = require('./genre');
 const Platform = require('./platform');
+const Developer = require('./developer');
 
 // const { Schema } = mongoose;
 
@@ -29,5 +30,6 @@ module.exports = {
   background_image: String,
   website: String,
   genres: [Genre],
-  platforms: [Platform]
+  platforms: [Platform],
+  developers: [Developer],
 };

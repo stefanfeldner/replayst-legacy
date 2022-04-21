@@ -12,14 +12,13 @@ export default function HomeScreen() {
   const [nextUrl, setNextUrl] = useState('');
 
   useEffect(() => {
-    getPopularGames()
-      .then((res) => {
-        const filtered = filterResult(res);
-        console.log(filtered);
-        setNextUrl(filtered.next);
-        setGames(filtered.results);
-      })
-      .then(console.log('\nUSE EFFETCT AND SERVER CALL\n')); // to be deleted
+    // getPopularGames()
+    //   .then((res) => {
+    //     const filtered = filterResult(res);
+    //     setNextUrl(filtered.next);
+    //     setGames(filtered.results);
+    //   })
+    //   .then(console.log('\nUSE EFFETCT AND SERVER CALL\n')); // TODO delete line
   }, []);
 
   function infiniteScroll(url) {

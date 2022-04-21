@@ -12,8 +12,8 @@ export default function GameList({ games, infiniteScroll, nextUrl, setGames }) {
         maxToRenderPerBatch={8}
         onEndReached={() => {
           console.log('fired');
-          // return infiniteScroll(nextUrl)
-        }} // <-- for some reason it needs to be put in a callback function!!!
+          // return infiniteScroll(nextUrl) //UNCOMMENT TO ACTIVATE INFINITE SCROLL
+        }} // <-- when we call a function directly in JSX we need to put it in a callback function!!!
         onEndReachedThreshold={0}
       />
     </SafeAreaView>
