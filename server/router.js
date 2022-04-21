@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { populateWithGenres } = require('./middleware/helpers');
 
 const {
   createUser,
@@ -14,6 +15,6 @@ router.post('/register', createUser);
 // router.post('/platforms', addPlatforms); TODO delete
 
 router.get('/owned/:id', getOwnedGames);
-router.put('/owned/:id', addOwnedGame);
+router.put('/owned/:id', populateWithGenres, addOwnedGame);
 
 module.exports = router;

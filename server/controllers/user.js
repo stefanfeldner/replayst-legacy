@@ -36,8 +36,6 @@ async function getOwnedGames(req, res) {
 async function addOwnedGame(req, res) {
   try {
     const { id } = req.params;
-    const genres = await populateWithGenres(req);
-    req.body.genres = genres;
     const game = await Game.findOne({ id: req.body.id });
     //console.log('GAME=> ', game);
     if (!game) {
@@ -74,12 +72,12 @@ async function addOwnedGame(req, res) {
 }
 
 // TODO move to middleware
-async function populateWithGenres(req, res, next) {
-  //console.log('REQUEST GENRES\n', req.body.genres);
-  const genIds = req.body.genres.map((genre) => genre.id);
-  const genres = await Genre.find({ id: { $in: genIds } });
-  return genres.map((gen) => gen._id);
-}
+// async function populateWithGenres(req, res, next) {
+//   //console.log('REQUEST GENRES\n', req.body.genres);
+//   const genIds = req.body.genres.map((genre) => genre.id);
+//   const genres = await Genre.find({ id: { $in: genIds } });
+//   return genres.map((gen) => gen._id);
+// }
 
 // TODO delete function and modules
 // async function addGenres(req, res) {
