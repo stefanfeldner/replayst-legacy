@@ -22,6 +22,6 @@ module.exports = {
   name: String,
   owned: {
     type: Boolean,
-    default: false
-  }
-}
+    default: false,
+  },
+};
