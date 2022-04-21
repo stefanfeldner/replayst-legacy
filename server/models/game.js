@@ -12,7 +12,7 @@ const newGame = Schema({
   released: String,
   background_image: String,
   website: String,
-  // genres: [{ type: Schema.Types.ObjectId, ref: 'Genre' }], // CHECK POPULATION FOR REFACTORING
+  genres: [{ type: Schema.Types.ObjectId, ref: 'Genre' }], // CHECK POPULATION FOR REFACTORING
   // platforms: [{ type: Schema.Types.ObjectId, ref: 'Platform' }],
   developers: [Developer]
   // developers: [{ type: Schema.Types.ObjectId, ref: 'Developer' }] // TO REFACTOR IN PRODUCTION
