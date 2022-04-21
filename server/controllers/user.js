@@ -50,7 +50,8 @@ async function addOwnedGame(req, res) {
 // TODO delete function and modules
 async function addGenres(req, res) {
   try {
-    const genres = await Genre.create(req.body);
+    const { results } = req.body;
+    const genres = await Genre.create(results);
     res.status(201).send(genres);
   } catch (error) {
     res.status(500).send({ error, message: 'Server error, try again' });
@@ -62,7 +63,6 @@ async function addPlatforms(req, res) {
   try {
     const { results } = req.body;
     const pf = results.map((res) => res.platforms).flat();
-    console.log(pf);
     const platforms = await Platform.create(pf);
     res.status(201).send(platforms);
   } catch (error) {
