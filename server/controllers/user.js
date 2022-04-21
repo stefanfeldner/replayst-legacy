@@ -1,4 +1,7 @@
 const User = require('../models/user');
+const Game = require('../models/game');
+const Genre = require('../models/genre');
+const Platform = require('../models/platform');
 const bcrypt = require('bcrypt');
 
 async function createUser(req, res) {
@@ -44,4 +47,28 @@ async function addOwnedGame(req, res) {
   }
 }
 
-module.exports = { createUser, addOwnedGame, getOwnedGames };
+async function addGenres(req, res) {
+  try {
+    const genres = await Genre.create(req.body);
+    res.status(201).send(genres);
+  } catch (error) {
+    res.status(500).send({ error, message: 'Server error, try again' });
+  }
+}
+
+async function addPlatforms(req, res) {
+  try {
+    const platforms = await Platform.create(req.body);
+    res.status(201).send(platforms);
+  } catch (error) {
+    res.status(500).send({ error, message: 'Server error, try again' });
+  }
+}
+
+module.exports = {
+  createUser,
+  addOwnedGame,
+  getOwnedGames,
+  addPlatforms,
+  addGenres
+};
