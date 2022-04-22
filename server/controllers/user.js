@@ -38,7 +38,9 @@ async function getOwnedGames(req, res) {
 async function addOwnedGame(req, res) {
   try {
     const { id } = req.params;
-    const game = await Game.findOne({ id: req.body.id });
+    const game = await Game.findOne({ id: req.body.id }).populate({
+      path: 'genres platforms'
+    });
     if (!game) {
       const newGame = await Game.create(req.body);
       await User.findByIdAndUpdate(

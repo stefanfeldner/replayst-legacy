@@ -8,12 +8,12 @@ export default function HomeScreen() {
   const [nextUrl, setNextUrl] = useState('');
 
   useEffect(() => {
-    // getPopularGames()
-    //   .then((res) => {
-    //     setNextUrl(res.next);
-    //     setGames(res.results);
-    //   })
-    //   .then(console.log('\nUSE EFFETCT AND API CALL\n')); // TODO delete line
+    getPopularGames()
+      .then((res) => {
+        setNextUrl(res.next);
+        setGames(res.results);
+      })
+      .then(console.log('\nUSE EFFETCT AND API CALL\n')); // TODO delete line
   }, []);
 
   function infiniteScroll(url) {

@@ -9,10 +9,10 @@ export default function AddToCollection({ game, setGame }) {
     <View style={styles.container}>
       <Pressable
         onPress={() =>
-          addGameToCollection(userId, game).then(
-            (res) => console.log(res.added)
-            //setGame(res.added, setIsAdded(true))
-          )
+          addGameToCollection(userId, game).then((res) => {
+            console.log(res.added);
+            setGame(res.added, setIsAdded(true));
+          })
         }
       >
         <Text style={styles.text}>{isAdded ? '-' : '+'}</Text>
@@ -25,8 +25,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'flex-end',
-    padding: 10
+    alignSelf: 'flex-end',
+    padding: 10,
+    width: '10%'
   },
   text: {
     color: 'rgb(222, 219, 214)',

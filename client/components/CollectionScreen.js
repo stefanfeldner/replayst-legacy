@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import GameList from './GameList';
 import { getCollection, fetchMore } from '../services/ApiClient';
 
-export default function HomeScreen() {
+export default function CollectionScreen() {
   const [games, setGames] = useState([]);
   const [nextUrl, setNextUrl] = useState('');
   const userId = '6261e0b712592ddafe9b6aa2';
