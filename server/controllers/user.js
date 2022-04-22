@@ -25,7 +25,7 @@ async function getOwnedGames(req, res) {
     const { id } = req.params;
     const user = await User.findById(id).populate({
       path: 'owned',
-      populate: { path: 'genres', path: 'platforms' }
+      populate: { path: 'genres platforms' }
     });
     res.status(200).send(user.owned);
   } catch (err) {
@@ -41,7 +41,6 @@ async function addOwnedGame(req, res) {
     const game = await Game.findOne({ id: req.body.id });
     if (!game) {
       const newGame = await Game.create(req.body);
-      console.log('NEWGAME =>', newGame);
       const user = await User.findByIdAndUpdate(
         id,
         { $push: { owned: newGame._id } },
