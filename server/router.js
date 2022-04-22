@@ -7,12 +7,15 @@ const {
 const {
   createUser,
   getOwnedGames,
-  addOwnedGame
+  addOwnedGame,
+  getOneGame
 } = require('./controllers/user');
 
 router.post('/register', createUser);
 
 router.get('/owned/:id', getOwnedGames);
+
+router.get('/game/:id', getOneGame);
 
 router.put(
   '/owned/:id',

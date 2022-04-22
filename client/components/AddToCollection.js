@@ -11,7 +11,7 @@ export default function AddToCollection({ game, setGame }) {
         onPress={() =>
           addGameToCollection(userId, game).then((res) => {
             console.log(res.added);
-            setGame(res.added, setIsAdded(true));
+            setGame(res.added, setIsAdded(!isAdded));
           })
         }
       >

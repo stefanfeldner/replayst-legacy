@@ -11,11 +11,10 @@ export function getPopularGames() {
     .catch((err) => console.error(err, err.message));
 }
 
-export function getCollection(id) {
+export function getUserCollection(id) {
   return fetch(`${baseURL}/owned/${id}`)
     .then((res) => (res.status < 400 ? res : Promise.reject(res)))
     .then((res) => res.json())
-    .then((res) => filterTileResult(res))
     .catch((err) => console.error(err, err.message));
 }
 

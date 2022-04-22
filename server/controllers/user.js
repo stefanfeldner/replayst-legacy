@@ -23,11 +23,26 @@ async function createUser(req, res) {
 async function getOwnedGames(req, res) {
   try {
     const { id } = req.params;
-    const user = await User.findById(id).populate({
-      path: 'owned',
-      populate: { path: 'genres platforms' }
+    const user = await User.findById(id).populate('owned');
+    const ownedTiles = user.owned.map((game) => {
+      return {
+        _id: game._id,
+        id: game.id,
+        name: game.name,
+        background_image: game.background_image
+      };
     });
-    res.status(200).send(user.owned);
+    res.status(200).send(ownedTiles);
+  } catch (err) {
+    res.status(500).send({ err, message: 'Server error, try again' });
+  }
+}
+
+async function getOneGame(req, res) {
+  try {
+    const { id } = req.params;
+    const game = await Game.findById(id).populate('genres platforms');
+    res.status(200).send(game);
   } catch (err) {
     res.status(500).send({ err, message: 'Server error, try again' });
   }
@@ -73,5 +88,6 @@ async function addOwnedGame(req, res) {
 module.exports = {
   createUser,
   addOwnedGame,
-  getOwnedGames
+  getOwnedGames,
+  getOneGame
 };

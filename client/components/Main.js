@@ -8,6 +8,7 @@ const Tab = createBottomTabNavigator();
 function Main() {
   return (
     <Tab.Navigator initialRouteName="Home">
+      <Tab.Screen name="Collection" component={CollectionScreen} />
       <Tab.Screen
         name="Home"
         component={HomeScreen}
@@ -22,7 +23,6 @@ function Main() {
           )
         }}
       />
-      <Tab.Screen name="Collection" component={CollectionScreen} />
     </Tab.Navigator>
   );
 }
