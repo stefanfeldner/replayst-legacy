@@ -13,7 +13,7 @@ export default function HomeScreen() {
     //     setNextUrl(res.next);
     //     setGames(res.results);
     //   })
-    //   .then(console.log('\nUSE EFFETCT AND SERVER CALL\n')); // TODO delete line
+    //   .then(console.log('\nUSE EFFETCT AND API CALL\n')); // TODO delete line
   }, []);
 
   function infiniteScroll(url) {
@@ -34,14 +34,6 @@ export default function HomeScreen() {
           setGames={setGames}
         />
       }
-
-      {/* <Image source={{url: "https://media.rawg.io/media/games/283/283e7e600366b0da7021883d27159b27.jpg"}} style={styles.logo} />
-      <Text style={styles.testDesc}>Hello, it's me. I don't know why words like from and with are blue in the tutorial. Maybe I need an extension.</Text>
-      <TouchableOpacity
-        onPress={() => alert('Yo-ho, yo-ho, a pirate life for me')}
-        style={styles.button}>
-        <Text style={styles.buttonText}>Pick a photo</Text>
-      </TouchableOpacity> */}
     </View>
   );
 }

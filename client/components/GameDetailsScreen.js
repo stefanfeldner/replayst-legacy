@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Image, StyleSheet, Text, ScrollView, View } from 'react-native';
 import { fetchOne } from '../services/ApiClient';
 import { DateTime } from 'luxon';
+import AddToCollection from './AddToCollection';
 
 export default function GameDetails(props) {
   const [game, setGame] = useState(null);
@@ -16,7 +17,8 @@ export default function GameDetails(props) {
         <Text>Loading...</Text>
       ) : (
         <ScrollView style={styles.container}>
-          <Image source={{ url: game.background_image }} style={styles.image} />
+          <Image source={{ uri: game.background_image }} style={styles.image} />
+          <AddToCollection game={game} setGame={setGame} />
           {game.developers.map((dev) => (
             <Text style={styles.textCol} key={dev.id}>
               {dev.name}

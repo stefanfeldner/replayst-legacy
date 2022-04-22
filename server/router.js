@@ -13,6 +13,7 @@ const {
 router.post('/register', createUser);
 
 router.get('/owned/:id', getOwnedGames);
+
 router.put(
   '/owned/:id',
   populateWithGenres,

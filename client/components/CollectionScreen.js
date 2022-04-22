@@ -6,22 +6,21 @@ import { getCollection, fetchMore } from '../services/ApiClient';
 export default function HomeScreen() {
   const [games, setGames] = useState([]);
   const [nextUrl, setNextUrl] = useState('');
-
+  const userId = '6261e0b712592ddafe9b6aa2';
   useEffect(() => {
-    // getCollection('62615758b8b1a36468b51441')
+    // getCollection(userId)
     //   .then((res) => {
-    //     setNextUrl(res.next);
+    //     setNextUrl(res.next); // TODO ONLY FOR PAGINATION, TO BE IMPLEMENTED ON THE BACKEND
     //     setGames(res.results);
     //   })
-    //   .then(console.log('\nUSE EFFETCT AND SERVER CALL\n')); // TODO delete line
+    //   .then(console.log('\nUSE EFFETCT AND BACKEND CALL\n')); // TODO delete line
   }, []);
 
-  // TODO UNNECESSARY WOUT PAGINATION, USEFUL FOR HUGE LISTS
+  // TODO UNNECESSARY WOUT PAGINATION
   // function infiniteScroll(url) {
   //   fetchMore(url).then((res) =>
   //     setGames((prev) => [...prev, ...res.results], setNextUrl(res.next))
   //   );
-  //   // setState accepts a callback function as a 2nd argument that gets executed once the new state is set
   // }
 
   return (

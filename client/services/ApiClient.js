@@ -29,11 +29,23 @@ export function fetchMore(url) {
 
 export function fetchOne(id, source) {
   let url = '';
-  source === 'DB' ? null : (url = `${apiURL}/games/${id}?${apiKEY}`); //TODO set url to fetch from DB
+  //TODO set url to fetch from DB
+  source === 'DB' ? null : (url = `${apiURL}/games/${id}?${apiKEY}`);
   return fetch(url)
     .then((res) => (res.status < 400 ? res : Promise.reject(res)))
     .then((res) => res.json())
     .then((res) => filterSingleGameResult(res))
+    .catch((err) => console.error(err, err.message));
+}
+
+export function addGameToCollection(owner, game) {
+  return fetch(`${baseURL}/owned/${owner}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(game)
+  })
+    .then((res) => (res.status < 400 ? res : Promise.reject(res)))
+    .then((res) => res.json())
     .catch((err) => console.error(err, err.message));
 }
 
@@ -56,7 +68,7 @@ function filterSingleGameResult(res) {
     developers: res.developers
   };
 
-  console.log(JSON.stringify(game));
+  //console.log(JSON.stringify(game)); // TODO delete log
 
   return game;
 }
@@ -69,8 +81,9 @@ function filterTileResult(res) {
       background_image: game.background_image
     };
   });
-  return {
+  const toPass = {
     next: res.next,
     results: basicTiles
   };
+  return toPass;
 }

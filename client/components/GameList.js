@@ -14,7 +14,7 @@ export default function GameList({ games, infiniteScroll, nextUrl }) {
           console.log('fired');
           // return infiniteScroll(nextUrl) //UNCOMMENT TO ACTIVATE INFINITE SCROLL
         }} // <-- when we call a function directly in JSX we need to put it in a callback function!!!
-        onEndReachedThreshold={0}
+        onEndReachedThreshold={0.1} // TODO check how many times it gets fired with the active infinite scroll
       />
     </SafeAreaView>
   );

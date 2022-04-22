@@ -41,23 +41,27 @@ async function addOwnedGame(req, res) {
     const game = await Game.findOne({ id: req.body.id });
     if (!game) {
       const newGame = await Game.create(req.body);
-      const user = await User.findByIdAndUpdate(
+      await User.findByIdAndUpdate(
         id,
         { $push: { owned: newGame._id } },
         { new: true }
       );
-      res
-        .status(201)
-        .send({ owned: user.owned, message: 'added to collection' });
+      // TODO sends back owned games keys, should I send back the whole list
+      // or maybe just the new game tile elements to be rendered? NO, BECAUSE GAMES OWNED CAN ONLY BE ADDED FROM
+      // the API SIDE, things will change for favorites/wishlist, unless I want to graphically update the frontend
+      // when added to collection.
+      res.status(201).send({ added: newGame, message: 'Added to collection!' });
     } else {
-      const user = await User.findByIdAndUpdate(
+      await User.findByIdAndUpdate(
         id,
         { $push: { owned: game._id } },
         { new: true }
       );
-      res
-        .status(201)
-        .send({ owned: user.owned, message: 'added to collection' });
+      // TODO handle the case in which the game already exists in our game database, we need to return the updated
+      // details to be rendered. Or should we update them in the screen if we receive a positive status?
+      // OR SHOULD WE PASS BACK THE WHOLE USER DETAILS? SOUNDS LIKE AN OVERKILL
+      // ---> what if the user clicks on the tile again? <---
+      res.status(201).send({ owned: game, message: 'Added to collection!' });
     }
   } catch (error) {
     res.status(500).send({ error, message: 'Server error, try again' });

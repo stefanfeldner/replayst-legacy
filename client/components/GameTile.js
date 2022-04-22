@@ -1,7 +1,8 @@
 import { Image, View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { memo } from 'react';
 
-export default function GameTile({ game }) {
+function GameTile({ game }) {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
@@ -10,7 +11,7 @@ export default function GameTile({ game }) {
       }}
     >
       <View style={styles.container}>
-        <Image source={{ url: game.background_image }} style={styles.tile} />
+        <Image source={{ uri: game.background_image }} style={styles.tile} />
         <View style={styles.desc}>
           <Text style={styles.title}>{game.name}</Text>
         </View>
@@ -18,6 +19,8 @@ export default function GameTile({ game }) {
     </TouchableOpacity>
   );
 }
+
+export default memo(GameTile);
 
 const styles = StyleSheet.create({
   container: {
