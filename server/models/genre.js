@@ -2,18 +2,12 @@ const mongoose = require('./');
 
 const { Schema } = mongoose;
 
-const newGenre = Schema({
+const newGenre = new Schema({
   id: Number,
   slug: String,
   name: String
 });
 
-const Genre = mongoose.model('genre', newGenre);
+const Genre = mongoose.model('Genre', newGenre);
 
 module.exports = Genre;
-
-// module.exports = {
-//   id: Number,
-//   slug: String,
-//   name: String
-// }

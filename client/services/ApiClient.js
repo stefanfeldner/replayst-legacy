@@ -56,6 +56,8 @@ function filterSingleGameResult(res) {
     developers: res.developers
   };
 
+  console.log(JSON.stringify(game));
+
   return game;
 }
 

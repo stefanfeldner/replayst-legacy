@@ -2,7 +2,7 @@ const mongoose = require('./');
 
 const { Schema } = mongoose;
 
-const newUser = Schema({
+const newUser = new Schema({
   email: { type: String, required: true },
   nickname: String,
   name: { type: String, required: true },

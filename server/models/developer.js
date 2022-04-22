@@ -2,7 +2,7 @@
 
 // const { Schema } = mongoose;
 
-// const newDev = Schema({
+// const newDev = new Schema({
 //   id: Number,
 //   slug: String,
 //   name: String
