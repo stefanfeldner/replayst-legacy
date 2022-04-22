@@ -29,12 +29,18 @@ export function fetchMore(url) {
 export function fetchOne(id, source) {
   let url = '';
   //TODO set url to fetch from DB
-  source === 'DB' ? null : (url = `${apiURL}/games/${id}?${apiKEY}`);
-  return fetch(url)
-    .then((res) => (res.status < 400 ? res : Promise.reject(res)))
-    .then((res) => res.json())
-    .then((res) => filterSingleGameResult(res))
-    .catch((err) => console.error(err, err.message));
+  if (source === 'DB') {
+    return fetch(`${baseURL}/game/${id}`)
+      .then((res) => (res.status < 400 ? res : Promise.reject(res)))
+      .then((res) => res.json())
+      .catch((err) => console.error(err, err.message));
+  } else {
+    return fetch(`${apiURL}/games/${id}?${apiKEY}`)
+      .then((res) => (res.status < 400 ? res : Promise.reject(res)))
+      .then((res) => res.json())
+      .then((res) => filterSingleGameResult(res))
+      .catch((err) => console.error(err, err.message));
+  }
 }
 
 export function addGameToCollection(owner, game) {

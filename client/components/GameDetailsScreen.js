@@ -2,12 +2,20 @@ import { useEffect, useState } from 'react';
 import { Image, StyleSheet, Text, ScrollView, View } from 'react-native';
 import { fetchOne } from '../services/ApiClient';
 import { DateTime } from 'luxon';
-import AddToCollection from './AddToCollection';
+import UpdateCollection from './UpdateCollection';
 
 export default function GameDetailsScreen(props) {
   const [game, setGame] = useState(null);
+
+  // check if the games is in the collection and make the call accordingly
+  const source = props.route.params.ownedIds.some(
+    (id) => id === props.route.params.id
+  )
+    ? 'DB'
+    : 'API';
+  console.log(source);
   useEffect(() => {
-    fetchOne(props.route.params.id).then((res) => setGame(res));
+    fetchOne(props.route.params.id, source).then((res) => setGame(res));
   }, []);
 
   return (
@@ -17,7 +25,7 @@ export default function GameDetailsScreen(props) {
       ) : (
         <ScrollView style={styles.container}>
           <Image source={{ uri: game.background_image }} style={styles.image} />
-          <AddToCollection game={game} setGame={setGame} />
+          <UpdateCollection game={game} setGame={setGame} />
           {game.developers.map((dev) => (
             <Text style={styles.textCol} key={dev.id}>
               {dev.name}

@@ -41,7 +41,7 @@ async function getOwnedGames(req, res) {
 async function getOneGame(req, res) {
   try {
     const { id } = req.params;
-    const game = await Game.findById(id).populate('genres platforms');
+    const game = await Game.findOne({ id }).populate('genres platforms');
     res.status(200).send(game);
   } catch (err) {
     res.status(500).send({ err, message: 'Server error, try again' });

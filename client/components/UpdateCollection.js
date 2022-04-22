@@ -2,17 +2,20 @@ import { useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { addGameToCollection } from '../services/ApiClient';
 
-export default function AddToCollection({ game, setGame }) {
+// TODO handle the remove from collection case, with an alert for accidental press
+export default function UpdateCollection({ game, setGame }) {
   const [isAdded, setIsAdded] = useState(false);
   const userId = '6261e0b712592ddafe9b6aa2';
   return (
     <View style={styles.container}>
       <Pressable
         onPress={() =>
-          addGameToCollection(userId, game).then((res) => {
-            console.log(res.added);
-            setGame(res.added, setIsAdded(!isAdded));
-          })
+          !isAdded
+            ? addGameToCollection(userId, game).then((res) => {
+                console.log(res.added);
+                setGame(res.added, setIsAdded(!isAdded));
+              })
+            : null
         }
       >
         <Text style={styles.text}>{isAdded ? '-' : '+'}</Text>

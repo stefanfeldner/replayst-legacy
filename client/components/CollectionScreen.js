@@ -5,8 +5,8 @@ import { getUserCollection, fetchMore } from '../services/ApiClient';
 
 export default function CollectionScreen() {
   const [tiles, setTiles] = useState([]);
-  const ids = tiles.map((tile) => tile.id);
-  console.log(ids);
+  const ownedIds = tiles.map((tile) => tile.id);
+  console.log(ownedIds);
   //const [nextUrl, setNextUrl] = useState('');
   const userId = '6261e0b712592ddafe9b6aa2';
   useEffect(() => {
@@ -28,10 +28,10 @@ export default function CollectionScreen() {
       {
         <GameList
           style={styles.list}
-          games={tiles}
+          tiles={tiles}
           // infiniteScroll={infiniteScroll}
           // nextUrl={nextUrl}
-          setTiles={setTiles}
+          ownedIds={ownedIds}
         />
       }
     </View>
