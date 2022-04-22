@@ -23,10 +23,10 @@ export default function UpdateCollection({
                 setOwnedTiles((prev) => [
                   ...prev,
                   {
-                    _id: res._id,
-                    background_image: res.background_image,
-                    id: res.id,
-                    name: res.name
+                    _id: res.added._id,
+                    background_image: res.added.background_image,
+                    id: res.added.id,
+                    name: res.added.name
                   }
                 ]);
               })

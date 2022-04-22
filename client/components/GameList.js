@@ -35,7 +35,7 @@ function GameList({
   );
 }
 
-export default memo(GameList);
+export default GameList;
 
 const styles = StyleSheet.create({
   container: {
