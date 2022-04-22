@@ -6,14 +6,12 @@ import UpdateCollection from './UpdateCollection';
 
 export default function GameDetailsScreen(props) {
   const [game, setGame] = useState(null);
-
+  const { ownedIds, setOwnedTiles } = props.route.params;
   // check if the games is in the collection and make the call accordingly
-  const source = props.route.params.ownedIds.some(
-    (id) => id === props.route.params.id
-  )
-    ? 'DB'
-    : 'API';
+  const match = ownedIds.some((id) => id === props.route.params.id);
+  const source = match ? 'DB' : 'API';
   console.log(source);
+
   useEffect(() => {
     fetchOne(props.route.params.id, source).then((res) => setGame(res));
   }, []);
@@ -25,18 +23,30 @@ export default function GameDetailsScreen(props) {
       ) : (
         <ScrollView style={styles.container}>
           <Image source={{ uri: game.background_image }} style={styles.image} />
-          <UpdateCollection game={game} setGame={setGame} />
+          <UpdateCollection
+            match={match}
+            game={game}
+            setGame={setGame}
+            setOwnedTiles={setOwnedTiles}
+          />
           {game.developers.map((dev) => (
             <Text style={styles.textCol} key={dev.id}>
               {dev.name}
+              {dev.id}
             </Text>
           ))}
           <Text style={[styles.title, styles.textCol]}>{game.name}</Text>
           {game.genres.map((genre) => (
-            <Text key={genre.id}>{genre.name}</Text>
+            <Text style={styles.textCol} key={genre.id}>
+              {genre.name}
+              {genre.id}
+            </Text>
           ))}
           {game.platforms.map((p) => (
-            <Text key={p.id}>{p.name}</Text>
+            <Text style={styles.textCol} key={p.id}>
+              {p.name}
+              {p.id}
+            </Text>
           ))}
           <Text style={styles.textCol}>
             Release date: {DateTime.fromISO(game.released).toLocaleString()}

@@ -3,16 +3,16 @@ import { View, StyleSheet } from 'react-native';
 import GameList from './GameList';
 import { getPopularGames, fetchMore } from '../services/ApiClient';
 
-export default function HomeScreen() {
+export default function HomeScreen({ ownedIds, setOwnedTiles }) {
   const [tiles, setTiles] = useState([]);
   const [nextUrl, setNextUrl] = useState('');
   useEffect(() => {
-    getPopularGames()
-      .then((res) => {
-        setNextUrl(res.next);
-        setTiles(res.results);
-      })
-      .then(console.log('\nUSE EFFETCT AND API CALL\n')); // TODO delete line
+    // getPopularGames()
+    //   .then((res) => {
+    //     setNextUrl(res.next);
+    //     setTiles(res.results);
+    //   })
+    //   .then(console.log('\nUSE EFFETCT AND API CALL\n')); // TODO delete line
   }, []);
 
   function infiniteScroll(url) {
@@ -30,6 +30,8 @@ export default function HomeScreen() {
           tiles={tiles}
           infiniteScroll={infiniteScroll}
           nextUrl={nextUrl}
+          ownedIds={ownedIds}
+          setOwnedTiles={setOwnedTiles}
         />
       }
     </View>

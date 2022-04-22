@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './HomeScreen';
 import GameDetailsScreen from './GameDetailsScreen';
-import { useNavigation } from '@react-navigation/native';
+import { Text } from 'react-native';
 const HomeStack = createNativeStackNavigator();
 
 function Home() {
@@ -9,10 +9,10 @@ function Home() {
     <NavigationContainer>
       <HomeStack.Navigator>
         <HomeStack.Screen name="Home" component={HomeScreen}></HomeStack.Screen>
-        <HomeStack.Screen
+        {/* <HomeStack.Screen
           name="Details"
           component={GameDetailsScreen}
-        ></HomeStack.Screen>
+        ></HomeStack.Screen> */}
       </HomeStack.Navigator>
     </NavigationContainer>
   );

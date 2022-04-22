@@ -1,12 +1,14 @@
+import { memo } from 'react';
 import { SafeAreaView, StyleSheet, FlatList } from 'react-native';
 import GameTile from './GameTile';
 
-export default function GameList({
+function GameList({
   tiles,
   infiniteScroll,
   nextUrl,
   navigation,
-  ownedIds
+  ownedIds,
+  setOwnedTiles
 }) {
   return (
     <SafeAreaView style={styles.container}>
@@ -15,7 +17,12 @@ export default function GameList({
         initialNumToRender={8}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-          <GameTile game={item} navigation={navigation} ownedIds={ownedIds} />
+          <GameTile
+            game={item}
+            navigation={navigation}
+            ownedIds={ownedIds}
+            setOwnedTiles={setOwnedTiles}
+          />
         )}
         maxToRenderPerBatch={4}
         onEndReached={() => {
@@ -27,6 +34,8 @@ export default function GameList({
     </SafeAreaView>
   );
 }
+
+export default memo(GameList);
 
 const styles = StyleSheet.create({
   container: {

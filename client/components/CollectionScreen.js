@@ -3,18 +3,18 @@ import { View, StyleSheet } from 'react-native';
 import GameList from './GameList';
 import { getUserCollection, fetchMore } from '../services/ApiClient';
 
-export default function CollectionScreen() {
-  const [tiles, setTiles] = useState([]);
-  const ownedIds = tiles.map((tile) => tile.id);
-  console.log(ownedIds);
-  //const [nextUrl, setNextUrl] = useState('');
-  const userId = '6261e0b712592ddafe9b6aa2';
-  useEffect(() => {
-    getUserCollection(userId).then((res) => {
-      // setNextUrl(res.next); // TODO ONLY FOR PAGINATION, TO BE IMPLEMENTED ON THE BACKEND
-      setTiles(res);
-    });
-  }, []);
+export default function CollectionScreen({ tiles, ownedIds }) {
+  // const [tiles, setTiles] = useState([]);
+  // const ownedIds = tiles.map((tile) => tile.id);
+  //const [nextUrl, setNextUrl] = useState(''); TODO pagination
+
+  // const userId = '6261e0b712592ddafe9b6aa2';
+  // useEffect(() => {
+  //   getUserCollection(userId).then((res) => {
+  //     // setNextUrl(res.next); // TODO ONLY FOR PAGINATION, TO BE IMPLEMENTED ON THE BACKEND
+  //     setTiles(res);
+  //   });
+  // }, []);
 
   // TODO UNNECESSARY WOUT PAGINATION
   // function infiniteScroll(url) {
@@ -29,9 +29,9 @@ export default function CollectionScreen() {
         <GameList
           style={styles.list}
           tiles={tiles}
+          ownedIds={ownedIds}
           // infiniteScroll={infiniteScroll}
           // nextUrl={nextUrl}
-          ownedIds={ownedIds}
         />
       }
     </View>

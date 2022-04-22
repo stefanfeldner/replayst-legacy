@@ -48,7 +48,7 @@ async function getOneGame(req, res) {
   }
 }
 
-// could be changed to add game and specify the property in the body of the request?
+// could be changed to add game and specify the property field in the body of the request?
 // TODO refactor after authentication for middleware obtained id (or API?)
 async function addOwnedGame(req, res) {
   try {
@@ -57,12 +57,14 @@ async function addOwnedGame(req, res) {
       path: 'genres platforms'
     });
     if (!game) {
-      const newGame = await Game.create(req.body);
+      let newGame = await Game.create(req.body);
       await User.findByIdAndUpdate(
         id,
         { $push: { owned: newGame._id } },
         { new: true }
       );
+      newGame = await newGame.populate({ path: 'genres platforms' });
+      console.log('NEW GAME ', newGame);
       // TODO sends back owned games keys, should I send back the whole list
       // or maybe just the new game tile elements to be rendered? NO, BECAUSE GAMES OWNED CAN ONLY BE ADDED FROM
       // the API SIDE, things will change for favorites/wishlist, unless I want to graphically update the frontend

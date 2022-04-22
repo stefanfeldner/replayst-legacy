@@ -2,13 +2,17 @@ import { Image, View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { memo } from 'react';
 
-function GameTile({ game, ownedIds }) {
+function GameTile({ game, ownedIds, setOwnedTiles }) {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
       onPress={() => {
         console.log('click');
-        navigation.navigate('Details', { id: game.id, ownedIds: ownedIds });
+        navigation.navigate('Details', {
+          id: game.id,
+          ownedIds: ownedIds,
+          setOwnedTiles: setOwnedTiles
+        });
       }}
     >
       <View style={styles.container}>
