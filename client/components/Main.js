@@ -11,9 +11,6 @@ function Main() {
   const [tiles, setOwnedTiles] = useState([]);
   const ownedIds = tiles.map((tile) => tile.id);
 
-  //TODO update tiles and ownedIds on collection tab
-  console.log('tiles', tiles);
-
   const userId = '6261e0b712592ddafe9b6aa2';
   useEffect(() => {
     getUserCollection(userId).then((res) => {
@@ -27,6 +24,8 @@ function Main() {
       <Tab.Screen
         name="Collection"
         options={{
+          headerTintColor: '#20150d',
+          tabBarStyle: { backgroundColor: 'rgb(222, 219, 214)' },
           headerStyle: { backgroundColor: 'rgb(222, 219, 214)' },
           headerRight: () => (
             <Button
@@ -42,6 +41,8 @@ function Main() {
       <Tab.Screen
         name="Home"
         options={{
+          headerTintColor: '#20150d',
+          tabBarStyle: { backgroundColor: 'rgb(222, 219, 214)' },
           headerStyle: { backgroundColor: 'rgb(222, 219, 214)' },
           headerRight: () => (
             <Button

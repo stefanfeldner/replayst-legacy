@@ -10,9 +10,9 @@ export default function GameDetailsScreen(props) {
   // check if the games is in the collection and make the call accordingly
   const match = ownedIds.some((id) => id === props.route.params.id);
   const source = match ? 'DB' : 'API';
-  console.log(source);
 
   useEffect(() => {
+    console.log(source);
     fetchOne(props.route.params.id, source).then((res) => setGame(res));
   }, []);
 
@@ -32,20 +32,17 @@ export default function GameDetailsScreen(props) {
           {game.developers.map((dev) => (
             <Text style={styles.textCol} key={dev.id}>
               {dev.name}
-              {dev.id}
             </Text>
           ))}
           <Text style={[styles.title, styles.textCol]}>{game.name}</Text>
           {game.genres.map((genre) => (
             <Text style={styles.textCol} key={genre.id}>
               {genre.name}
-              {genre.id}
             </Text>
           ))}
           {game.platforms.map((p) => (
             <Text style={styles.textCol} key={p.id}>
               {p.name}
-              {p.id}
             </Text>
           ))}
           <Text style={styles.textCol}>

@@ -27,8 +27,6 @@ export function fetchMore(url) {
 }
 
 export function fetchOne(id, source) {
-  let url = '';
-  //TODO set url to fetch from DB
   if (source === 'DB') {
     return fetch(`${baseURL}/game/${id}`)
       .then((res) => (res.status < 400 ? res : Promise.reject(res)))
