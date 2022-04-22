@@ -4,9 +4,8 @@ import { fetchOne } from '../services/ApiClient';
 import { DateTime } from 'luxon';
 import AddToCollection from './AddToCollection';
 
-export default function GameDetails(props) {
+export default function GameDetailsScreen(props) {
   const [game, setGame] = useState(null);
-
   useEffect(() => {
     fetchOne(props.route.params.id).then((res) => setGame(res));
   }, []);

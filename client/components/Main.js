@@ -1,13 +1,11 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { useNavigation } from '@react-navigation/native';
 import HomeScreen from './HomeScreen';
 import CollectionScreen from './CollectionScreen';
 import { Button } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
-function MyTabs() {
-  const navigation = useNavigation();
+function Main() {
   return (
     <Tab.Navigator initialRouteName="Home">
       <Tab.Screen
@@ -29,4 +27,4 @@ function MyTabs() {
   );
 }
 
-export default MyTabs;
+export default Main;

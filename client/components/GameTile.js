@@ -7,6 +7,7 @@ function GameTile({ game }) {
   return (
     <TouchableOpacity
       onPress={() => {
+        console.log('click');
         navigation.navigate('Details', { id: game.id });
       }}
     >

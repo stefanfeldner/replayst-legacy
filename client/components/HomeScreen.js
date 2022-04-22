@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import GameList from './GameList';
 import { getPopularGames, fetchMore } from '../services/ApiClient';
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   const [games, setGames] = useState([]);
   const [nextUrl, setNextUrl] = useState('');
 
@@ -32,6 +32,7 @@ export default function HomeScreen() {
           infiniteScroll={infiniteScroll}
           nextUrl={nextUrl}
           setGames={setGames}
+          navigation={navigation}
         />
       }
     </View>
