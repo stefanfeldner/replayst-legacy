@@ -1,14 +1,10 @@
-import { SearchBar } from 'react-native-screens';
+import { useState } from 'react';
+import { Searchbar } from 'react-native-paper';
 
 function SearchGameBar() {
+  const [search, setSearch] = useState('');
   return (
-    <SearchBar
-      round
-      searchIcon={{ size: 24 }}
-      onChangeText={(text) => text}
-      placeholder="Type Here..."
-      value={search}
-    />
+    <Searchbar placeholder="Search" onChangeText={setSearch} value={search} />
   );
 }
 
