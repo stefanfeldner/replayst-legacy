@@ -1,20 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import GameList from './GameList';
-import { getUserCollection, fetchMore } from '../services/ApiClient';
+import { fetchMore } from '../services/ApiClient';
 
 export default function CollectionScreen({ tiles, ownedIds }) {
-  // const [tiles, setTiles] = useState([]);
-  // const ownedIds = tiles.map((tile) => tile.id);
-  //const [nextUrl, setNextUrl] = useState(''); TODO pagination
+  //const [nextUrl, setNextUrl] = useState(''); //TODO pagination
+  //console.log('TILES', tiles);
+  //console.log('IDS', ownedIds);
 
-  // const userId = '6261e0b712592ddafe9b6aa2';
-  // useEffect(() => {
-  //   getUserCollection(userId).then((res) => {
-  //     // setNextUrl(res.next); // TODO ONLY FOR PAGINATION, TO BE IMPLEMENTED ON THE BACKEND
-  //     setTiles(res);
-  //   });
-  // }, []);
+  useEffect(() => {}, [tiles]);
 
   // TODO UNNECESSARY WOUT PAGINATION
   // function infiniteScroll(url) {

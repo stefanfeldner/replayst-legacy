@@ -1,7 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StyleSheet } from 'react-native';
-import GameDetailsScreen from './components/GameDetailsScreen';
 
 import Main from './components/Main';
 
@@ -17,7 +16,6 @@ export default function App() {
             component={Main}
             options={{ headerShown: false }}
           ></Stack.Screen>
-          {/* <Stack.Screen name="Details" component={GameDetailsScreen} /> */}
         </Stack.Navigator>
       </NavigationContainer>
     </>

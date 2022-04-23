@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from './HomeScreen';
-import CollectionScreen from './CollectionScreen';
+import Home from './Home';
+import Collection from './Collection';
 import { Button } from 'react-native';
 import { useState, useEffect } from 'react';
 import { getUserCollection } from '../services/ApiClient';
@@ -18,11 +18,16 @@ function Main() {
       setOwnedTiles(res);
     });
   }, []);
+  console.log('IDS from main', ownedIds);
 
   return (
-    <Tab.Navigator initialRouteName="Home">
+    <Tab.Navigator
+      screenOptions={{ headerShown: false }}
+      initialRouteName="Home"
+    >
       <Tab.Screen
-        name="Collection"
+        name="CollectionTab"
+        children={() => <Collection tiles={tiles} ownedIds={ownedIds} />}
         options={{
           headerTintColor: '#20150d',
           tabBarStyle: { backgroundColor: 'rgb(222, 219, 214)' },
@@ -35,11 +40,12 @@ function Main() {
             />
           )
         }}
-      >
-        {() => <CollectionScreen tiles={tiles} ownedIds={ownedIds} />}
-      </Tab.Screen>
+      />
       <Tab.Screen
-        name="Home"
+        name="HomeTab"
+        children={() => (
+          <Home ownedIds={ownedIds} setOwnedTiles={setOwnedTiles} />
+        )}
         options={{
           headerTintColor: '#20150d',
           tabBarStyle: { backgroundColor: 'rgb(222, 219, 214)' },
@@ -52,9 +58,7 @@ function Main() {
             />
           )
         }}
-      >
-        {/* {() => <HomeScreen ownedIds={ownedIds} setOwnedTiles={setOwnedTiles} />} */}
-      </Tab.Screen>
+      />
     </Tab.Navigator>
   );
 }

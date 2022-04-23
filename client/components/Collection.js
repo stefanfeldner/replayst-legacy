@@ -1,22 +1,21 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import GameDetailsScreen from './GameDetailsScreen';
 import CollectionScreen from './CollectionScreen';
+
 const CollectionStack = createNativeStackNavigator();
 
-function Collection() {
+function Collection({ tiles, ownedIds }) {
   return (
-    <NavigationContainer>
-      <CollectionStack.Navigator>
-        <CollectionStack.Screen
-          name="Collection"
-          component={CollectionScreen}
-        ></CollectionStack.Screen>
-        <CollectionStack.Screen
-          name="Details"
-          component={GameDetailsScreen}
-        ></CollectionStack.Screen>
-      </CollectionStack.Navigator>
-    </NavigationContainer>
+    <CollectionStack.Navigator>
+      <CollectionStack.Screen
+        name="Collection"
+        children={() => <CollectionScreen tiles={tiles} ownedIds={ownedIds} />}
+      ></CollectionStack.Screen>
+      <CollectionStack.Screen
+        name="Details"
+        component={GameDetailsScreen}
+      ></CollectionStack.Screen>
+    </CollectionStack.Navigator>
   );
 }
 
