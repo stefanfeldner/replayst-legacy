@@ -3,7 +3,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import HomeScreen from './HomeScreen';
 import GameDetailsScreen from './GameDetailsScreen';
 import SearchScreen from './SearchScreen';
-import { Button } from 'react-native';
+import { Pressable } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import SearchGameBar from './SearchGameBar';
 import { useState } from 'react';
 import { searchGamesFromAPI } from '../services/ApiClient';
@@ -35,18 +36,20 @@ function Home({ ownedIds, setOwnedTiles }) {
             headerTintColor: '#dedbd6',
             headerStyle: { backgroundColor: '#20150d' },
             headerRight: () => (
-              <Button
-                onPress={() => navigation.navigate('SearchScreen')}
-                title="But"
-                color="#000"
-              />
+              <Pressable onPress={() => navigation.navigate('SearchScreen')}>
+                <Ionicons name="search" size={20} color="#dedbd6" />
+              </Pressable>
             )
           })}
         />
         <HomeStack.Screen
           name="Details"
           component={GameDetailsScreen}
-          options={{ headerBackTitle: '' }}
+          options={{
+            headerBackTitle: '',
+            headerTintColor: '#dedbd6',
+            headerStyle: { backgroundColor: '#20150d' }
+          }}
         />
         <HomeStack.Screen
           name="SearchScreen"
@@ -61,6 +64,8 @@ function Home({ ownedIds, setOwnedTiles }) {
           )}
           options={{
             headerBackTitle: '',
+            headerTintColor: '#c8c6bf',
+            headerStyle: { backgroundColor: '#20150d' },
             headerTitle: () => (
               <SearchGameBar
                 search={search}
