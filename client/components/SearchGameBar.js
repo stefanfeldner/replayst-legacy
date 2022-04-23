@@ -1,9 +1,13 @@
-import { useState } from 'react';
 import { Searchbar } from 'react-native-paper';
 
-function SearchGameBar({ search, setSearch }) {
+function SearchGameBar({ search, setSearch, handleOnSubmit }) {
   return (
-    <Searchbar placeholder="Search" onChangeText={setSearch} value={search} />
+    <Searchbar
+      placeholder="Search"
+      onChangeText={setSearch}
+      value={search}
+      onSubmitEditing={handleOnSubmit}
+    />
   );
 }
 

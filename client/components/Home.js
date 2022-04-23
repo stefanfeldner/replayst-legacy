@@ -11,7 +11,9 @@ const HomeStack = createNativeStackNavigator();
 
 function Home({ ownedIds, setOwnedTiles }) {
   const [search, setSearch] = useState('');
-  console.log(search);
+  const [searchResults, setSearchResults] = useState([]);
+
+  function handleOnSubmit() {}
 
   return (
     <NavigationContainer independent={true}>
@@ -51,7 +53,12 @@ function Home({ ownedIds, setOwnedTiles }) {
           options={{
             headerBackTitle: '',
             headerTitle: () => (
-              <SearchGameBar search={search} setSearch={setSearch} />
+              <SearchGameBar
+                search={search}
+                setSearch={setSearch}
+                setSearchResults={setSearchResults}
+                handleOnSubmit={handleOnSubmit}
+              />
             )
           }}
         />

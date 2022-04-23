@@ -3,7 +3,7 @@ import Home from './Home';
 import Collection from './Collection';
 import { Button } from 'react-native';
 import { useState, useEffect } from 'react';
-import { getUserCollection } from '../services/ApiClient';
+import { getUserCollection } from '../services/DbClient';
 
 const Tab = createBottomTabNavigator();
 
@@ -14,11 +14,11 @@ function Main() {
   const userId = '6261e0b712592ddafe9b6aa2';
   useEffect(() => {
     getUserCollection(userId).then((res) => {
-      // setNextUrl(res.next); // TODO ONLY FOR PAGINATION, TO BE IMPLEMENTED ON THE BACKEND
+      // setNextUrl(res.next); // TODO ONLY FOR PAGINATION, to eventually implement on the backend
       setOwnedTiles(res);
+      console.log('MAIN');
     });
   }, []);
-  console.log('IDS from main', ownedIds);
 
   return (
     <Tab.Navigator

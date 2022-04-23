@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { addGameToCollection } from '../services/ApiClient';
+import { addGameToCollection } from '../services/DbClient';
 
 // TODO handle the remove from collection case, with an alert for accidental press
 export default function UpdateCollection({
