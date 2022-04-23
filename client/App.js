@@ -17,7 +17,7 @@ export default function App() {
             component={Main}
             options={{ headerShown: false }}
           ></Stack.Screen>
-          <Stack.Screen name="Details" component={GameDetailsScreen} />
+          {/* <Stack.Screen name="Details" component={GameDetailsScreen} /> */}
         </Stack.Navigator>
       </NavigationContainer>
     </>

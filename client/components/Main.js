@@ -53,7 +53,7 @@ function Main() {
           )
         }}
       >
-        {() => <HomeScreen ownedIds={ownedIds} setOwnedTiles={setOwnedTiles} />}
+        {/* {() => <HomeScreen ownedIds={ownedIds} setOwnedTiles={setOwnedTiles} />} */}
       </Tab.Screen>
     </Tab.Navigator>
   );
