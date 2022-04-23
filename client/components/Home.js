@@ -40,8 +40,10 @@ function Home({ ownedIds, setOwnedTiles }) {
           children={() => (
             <SearchScreen ownedIds={ownedIds} setOwnedTiles={setOwnedTiles} />
           )}
-          options={{ headerBackTitle: '' }}
-          headerTitle={() => <SearchGameBar />}
+          options={{
+            headerBackTitle: '',
+            headerTitle: () => <SearchGameBar />
+          }}
         />
       </HomeStack.Navigator>
     </NavigationContainer>
