@@ -5,10 +5,14 @@ import GameDetailsScreen from './GameDetailsScreen';
 import SearchScreen from './SearchScreen';
 import { Button } from 'react-native';
 import SearchGameBar from './SearchGameBar';
+import { useState } from 'react';
 
 const HomeStack = createNativeStackNavigator();
 
 function Home({ ownedIds, setOwnedTiles }) {
+  const [search, setSearch] = useState('');
+  console.log(search);
+
   return (
     <NavigationContainer independent={true}>
       <HomeStack.Navigator>
@@ -38,11 +42,17 @@ function Home({ ownedIds, setOwnedTiles }) {
         <HomeStack.Screen
           name="SearchScreen"
           children={() => (
-            <SearchScreen ownedIds={ownedIds} setOwnedTiles={setOwnedTiles} />
+            <SearchScreen
+              ownedIds={ownedIds}
+              setOwnedTiles={setOwnedTiles}
+              search={search}
+            />
           )}
           options={{
             headerBackTitle: '',
-            headerTitle: () => <SearchGameBar />
+            headerTitle: () => (
+              <SearchGameBar search={search} setSearch={setSearch} />
+            )
           }}
         />
       </HomeStack.Navigator>

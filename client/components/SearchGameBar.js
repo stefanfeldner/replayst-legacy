@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { Searchbar } from 'react-native-paper';
 
-function SearchGameBar() {
-  const [search, setSearch] = useState('');
+function SearchGameBar({ search, setSearch }) {
   return (
     <Searchbar placeholder="Search" onChangeText={setSearch} value={search} />
   );
