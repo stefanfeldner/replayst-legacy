@@ -14,6 +14,7 @@ function Collection({ tiles, ownedIds }) {
       <CollectionStack.Screen
         name="Details"
         component={GameDetailsScreen}
+        options={{ headerBackTitle: '' }}
       ></CollectionStack.Screen>
     </CollectionStack.Navigator>
   );

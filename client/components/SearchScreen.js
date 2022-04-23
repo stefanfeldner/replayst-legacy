@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { View } from 'react-native';
-import { SearchBar } from 'react-native-screens';
+import { StyleSheet, View } from 'react-native';
+import GameList from './GameList';
 
-function SearchScreen() {
+function SearchScreen({ ownedIds, setOwnedTiles }) {
   const [tiles, setTiles] = useState([]);
   const [nextUrl, setNextUrl] = useState('');
   const [searchMore, setSearchMore] = useState(true);
+  const [search, setSearch] = useState('');
 
   function infiniteScroll(url) {
     if (searchMore) {
@@ -19,13 +20,6 @@ function SearchScreen() {
 
   return (
     <View style={styles.container}>
-      <SearchBar
-        round
-        searchIcon={{ size: 24 }}
-        onChangeText={(text) => text}
-        placeholder="Type Here..."
-        value={search}
-      />
       {
         <GameList
           style={styles.list}
@@ -33,10 +27,22 @@ function SearchScreen() {
           infiniteScroll={infiniteScroll}
           nextUrl={nextUrl}
           ownedIds={ownedIds}
+          setOwnedTiles={setOwnedTiles}
         />
       }
     </View>
   );
 }
 
-module.exports = SearchScreen;
+export default SearchScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'rgb(24, 16, 9)',
+    flex: 1,
+    justifyContent: 'center'
+  },
+  list: {
+    marginTop: 50
+  }
+});
