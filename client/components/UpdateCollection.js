@@ -19,7 +19,7 @@ export default function UpdateCollection({
           () =>
             !isAdded
               ? addGameToCollection(userId, game).then((res) => {
-                  setGame(res.added);
+                  setGame(res.added); // logic ready for platform ownership feature
                   setIsAdded(!isAdded);
                   setOwnedTiles((prev) => [
                     ...prev,
