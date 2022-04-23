@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import GameList from './GameList';
 import { getPopularGames, fetchMore } from '../services/ApiClient';
 
@@ -7,12 +7,12 @@ export default function HomeScreen({ ownedIds, setOwnedTiles }) {
   const [tiles, setTiles] = useState([]);
   const [nextUrl, setNextUrl] = useState('');
   useEffect(() => {
-    getPopularGames()
-      .then((res) => {
-        setNextUrl(res.next);
-        setTiles(res.results);
-      })
-      .then(console.log('\nUSE EFFETCT AND API CALL\n')); // TODO delete line
+    // getPopularGames()
+    //   .then((res) => {
+    //     setNextUrl(res.next);
+    //     setTiles(res.results);
+    //   })
+    //   .then(console.log('\nUSE EFFETCT AND API CALL\n')); // TODO delete line
   }, []);
 
   function infiniteScroll(url) {
@@ -24,7 +24,9 @@ export default function HomeScreen({ ownedIds, setOwnedTiles }) {
 
   return (
     <View style={styles.container}>
-      {
+      {!tiles ? (
+        <Text style={styles.testDesc}>Loading...</Text>
+      ) : (
         <GameList
           style={styles.list}
           tiles={tiles}
@@ -33,7 +35,7 @@ export default function HomeScreen({ ownedIds, setOwnedTiles }) {
           ownedIds={ownedIds}
           setOwnedTiles={setOwnedTiles}
         />
-      }
+      )}
     </View>
   );
 }
@@ -53,16 +55,6 @@ const styles = StyleSheet.create({
     color: 'rgb(222, 219, 214)',
     fontSize: 18,
     marginHorizontal: 15
-  },
-  button: {
-    backgroundColor: 'blue',
-    padding: 20,
-    borderRadius: 5,
-    marginTop: 10
-  },
-  buttonText: {
-    fontSize: 20,
-    color: '#fff'
   },
   list: {
     marginTop: 50

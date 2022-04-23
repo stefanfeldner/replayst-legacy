@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import GameList from './GameList';
 import { fetchMore } from '../services/ApiClient';
 
 export default function CollectionScreen({ tiles, ownedIds }) {
   //const [nextUrl, setNextUrl] = useState(''); //TODO pagination
-  //console.log('TILES', tiles);
   //console.log('IDS', ownedIds);
 
   useEffect(() => {}, [tiles]);
@@ -19,7 +18,9 @@ export default function CollectionScreen({ tiles, ownedIds }) {
 
   return (
     <View style={styles.container}>
-      {
+      {!tiles ? (
+        <Text style={styles.testDesc}>Loading...</Text>
+      ) : (
         <GameList
           style={styles.list}
           tiles={tiles}
@@ -27,7 +28,7 @@ export default function CollectionScreen({ tiles, ownedIds }) {
           // infiniteScroll={infiniteScroll}
           // nextUrl={nextUrl}
         />
-      }
+      )}
     </View>
   );
 }
@@ -47,16 +48,6 @@ const styles = StyleSheet.create({
     color: 'rgb(222, 219, 214)',
     fontSize: 18,
     marginHorizontal: 15
-  },
-  button: {
-    backgroundColor: 'blue',
-    padding: 20,
-    borderRadius: 5,
-    marginTop: 10
-  },
-  buttonText: {
-    fontSize: 20,
-    color: '#fff'
   },
   list: {
     marginTop: 50

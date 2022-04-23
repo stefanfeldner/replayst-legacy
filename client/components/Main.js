@@ -1,7 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from './Home';
 import Collection from './Collection';
-import { Button } from 'react-native';
 import { useState, useEffect } from 'react';
 import { getUserCollection } from '../services/DbClient';
 
@@ -29,16 +28,7 @@ function Main() {
         name="CollectionTab"
         children={() => <Collection tiles={tiles} ownedIds={ownedIds} />}
         options={{
-          headerTintColor: '#20150d',
-          tabBarStyle: { backgroundColor: 'rgb(222, 219, 214)' },
-          headerStyle: { backgroundColor: 'rgb(222, 219, 214)' },
-          headerRight: () => (
-            <Button
-              onPress={() => alert('working!')}
-              title="But"
-              color="#000"
-            />
-          )
+          tabBarStyle: { backgroundColor: 'rgb(222, 219, 214)' }
         }}
       />
       <Tab.Screen
@@ -47,16 +37,7 @@ function Main() {
           <Home ownedIds={ownedIds} setOwnedTiles={setOwnedTiles} />
         )}
         options={{
-          headerTintColor: '#20150d',
-          tabBarStyle: { backgroundColor: 'rgb(222, 219, 214)' },
-          headerStyle: { backgroundColor: 'rgb(222, 219, 214)' },
-          headerRight: () => (
-            <Button
-              onPress={() => alert('working!')}
-              title="But"
-              color="#000"
-            />
-          )
+          tabBarStyle: { backgroundColor: 'rgb(222, 219, 214)' }
         }}
       />
     </Tab.Navigator>

@@ -6,14 +6,22 @@ import SearchScreen from './SearchScreen';
 import { Button } from 'react-native';
 import SearchGameBar from './SearchGameBar';
 import { useState } from 'react';
+import { searchGamesFromAPI } from '../services/ApiClient';
 
 const HomeStack = createNativeStackNavigator();
 
 function Home({ ownedIds, setOwnedTiles }) {
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [nextSearchUrl, setNextSearchUrl] = useState('');
 
-  function handleOnSubmit() {}
+  function handleOnSubmit() {
+    searchGamesFromAPI(search).then((res) => {
+      setNextSearchUrl(res.next);
+      setSearchResults(res.results);
+      setSearch('');
+    });
+  }
 
   return (
     <NavigationContainer independent={true}>
@@ -25,7 +33,6 @@ function Home({ ownedIds, setOwnedTiles }) {
           )}
           options={({ navigation }) => ({
             headerTintColor: '#20150d',
-            tabBarStyle: { backgroundColor: 'rgb(222, 219, 214)' },
             headerStyle: { backgroundColor: 'rgb(222, 219, 214)' },
             headerRight: () => (
               <Button
@@ -47,7 +54,9 @@ function Home({ ownedIds, setOwnedTiles }) {
             <SearchScreen
               ownedIds={ownedIds}
               setOwnedTiles={setOwnedTiles}
-              search={search}
+              tiles={searchResults} // WARNING --> NEEDED A PROP NAME CHANGE
+              nextUrl={nextSearchUrl} // --> SAME AS ABOVE
+              setNextUrl={setNextSearchUrl} // --> SAME AS ABOVE
             />
           )}
           options={{
