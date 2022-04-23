@@ -10,6 +10,10 @@ function Collection({ tiles, ownedIds }) {
       <CollectionStack.Screen
         name="Collection"
         children={() => <CollectionScreen tiles={tiles} ownedIds={ownedIds} />}
+        options={{
+          headerTintColor: '#dedbd6',
+          headerStyle: { backgroundColor: '#20150d' }
+        }}
       ></CollectionStack.Screen>
       <CollectionStack.Screen
         name="Details"

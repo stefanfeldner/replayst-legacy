@@ -35,7 +35,7 @@ export default function CollectionScreen({ tiles, ownedIds }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'rgb(24, 16, 9)',
+    backgroundColor: '#110d07',
     flex: 1,
     justifyContent: 'center'
   },

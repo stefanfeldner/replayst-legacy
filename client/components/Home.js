@@ -32,8 +32,8 @@ function Home({ ownedIds, setOwnedTiles }) {
             <HomeScreen ownedIds={ownedIds} setOwnedTiles={setOwnedTiles} />
           )}
           options={({ navigation }) => ({
-            headerTintColor: '#20150d',
-            headerStyle: { backgroundColor: 'rgb(222, 219, 214)' },
+            headerTintColor: '#dedbd6',
+            headerStyle: { backgroundColor: '#20150d' },
             headerRight: () => (
               <Button
                 onPress={() => navigation.navigate('SearchScreen')}
