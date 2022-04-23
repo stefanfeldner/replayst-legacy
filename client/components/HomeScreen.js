@@ -7,12 +7,12 @@ export default function HomeScreen({ ownedIds, setOwnedTiles }) {
   const [tiles, setTiles] = useState([]);
   const [nextUrl, setNextUrl] = useState('');
   useEffect(() => {
-    // getPopularGames()
-    //   .then((res) => {
-    //     setNextUrl(res.next);
-    //     setTiles(res.results);
-    //   })
-    //   .then(console.log('\nUSE EFFETCT AND API CALL\n')); // TODO delete line
+    getPopularGames()
+      .then((res) => {
+        setNextUrl(res.next);
+        setTiles(res.results);
+      })
+      .then(console.log('\nUSE EFFETCT AND API CALL\n')); // TODO delete line
   }, []);
 
   function infiniteScroll(url) {
@@ -45,11 +45,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgb(24, 16, 9)',
     flex: 1,
     justifyContent: 'center'
-  },
-  logo: {
-    width: 305,
-    height: 159,
-    marginBottom: 10
   },
   testDesc: {
     color: 'rgb(222, 219, 214)',

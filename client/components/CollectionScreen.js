@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import GameList from './GameList';
-import { fetchMore } from '../services/ApiClient';
+//import { fetchMore } from '../services/ApiClient';
 
 export default function CollectionScreen({ tiles, ownedIds }) {
   //const [nextUrl, setNextUrl] = useState(''); //TODO pagination

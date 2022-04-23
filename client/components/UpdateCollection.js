@@ -15,22 +15,23 @@ export default function UpdateCollection({
   return (
     <View style={styles.container}>
       <Pressable
-        onPress={() =>
-          !isAdded
-            ? addGameToCollection(userId, game).then((res) => {
-                setGame(res.added);
-                setIsAdded(!isAdded);
-                setOwnedTiles((prev) => [
-                  ...prev,
-                  {
-                    _id: res.added._id,
-                    background_image: res.added.background_image,
-                    id: res.added.id,
-                    name: res.added.name
-                  }
-                ]);
-              })
-            : null
+        onPress={
+          () =>
+            !isAdded
+              ? addGameToCollection(userId, game).then((res) => {
+                  setGame(res.added);
+                  setIsAdded(!isAdded);
+                  setOwnedTiles((prev) => [
+                    ...prev,
+                    {
+                      _id: res.added._id,
+                      background_image: res.added.background_image,
+                      id: res.added.id,
+                      name: res.added.name
+                    }
+                  ]);
+                })
+              : null // TODO logic for game deletion
         }
       >
         <Text style={styles.text}>{isAdded ? '-' : '+'}</Text>
