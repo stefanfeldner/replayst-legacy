@@ -22,8 +22,7 @@ function Home({ ownedIds, setOwnedTiles }) {
     searchGamesFromAPI(search).then((res) => {
       setNextSearchUrl(res.next);
       setSearchResults(res.results);
-      listViewRef.current.scrollToOffset({ offset: 0, animated: true });
-
+      listViewRef.current.scrollToOffset({ offset: 0, animated: true }); // flatlist auto-scroll to top
       setSearch('');
     });
   }
