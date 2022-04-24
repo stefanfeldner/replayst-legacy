@@ -2,7 +2,7 @@ import { filterTileResult, filterSingleGameResult } from './Helpers';
 
 const apiKEY = process.env.API_KEY;
 const apiURL = process.env.API_URL;
-const baseURL = process.env.BASE_URL;
+const baseURL = 'http://localhost:3000';
 let page = 1; // for dynamic pagination, no need for it atm cause we are given the "next" field
 
 export async function getPopularGames() {
