@@ -8,7 +8,7 @@ const Tab = createBottomTabNavigator();
 
 function Main() {
   const [tiles, setOwnedTiles] = useState([]);
-  const ownedIds = tiles.map((tile) => tile.id);
+  const ownedIds = tiles && tiles.map((tile) => tile.id);
 
   const userId = '6261e0b712592ddafe9b6aa2';
   useEffect(() => {
@@ -18,6 +18,8 @@ function Main() {
       console.log('MAIN');
     });
   }, []);
+
+  console.log(process.env.API_KEY);
 
   return (
     <Tab.Navigator

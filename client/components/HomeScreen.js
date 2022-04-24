@@ -7,12 +7,12 @@ export default function HomeScreen({ ownedIds, setOwnedTiles }) {
   const [tiles, setTiles] = useState([]);
   const [nextUrl, setNextUrl] = useState('');
   useEffect(() => {
-    // getPopularGames()
-    //   .then((res) => {
-    //     setNextUrl(res.next);
-    //     setTiles(res.results);
-    //   })
-    //   .then(console.log('\nUSE EFFETCT AND API CALL\n')); // TODO delete line
+    getPopularGames()
+      .then((res) => {
+        setNextUrl(res.next);
+        setTiles(res.results);
+      })
+      .then(console.log('\nUSE EFFETCT AND API CALL\n')); // TODO delete line
   }, []);
 
   function infiniteScroll(url) {

@@ -1,8 +1,8 @@
 import { filterTileResult, filterSingleGameResult } from './Helpers';
 
-const apiKEY = 'key=52aeccdf84eb44f8932573f1bb164204';
-const apiURL = 'https://api.rawg.io/api';
-const baseURL = 'http://localhost:3000';
+const apiKEY = process.env.API_KEY;
+const apiURL = process.env.API_URL;
+const baseURL = process.env.BASE_URL;
 let page = 1; // for dynamic pagination, no need for it atm cause we are given the "next" field
 
 export async function getPopularGames() {
