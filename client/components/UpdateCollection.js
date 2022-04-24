@@ -19,16 +19,16 @@ export default function UpdateCollection({
           () =>
             !isAdded
               ? addGameToCollection(userId, game).then((res) => {
-                  setGame(res.added); // logic ready for platform ownership feature
+                  // setGame(res.added); // logic ready for platform ownership feature
                   setIsAdded(!isAdded);
                   setOwnedTiles((prev) => [
-                    ...prev,
                     {
                       _id: res.added._id,
                       background_image: res.added.background_image,
                       id: res.added.id,
                       name: res.added.name
-                    }
+                    },
+                    ...prev
                   ]);
                 })
               : null // TODO logic for game deletion
