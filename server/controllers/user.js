@@ -60,7 +60,7 @@ async function addOwnedGame(req, res) {
       let newGame = await Game.create(req.body);
       await User.findByIdAndUpdate(
         id,
-        { $push: { owned: newGame._id } },
+        { $push: { owned: { $each: [newGame._id], $position: 0 } } }, //$position works only with $each
         { new: true }
       );
       newGame = await newGame.populate({ path: 'genres platforms' });
