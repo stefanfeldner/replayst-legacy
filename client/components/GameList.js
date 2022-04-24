@@ -8,13 +8,15 @@ function GameList({
   nextUrl,
   navigation,
   ownedIds,
-  setOwnedTiles
+  setOwnedTiles,
+  listViewRef
 }) {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
         data={tiles}
-        initialNumToRender={8}
+        ref={listViewRef}
+        initialNumToRender={4}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
           <GameTile
@@ -24,7 +26,7 @@ function GameList({
             setOwnedTiles={setOwnedTiles}
           />
         )}
-        maxToRenderPerBatch={4}
+        maxToRenderPerBatch={3}
         onEndReached={() => {
           console.log('fired');
           // return infiniteScroll(nextUrl) //UNCOMMENT TO ACTIVATE INFINITE SCROLL

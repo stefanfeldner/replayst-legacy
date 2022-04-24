@@ -2,7 +2,14 @@ import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import GameList from './GameList';
 
-function SearchScreen({ ownedIds, setOwnedTiles, tiles, nextUrl, setNextUrl }) {
+function SearchScreen({
+  ownedIds,
+  setOwnedTiles,
+  tiles,
+  nextUrl,
+  setNextUrl,
+  listViewRef
+}) {
   const [searchMore, setSearchMore] = useState(true);
 
   function infiniteScroll(url) {
@@ -27,6 +34,7 @@ function SearchScreen({ ownedIds, setOwnedTiles, tiles, nextUrl, setNextUrl }) {
           nextUrl={nextUrl}
           ownedIds={ownedIds}
           setOwnedTiles={setOwnedTiles}
+          listViewRef={listViewRef}
         />
       )}
     </View>

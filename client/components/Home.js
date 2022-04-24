@@ -6,7 +6,7 @@ import SearchScreen from './SearchScreen';
 import { Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import SearchGameBar from './SearchGameBar';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { searchGamesFromAPI } from '../services/ApiClient';
 
 const HomeStack = createNativeStackNavigator();
@@ -16,10 +16,14 @@ function Home({ ownedIds, setOwnedTiles }) {
   const [searchResults, setSearchResults] = useState([]);
   const [nextSearchUrl, setNextSearchUrl] = useState('');
 
+  let listViewRef = useRef();
+
   function handleOnSubmit() {
     searchGamesFromAPI(search).then((res) => {
       setNextSearchUrl(res.next);
       setSearchResults(res.results);
+      listViewRef.current.scrollToOffset({ offset: 0, animated: true });
+
       setSearch('');
     });
   }
@@ -60,6 +64,7 @@ function Home({ ownedIds, setOwnedTiles }) {
               tiles={searchResults} // WARNING --> NEEDED A PROP NAME CHANGE
               nextUrl={nextSearchUrl} // --> SAME AS ABOVE
               setNextUrl={setNextSearchUrl} // --> SAME AS ABOVE
+              listViewRef={listViewRef}
             />
           )}
           options={{
