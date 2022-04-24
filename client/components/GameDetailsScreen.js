@@ -1,13 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Image, StyleSheet, Text, ScrollView, View } from 'react-native';
 import { fetchOne } from '../services/ApiClient';
 import { DateTime } from 'luxon';
 import UpdateCollection from './UpdateCollection';
+import { UserContext } from './UserContext';
 
 export default function GameDetailsScreen(props) {
   const [game, setGame] = useState(null);
-  const { ownedIds /*setOwnedTiles*/ } = props.route.params;
-
+  //const { ownedIds /*setOwnedTiles*/ } = props.route.params;
+  const { ownedIds } = useContext(UserContext);
   // check if the games is in the collection and make the call accordingly
   const match = ownedIds.some((id) => id === props.route.params.id);
   const source = match ? 'DB' : 'API';

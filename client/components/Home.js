@@ -33,7 +33,7 @@ function Home({ ownedIds, setOwnedTiles }) {
         <HomeStack.Screen
           name="Home"
           children={() => (
-            <HomeScreen ownedIds={ownedIds} setOwnedTiles={setOwnedTiles} />
+            <HomeScreen /*ownedIds={ownedIds} setOwnedTiles={setOwnedTiles}*/ />
           )}
           options={({ navigation }) => ({
             headerTintColor: '#dedbd6',

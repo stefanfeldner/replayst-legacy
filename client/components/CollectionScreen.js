@@ -1,11 +1,17 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import GameList from './GameList';
+import { UserContext } from './UserContext';
 //import { fetchMore } from '../services/ApiClient';
 
-export default function CollectionScreen({ tiles, ownedIds }) {
+export default function CollectionScreen(
+  {
+    /*tiles, ownedIds*/
+  }
+) {
   //const [nextUrl, setNextUrl] = useState(''); //TODO pagination
-
+  const { owned, ownedIds } = useContext(UserContext);
+  const [tiles] = owned;
   useEffect(() => {}, [tiles]);
 
   // TODO UNNECESSARY WOUT PAGINATION

@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { addGameToCollection } from '../services/DbClient';
-import { UserContext } from './Main';
+import { UserContext } from './UserContext';
 
 // TODO handle the remove from collection case, with an alert for accidental press
 export default function UpdateCollection({
@@ -11,8 +11,8 @@ export default function UpdateCollection({
   match
 }) {
   const [isAdded, setIsAdded] = useState(match);
-
-  const setOwnedTiles = useContext(UserContext);
+  const { owned } = useContext(UserContext);
+  const [tiles, setOwnedTiles] = owned;
 
   const userId = '6261e0b712592ddafe9b6aa2';
   return (
@@ -23,6 +23,7 @@ export default function UpdateCollection({
             !isAdded
               ? addGameToCollection(userId, game).then((res) => {
                   // setGame(res.added); // logic ready for platform ownership feature
+                  console.log(res);
                   setIsAdded(!isAdded);
                   setOwnedTiles((prev) => [
                     {
