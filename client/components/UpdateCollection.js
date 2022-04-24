@@ -1,15 +1,18 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { addGameToCollection } from '../services/DbClient';
+import { UserContext } from './Main';
 
 // TODO handle the remove from collection case, with an alert for accidental press
 export default function UpdateCollection({
   game,
-  setGame,
-  setOwnedTiles,
+  //setGame, // logic for platform ownership feature
+  //setOwnedTiles,
   match
 }) {
   const [isAdded, setIsAdded] = useState(match);
+
+  const setOwnedTiles = useContext(UserContext);
 
   const userId = '6261e0b712592ddafe9b6aa2';
   return (

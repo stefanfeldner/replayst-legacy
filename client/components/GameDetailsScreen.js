@@ -6,7 +6,8 @@ import UpdateCollection from './UpdateCollection';
 
 export default function GameDetailsScreen(props) {
   const [game, setGame] = useState(null);
-  const { ownedIds, setOwnedTiles } = props.route.params;
+  const { ownedIds /*setOwnedTiles*/ } = props.route.params;
+
   // check if the games is in the collection and make the call accordingly
   const match = ownedIds.some((id) => id === props.route.params.id);
   const source = match ? 'DB' : 'API';
@@ -27,7 +28,7 @@ export default function GameDetailsScreen(props) {
             match={match}
             game={game}
             setGame={setGame}
-            setOwnedTiles={setOwnedTiles}
+            //setOwnedTiles={setOwnedTiles}
           />
           {game.developers.map((dev) => (
             <Text style={styles.textCol} key={dev.id}>

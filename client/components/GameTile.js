@@ -2,7 +2,7 @@ import { Image, View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { memo } from 'react';
 
-function GameTile({ game, ownedIds, setOwnedTiles }) {
+function GameTile({ game, ownedIds /*setOwnedTiles*/ }) {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
@@ -10,8 +10,8 @@ function GameTile({ game, ownedIds, setOwnedTiles }) {
         console.log('click');
         navigation.navigate('Details', {
           id: game.id,
-          ownedIds: ownedIds,
-          setOwnedTiles: setOwnedTiles
+          ownedIds: ownedIds
+          //setOwnedTiles: setOwnedTiles
         });
       }}
     >

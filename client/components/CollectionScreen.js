@@ -5,7 +5,6 @@ import GameList from './GameList';
 
 export default function CollectionScreen({ tiles, ownedIds }) {
   //const [nextUrl, setNextUrl] = useState(''); //TODO pagination
-  //console.log('IDS', ownedIds);
 
   useEffect(() => {}, [tiles]);
 
