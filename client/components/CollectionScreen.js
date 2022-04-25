@@ -5,9 +5,8 @@ import { UserContext } from './UserContext';
 //import { fetchMore } from '../services/ApiClient';
 
 export default function CollectionScreen() {
-  const { owned } = useContext(UserContext);
-  const [tiles] = owned;
-  // const [toRender, setToRender] = useState()
+  const { toRender } = useContext(UserContext);
+  const [tiles] = toRender;
   useEffect(() => {}, [tiles]);
 
   // TODO UNNECESSARY WOUT PAGINATION

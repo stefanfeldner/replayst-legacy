@@ -28,7 +28,7 @@ const UserProvider = ({ children }) => {
   useEffect(() => {
     getUserCollection(userId).then((res) => {
       // setNextUrl(res.next); // TODO ONLY FOR PAGINATION, to eventually implement on the backend
-      setOwned(res.owned);
+      setToRender(res.owned);
       console.log('MAIN');
     });
   }, []);
