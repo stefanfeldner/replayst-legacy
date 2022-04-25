@@ -6,6 +6,7 @@ const UserContext = createContext();
 const UserProvider = ({ children }) => {
   //const [nextUrl, setNextUrl] = useState(''); //TODO pagination
   const [toRender, setToRender] = useState([]); // to be rendered on user side
+  const [rendered, setRendered] = useState('owned');
   const [owned, setOwned] = useState([]); // OWNED
   const [wishlist, setWishlist] = useState([]); // WL
   const [favorites, setFavorites] = useState([]); // FAV
@@ -29,6 +30,9 @@ const UserProvider = ({ children }) => {
     getUserCollection(userId).then((res) => {
       // setNextUrl(res.next); // TODO ONLY FOR PAGINATION, to eventually implement on the backend
       setToRender(res.owned);
+      setOwned(res.owned);
+      setFavorites(res.favorites);
+      setWishlist(res.wishlist);
       console.log('MAIN');
     });
   }, []);
