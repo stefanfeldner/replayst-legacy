@@ -5,15 +5,15 @@ const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
   //const [nextUrl, setNextUrl] = useState(''); //TODO pagination
-  const [tiles, setOwnedTiles] = useState([]); // OWNED
+  const [owned, setOwned] = useState([]); // OWNED
   const [wishlist, setWishlist] = useState([]); // WL
   const [favorites, setFavorites] = useState([]); // FAV
-  const ownedIds = tiles && tiles.map((tile) => tile.id);
+  const ownedIds = owned && owned.map((tile) => tile.id);
   const wishIds = wishlist && wishlist.map((game) => game.id);
   const favsIds = favorites && favorites.map((game) => game.id);
 
   const value = {
-    owned: [tiles, setOwnedTiles],
+    owned: [owned, setOwned],
     wishlist: [wishlist, setWishlist],
     favorites: [favorites, setFavorites],
     ownedIds: ownedIds,
@@ -25,7 +25,7 @@ const UserProvider = ({ children }) => {
   useEffect(() => {
     getUserCollection(userId).then((res) => {
       // setNextUrl(res.next); // TODO ONLY FOR PAGINATION, to eventually implement on the backend
-      setOwnedTiles(res.owned);
+      setOwned(res.owned);
       console.log('MAIN');
     });
   }, []);

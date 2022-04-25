@@ -8,9 +8,14 @@ import { UserContext } from './UserContext';
 export default function GameDetailsScreen(props) {
   const [game, setGame] = useState(null);
 
-  const { ownedIds, wishIds, favsIds } = useContext(UserContext);
-  // check if the games is in the collection and make the call accordingly
+  const { owned, ownedIds, wishlist, wishIds, favorites, favsIds } =
+    useContext(UserContext);
 
+  const [pwnd, setPwned] = owned;
+  const [whish, setWish] = wishlist;
+  const [favs, setFavs] = favorites;
+
+  // check if the games is in the collection and make the call accordingly
   const ownedMatch = ownedIds.some((id) => id === props.route.params.id);
   const wishMatch = wishIds.some((id) => id === props.route.params.id);
   const favMatch = favsIds.some((id) => id === props.route.params.id);
@@ -22,15 +27,17 @@ export default function GameDetailsScreen(props) {
   }, []);
 
   return (
-    <>
+    <View style={styles.container}>
       {!game ? (
-        <Text>Loading...</Text>
+        <Text style={{ color: 'white' }}>Loading...</Text>
       ) : (
-        <ScrollView style={styles.container}>
+        <ScrollView>
           <Image source={{ uri: game.background_image }} style={styles.image} />
           <UpdateCollection
             match={ownedMatch}
             game={game}
+            list={'owned'}
+            setList={setPwned}
             //setGame={setGame} // TODO for platform ownership feature
           />
           {game.developers.map((dev) => (
@@ -55,14 +62,16 @@ export default function GameDetailsScreen(props) {
           <Text style={[styles.textCol, styles.desc]}>{game.description}</Text>
         </ScrollView>
       )}
-    </>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'rgb(32, 21, 13)'
+    backgroundColor: 'rgb(32, 21, 13)',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   image: {
     width: '100%',

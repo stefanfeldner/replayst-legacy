@@ -1,18 +1,20 @@
 import { useContext, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { addGameToCollection } from '../services/DbClient';
-import { UserContext } from './UserContext';
+//import { UserContext } from './UserContext';
 import { Ionicons } from '@expo/vector-icons';
 
 // TODO handle the remove from collection case, with an alert for accidental press
 export default function UpdateCollection({
   game,
   //setGame, // logic for platform ownership feature
-  match
+  match,
+  setList,
+  list
 }) {
   const [isAdded, setIsAdded] = useState(match);
-  const { owned } = useContext(UserContext);
-  const [tiles, setOwnedTiles] = owned;
+  //const { owned } = useContext(UserContext); pass it from the parent for dynamic behaviour
+  //const [tiles, setOwnedTiles] = owned;
 
   const userId = '6266679c68159251ea6f845d'; // filo: '6261e0b712592ddafe9b6aa2'; // TODO make it dynamic by user
   return (
@@ -21,11 +23,11 @@ export default function UpdateCollection({
         onPress={
           () =>
             !isAdded
-              ? addGameToCollection(userId, game).then((res) => {
+              ? addGameToCollection(userId, game, list).then((res) => {
                   // setGame(res.added); // logic ready for platform ownership feature
                   // console.log(res); // --> after a while it breaks by itself!
                   setIsAdded(!isAdded);
-                  setOwnedTiles((prev) => [
+                  setList((prev) => [
                     {
                       _id: res.added._id,
                       background_image: res.added.background_image,
@@ -56,11 +58,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignSelf: 'flex-end',
     padding: 10
-  },
-  text: {
-    color: 'rgb(222, 219, 214)',
-    fontSize: 24
   }
 });
