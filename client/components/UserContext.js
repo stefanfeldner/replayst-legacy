@@ -16,6 +16,7 @@ const UserProvider = ({ children }) => {
 
   const value = {
     toRender: [toRender, setToRender],
+    rendered: [rendered, setRendered],
     owned: [owned, setOwned],
     wishlist: [wishlist, setWishlist],
     favorites: [favorites, setFavorites],
