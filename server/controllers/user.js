@@ -10,9 +10,9 @@ async function createUser(req, res) {
   }
   try {
     if (password === '') throw new Error();
-    const pswd = await bcrypt.hash(password, 10);
+    const pswd = await bcrypt.hash(password, +process.env.SALT);
     const newUser = await User.create({ ...req.body, password: pswd });
-    res.status(201).send(newUser);
+    res.status(201).send(newUser); // TODO don't send back all user info
   } catch (err) {
     res.status(400).send({ error, message: 'Error, please retry' });
   }
@@ -85,6 +85,8 @@ async function addOwnedGame(req, res) {
     res.status(500).send({ error, message: 'Server error, try again' });
   }
 }
+
+async function removeOwnedGame(req, res) {}
 
 module.exports = {
   createUser,
