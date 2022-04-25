@@ -29,11 +29,11 @@ export default function UpdateCollection({
     <Pressable
       onPress={() =>
         !isAdded
-          ? addGameToCollection(userId, game, list).then((res) => {
+          ? addGameToCollection(userId, game, list).then(res => {
               // setGame(res.added); // logic ready for platform ownership feature
               // console.log(res); // --> after a while it breaks by itself!
               setIsAdded(!isAdded);
-              setList((prev) => [
+              setList(prev => [
                 {
                   _id: res.added._id,
                   background_image: res.added.background_image,
@@ -43,12 +43,12 @@ export default function UpdateCollection({
                 ...prev
               ]);
             })
-          : removeFromCollection(userId, game._id, list).then((res) => {
+          : removeFromCollection(userId, game._id, list).then(res => {
               setIsAdded(!isAdded);
-              setList((prev) => prev.filter((game) => game._id !== res.id));
+              setList(prev => prev.filter(game => game._id !== res.id));
               renderedList === list &&
-                setGamesToRender((prev) =>
-                  prev.filter((game) => game._id !== res.id)
+                setGamesToRender(prev =>
+                  prev.filter(game => game._id !== res.id)
                 );
             })
       }

@@ -21,7 +21,7 @@ export default function CollectionScreen() {
       {!tiles ? (
         <Text style={styles.testDesc}>Loading...</Text>
       ) : (
-        <GameList style={styles.list} tiles={tiles} />
+        <GameList style={styles.list} tiles={tiles} isFromCollection={true} />
       )}
     </View>
   );

@@ -8,7 +8,7 @@ export default function HomeScreen() {
   const [nextUrl, setNextUrl] = useState('');
   useEffect(() => {
     getPopularGames()
-      .then((res) => {
+      .then(res => {
         setNextUrl(res.next);
         setTiles(res.results);
       })
@@ -17,9 +17,11 @@ export default function HomeScreen() {
 
   //TODO modify infinite scroll to be list-length aware
   function infiniteScroll(url) {
-    fetchMore(url).then((res) =>
-      setTiles((prev) => [...prev, ...res.results], setNextUrl(res.next))
-    );
+    if (nextUrl) {
+      fetchMore(url).then(res =>
+        setTiles(prev => [...prev, ...res.results], setNextUrl(res.next))
+      );
+    }
     // setState accepts a callback function as a 2nd argument that gets executed once the new state is set
   }
 
@@ -31,7 +33,6 @@ export default function HomeScreen() {
         <GameList
           style={styles.list}
           tiles={tiles}
-          isFromHome={true}
           infiniteScroll={infiniteScroll}
           nextUrl={nextUrl}
         />

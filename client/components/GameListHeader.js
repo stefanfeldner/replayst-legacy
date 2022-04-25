@@ -1,43 +1,21 @@
 import { useContext } from 'react';
-import { View, Pressable, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { PALETTE } from '../services/theme';
 import { UserContext } from './UserContext';
+import GameListHeaderButton from './GameListHeaderButton';
 
 export default function GameListHeader() {
-  const { owned, favorites, wishlist, rendered, toRender } =
-    useContext(UserContext);
-  const [renderedList, setRenderedList] = rendered;
-  const [games, setToRender] = toRender;
+  const { owned, favorites, wishlist } = useContext(UserContext);
+
   const [coll] = owned;
   const [favs] = favorites;
   const [wish] = wishlist;
 
   return (
     <View style={styles.container}>
-      <Pressable
-        onPress={() => {
-          setToRender(coll);
-          setRenderedList('owned');
-        }}
-      >
-        <Text style={styles.text}>Collection</Text>
-      </Pressable>
-      <Pressable
-        onPress={() => {
-          setToRender(favs);
-          setRenderedList('favorites');
-        }}
-      >
-        <Text style={styles.text}>Favorites</Text>
-      </Pressable>
-      <Pressable
-        onPress={() => {
-          setToRender(wish);
-          setRenderedList('wishlist');
-        }}
-      >
-        <Text style={styles.text}>Wishlist</Text>
-      </Pressable>
+      <GameListHeaderButton list={coll} listName={'owned'} />
+      <GameListHeaderButton list={favs} listName={'favorites'} />
+      <GameListHeaderButton list={wish} listName={'wishlist'} />
     </View>
   );
 }

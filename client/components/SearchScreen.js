@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import GameList from './GameList';
 import { fetchMore } from '../services/ApiClient';
@@ -11,18 +10,13 @@ function SearchScreen({
   listViewRef
 }) {
   // INFINITE SCROLL END OF API LIST-AWARE
-  const [searchMore, setSearchMore] = useState(true);
   function infiniteScroll(url) {
-    if (searchMore) {
-      fetchMore(url).then((res) => {
-        //console.log('another BATCH');
-        res.next
-          ? setSearchResults(
-              (prev) => [...prev, ...res.results],
-              setNextSearchUrl(res.next)
-            )
-          : setSearchResults((prev) => [...prev, ...res.results]);
-        if (res.results.length < 40) setSearchMore(!searchMore);
+    if (nextSearchUrl) {
+      fetchMore(url).then(res => {
+        setSearchResults(
+          prev => [...prev, ...res.results],
+          setNextSearchUrl(res.next)
+        );
       });
     }
   }

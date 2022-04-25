@@ -3,7 +3,13 @@ import { SafeAreaView, StyleSheet, FlatList, View } from 'react-native';
 import GameListHeader from './GameListHeader';
 import GameTile from './GameTile';
 
-function GameList({ tiles, infiniteScroll, nextUrl, listViewRef, isFromHome }) {
+function GameList({
+  tiles,
+  infiniteScroll,
+  nextUrl,
+  listViewRef,
+  isFromCollection
+}) {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
@@ -18,7 +24,7 @@ function GameList({ tiles, infiniteScroll, nextUrl, listViewRef, isFromHome }) {
           if (nextUrl) return infiniteScroll(nextUrl); //UNCOMMENT TO ACTIVATE INFINITE SCROLL
         }} // <-- when we call a function directly in JSX we need to put it in a callback function!!!
         onEndReachedThreshold={0.1} // TODO check how many times it gets fired with the active infinite scroll
-        ListHeaderComponent={isFromHome ? null : GameListHeader}
+        ListHeaderComponent={isFromCollection ? GameListHeader : null}
       />
     </SafeAreaView>
   );

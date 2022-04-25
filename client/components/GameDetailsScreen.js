@@ -17,14 +17,14 @@ export default function GameDetailsScreen(props) {
   const [favs, setFavs] = favorites;
 
   // check if the games is in the collection and make the call accordingly
-  const ownedMatch = ownedIds.some((id) => id === props.route.params.id);
-  const wishMatch = wishIds.some((id) => id === props.route.params.id);
-  const favMatch = favsIds.some((id) => id === props.route.params.id);
+  const ownedMatch = ownedIds.some(id => id === props.route.params.id);
+  const wishMatch = wishIds.some(id => id === props.route.params.id);
+  const favMatch = favsIds.some(id => id === props.route.params.id);
   const source = ownedMatch || wishMatch || favMatch ? 'DB' : 'API';
 
   useEffect(() => {
     console.log(source);
-    fetchOne(props.route.params.id, source).then((res) => setGame(res));
+    fetchOne(props.route.params.id, source).then(res => setGame(res));
   }, []);
 
   return (
@@ -63,18 +63,18 @@ export default function GameDetailsScreen(props) {
               //setGame={setGame} // TODO for platform ownership feature
             />
           </View>
-          {game.developers.map((dev) => (
+          {game.developers.map(dev => (
             <Text style={styles.textCol} key={dev.id}>
               {dev.name}
             </Text>
           ))}
           <Text style={[styles.title, styles.textCol]}>{game.name}</Text>
-          {game.genres.map((genre) => (
+          {game.genres.map(genre => (
             <Text style={styles.textCol} key={genre.id}>
               {genre.name}
             </Text>
           ))}
-          {game.platforms.map((p) => (
+          {game.platforms.map(p => (
             <Text style={styles.textCol} key={p.id}>
               {p.name}
             </Text>

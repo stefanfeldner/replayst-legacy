@@ -57,7 +57,7 @@ async function addGameToUser(req, res) {
       path: 'genres platforms'
     });
     if (!game) {
-      let newGame = await Game.create(req.body);
+      let newGame = await Game.create(req.body.game);
       await User.findByIdAndUpdate(
         userId,
         { $push: { [list]: { $each: [newGame._id], $position: 0 } } }, //$position works only with $each
