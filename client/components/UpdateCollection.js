@@ -1,6 +1,9 @@
 import { useContext, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { addGameToCollection } from '../services/DbClient';
+import {
+  addGameToCollection,
+  removeFromCollection
+} from '../services/DbClient';
 //import { UserContext } from './UserContext';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -16,7 +19,8 @@ export default function UpdateCollection({
   //const { owned } = useContext(UserContext); pass it from the parent for dynamic behaviour
   //const [tiles, setOwnedTiles] = owned;
 
-  const userId = '6266679c68159251ea6f845d'; // filo: '6261e0b712592ddafe9b6aa2'; // TODO make it dynamic by user
+  const userId =
+    /* vic: '6266679c68159251ea6f845d';  filo:*/ '6261e0b712592ddafe9b6aa2'; // TODO make it dynamic by user
   return (
     <View style={styles.container}>
       <Pressable
@@ -37,7 +41,10 @@ export default function UpdateCollection({
                     ...prev
                   ]);
                 })
-              : null // TODO logic for game deletion
+              : removeFromCollection(userId, game._id, list).then((res) => {
+                  setIsAdded(!isAdded);
+                  setList((prev) => prev.filter((game) => game._id !== res));
+                }) // TODO logic for game deletion
         }
       >
         {isAdded ? (

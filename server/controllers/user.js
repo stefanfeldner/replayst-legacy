@@ -49,8 +49,7 @@ async function getOneGame(req, res) {
 
 // could be changed to add game and specify the property field in the body of the request?
 // TODO refactor after authentication for middleware obtained id (or API?)
-async function addOwnedGame(req, res) {
-  console.log('IN CONTROLER');
+async function addGameToUser(req, res) {
   try {
     const { userId } = req.params;
     const { list } = req.body;
@@ -74,7 +73,7 @@ async function addOwnedGame(req, res) {
     } else {
       await User.findByIdAndUpdate(
         userId,
-        { $push: { owned: game._id } },
+        { $push: { [list]: game._id } },
         { new: true }
       );
       // TODO handle the case in which the game already exists in our game database, we need to return the updated
@@ -90,15 +89,14 @@ async function addOwnedGame(req, res) {
 
 async function removeOwnedGame(req, res) {
   const { userId } = req.params;
-  const { _id } = req.body;
+  const { _id, list } = req.body;
   try {
     const updated = await User.findByIdAndUpdate(
       userId,
-      { $pull: { owned: _id } },
+      { $pull: { [list]: _id } },
       { new: true }
     );
-    console.log(updated);
-    res.status(200).send(updated);
+    res.status(200).send(updated); // TODO no need to send the full user, just send back the _id
   } catch (error) {
     console.error(error);
     res.status(500).send({ error, message: 'Server error, try again' });
@@ -107,7 +105,7 @@ async function removeOwnedGame(req, res) {
 
 module.exports = {
   createUser,
-  addOwnedGame,
+  addGameToUser,
   removeOwnedGame,
   getUserGames,
   getOneGame

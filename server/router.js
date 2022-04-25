@@ -7,7 +7,7 @@ const {
 const {
   createUser,
   getUserGames,
-  addOwnedGame,
+  addGameToUser,
   removeOwnedGame,
   getOneGame
 } = require('./controllers/user');
@@ -22,7 +22,7 @@ router.put(
   '/owned/:userId',
   populateWithGenres,
   populateWithPlatforms,
-  addOwnedGame
+  addGameToUser
 );
 
 router.patch('/owned/:userId', removeOwnedGame);
