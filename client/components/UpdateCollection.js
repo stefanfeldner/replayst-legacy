@@ -13,7 +13,7 @@ export default function UpdateCollection({
   const { owned } = useContext(UserContext);
   const [tiles, setOwnedTiles] = owned;
 
-  const userId = '6261e0b712592ddafe9b6aa2';
+  const userId = '6266679c68159251ea6f845d'; //'6261e0b712592ddafe9b6aa2'; // TODO make it dynamic by user
   return (
     <View style={styles.container}>
       <Pressable
@@ -22,7 +22,7 @@ export default function UpdateCollection({
             !isAdded
               ? addGameToCollection(userId, game).then((res) => {
                   // setGame(res.added); // logic ready for platform ownership feature
-                  //console.log(res); // --> after a while it breaks by itself!
+                  // console.log(res); // --> after a while it breaks by itself!
                   setIsAdded(!isAdded);
                   setOwnedTiles((prev) => [
                     {

@@ -8,9 +8,12 @@ import { UserContext } from './UserContext';
 export default function GameDetailsScreen(props) {
   const [game, setGame] = useState(null);
 
-  const { ownedIds } = useContext(UserContext);
+  const { ownedIds, wishIds, favsIds } = useContext(UserContext);
   // check if the games is in the collection and make the call accordingly
-  const match = ownedIds.some((id) => id === props.route.params.id);
+  const match =
+    ownedIds.some((id) => id === props.route.params.id) ||
+    wishIds.some((id) => id === props.route.params.id) ||
+    favsIds.some((id) => id === props.route.params.id);
   const source = match ? 'DB' : 'API';
 
   useEffect(() => {

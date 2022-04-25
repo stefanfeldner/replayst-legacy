@@ -79,7 +79,7 @@ async function addOwnedGame(req, res) {
       // details to be rendered. Or should we update them in the screen if we receive a positive status?
       // OR SHOULD WE PASS BACK THE WHOLE USER DETAILS? SOUNDS LIKE AN OVERKILL
       // ---> what if the user clicks on the tile again? <---
-      res.status(201).send({ owned: game, message: 'Added to collection!' });
+      res.status(201).send({ added: game, message: 'Added to collection!' });
     }
   } catch (error) {
     res.status(500).send({ error, message: 'Server error, try again' });
