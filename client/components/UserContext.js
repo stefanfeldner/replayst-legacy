@@ -6,10 +6,14 @@ const UserContext = createContext();
 const UserProvider = ({ children }) => {
   //const [nextUrl, setNextUrl] = useState(''); //TODO pagination
   const [tiles, setOwnedTiles] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
+  const [favorites, setFavorites] = useState([]);
   const ownedIds = tiles && tiles.map((tile) => tile.id);
 
   const value = {
     owned: [tiles, setOwnedTiles],
+    wishlist: [wishlist, setWishlist],
+    favorites: [favorites, setFavorites],
     ownedIds: ownedIds
   };
   // call user collection at loading, rerenders only on value change
@@ -17,7 +21,7 @@ const UserProvider = ({ children }) => {
   useEffect(() => {
     getUserCollection(userId).then((res) => {
       // setNextUrl(res.next); // TODO ONLY FOR PAGINATION, to eventually implement on the backend
-      setOwnedTiles(res);
+      setOwnedTiles(res.owned);
       console.log('MAIN');
     });
   }, []);

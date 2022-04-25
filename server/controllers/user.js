@@ -20,19 +20,18 @@ async function createUser(req, res) {
 
 // refactored query with populated method
 // TODO refactor after authentication for middleware obtained id (or API?)
-async function getOwnedGames(req, res) {
+async function getUserGames(req, res) {
   try {
     const { id } = req.params;
-    const user = await User.findById(id).populate('owned');
-    const ownedTiles = user.owned.map((game) => {
-      return {
-        _id: game._id,
-        id: game.id,
-        name: game.name,
-        background_image: game.background_image
-      };
-    });
-    res.status(200).send(ownedTiles);
+    // TODO didn't return populated genres and platform fields yet
+    //populating only fields needed
+    const userColl = await User.findById(id)
+      .select('owned wishlist favorites')
+      .populate(
+        'owned wishlist favorites',
+        'id name metacritic released background_image'
+      );
+    res.status(200).send(userColl);
   } catch (err) {
     res.status(500).send({ err, message: 'Server error, try again' });
   }
@@ -90,6 +89,6 @@ async function addOwnedGame(req, res) {
 module.exports = {
   createUser,
   addOwnedGame,
-  getOwnedGames,
+  getUserGames,
   getOneGame
 };

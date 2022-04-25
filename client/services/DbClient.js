@@ -1,7 +1,7 @@
 const baseURL = 'http://localhost:3000';
 
 export async function getUserCollection(id) {
-  return fetch(`${baseURL}/owned/${id}`)
+  return fetch(`${baseURL}/list/${id}`)
     .then((res) => (res.status < 400 ? res : Promise.reject(res)))
     .then((res) => res.json())
     .catch((err) => console.error(err, err.message));
