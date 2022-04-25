@@ -28,7 +28,7 @@ export default function GameDetailsScreen(props) {
           <UpdateCollection
             match={match}
             game={game}
-            //setGame={setGame} // logic ready for platform ownership feature
+            //setGame={setGame} // TODO for platform ownership feature
           />
           {game.developers.map((dev) => (
             <Text style={styles.textCol} key={dev.id}>
