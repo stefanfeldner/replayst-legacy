@@ -91,12 +91,13 @@ async function removeOwnedGame(req, res) {
   const { userId } = req.params;
   const { _id, list } = req.body;
   try {
-    const updated = await User.findByIdAndUpdate(
+    await User.findByIdAndUpdate(
       userId,
       { $pull: { [list]: _id } },
       { new: true }
     );
-    res.status(200).send(updated); // TODO no need to send the full user, just send back the _id
+
+    res.status(200).send({ id: _id }); // TODO no need to send the full user, just send back the _id
   } catch (error) {
     console.error(error);
     res.status(500).send({ error, message: 'Server error, try again' });

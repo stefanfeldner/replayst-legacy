@@ -38,6 +38,8 @@ export default function GameDetailsScreen(props) {
             game={game}
             list={'owned'}
             setList={setPwned}
+            addIcon={'ios-add-circle-outline'}
+            removeIcon={'ios-checkmark-circle-outline'}
             //setGame={setGame} // TODO for platform ownership feature
           />
           {game.developers.map((dev) => (

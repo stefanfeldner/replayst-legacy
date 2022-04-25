@@ -13,7 +13,9 @@ export default function UpdateCollection({
   //setGame, // logic for platform ownership feature
   match,
   setList,
-  list
+  list,
+  addIcon,
+  removeIcon
 }) {
   const [isAdded, setIsAdded] = useState(match);
   //const { owned } = useContext(UserContext); pass it from the parent for dynamic behaviour
@@ -43,18 +45,15 @@ export default function UpdateCollection({
                 })
               : removeFromCollection(userId, game._id, list).then((res) => {
                   setIsAdded(!isAdded);
-                  setList((prev) => prev.filter((game) => game._id !== res));
+                  console.log(res);
+                  setList((prev) => prev.filter((game) => game._id !== res.id));
                 }) // TODO logic for game deletion
         }
       >
         {isAdded ? (
-          <Ionicons
-            name="ios-checkmark-circle-outline"
-            size={28}
-            color="#e9e7e3"
-          />
+          <Ionicons name={removeIcon} size={28} color="#e9e7e3" />
         ) : (
-          <Ionicons name="ios-add-circle-outline" size={28} color="#c8c6bf" />
+          <Ionicons name={addIcon} size={28} color="#c8c6bf" />
         )}
       </Pressable>
     </View>
