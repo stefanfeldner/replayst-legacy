@@ -4,6 +4,7 @@ import { fetchOne } from '../services/ApiClient';
 import { DateTime } from 'luxon';
 import UpdateCollection from './UpdateCollection';
 import { UserContext } from './UserContext';
+import { PALETTE } from '../services/theme';
 
 export default function GameDetailsScreen(props) {
   const [game, setGame] = useState(null);
@@ -33,15 +34,35 @@ export default function GameDetailsScreen(props) {
       ) : (
         <ScrollView>
           <Image source={{ uri: game.background_image }} style={styles.image} />
-          <UpdateCollection
-            match={ownedMatch}
-            game={game}
-            list={'owned'}
-            setList={setPwned}
-            addIcon={'ios-add-circle-outline'}
-            removeIcon={'ios-checkmark-circle-outline'}
-            //setGame={setGame} // TODO for platform ownership feature
-          />
+          <View style={styles.buttons}>
+            <UpdateCollection
+              match={favMatch}
+              game={game}
+              list={'favorites'}
+              setList={setFavs}
+              addIcon={'ios-heart-outline'}
+              removeIcon={'ios-heart'}
+              //setGame={setGame} // TODO for platform ownership feature
+            />
+            <UpdateCollection
+              match={wishMatch}
+              game={game}
+              list={'wishlist'}
+              setList={setWish}
+              addIcon={'ios-star-outline'}
+              removeIcon={'ios-star'}
+              //setGame={setGame} // TODO for platform ownership feature
+            />
+            <UpdateCollection
+              match={ownedMatch}
+              game={game}
+              list={'owned'}
+              setList={setPwned}
+              addIcon={'ios-add-circle-outline'}
+              removeIcon={'ios-checkmark-circle'}
+              //setGame={setGame} // TODO for platform ownership feature
+            />
+          </View>
           {game.developers.map((dev) => (
             <Text style={styles.textCol} key={dev.id}>
               {dev.name}
@@ -71,7 +92,7 @@ export default function GameDetailsScreen(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'rgb(32, 21, 13)',
+    backgroundColor: PALETTE.five,
     justifyContent: 'center',
     alignItems: 'center'
   },
@@ -83,9 +104,14 @@ const styles = StyleSheet.create({
     fontSize: 24
   },
   textCol: {
-    color: 'rgb(222, 219, 214)'
+    color: PALETTE.one
   },
   desc: {
     padding: 15
+  },
+  buttons: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 10
   }
 });
