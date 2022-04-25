@@ -10,11 +10,11 @@ export default function GameDetailsScreen(props) {
 
   const { ownedIds, wishIds, favsIds } = useContext(UserContext);
   // check if the games is in the collection and make the call accordingly
-  const match =
-    ownedIds.some((id) => id === props.route.params.id) ||
-    wishIds.some((id) => id === props.route.params.id) ||
-    favsIds.some((id) => id === props.route.params.id);
-  const source = match ? 'DB' : 'API';
+
+  const ownedMatch = ownedIds.some((id) => id === props.route.params.id);
+  const wishMatch = wishIds.some((id) => id === props.route.params.id);
+  const favMatch = favsIds.some((id) => id === props.route.params.id);
+  const source = ownedMatch || wishMatch || favMatch ? 'DB' : 'API';
 
   useEffect(() => {
     console.log(source);
@@ -29,7 +29,7 @@ export default function GameDetailsScreen(props) {
         <ScrollView style={styles.container}>
           <Image source={{ uri: game.background_image }} style={styles.image} />
           <UpdateCollection
-            match={match}
+            match={ownedMatch}
             game={game}
             //setGame={setGame} // TODO for platform ownership feature
           />

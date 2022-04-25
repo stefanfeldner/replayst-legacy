@@ -22,10 +22,10 @@ async function createUser(req, res) {
 // TODO refactor after authentication for middleware obtained id (or API?)
 async function getUserGames(req, res) {
   try {
-    const { id } = req.params;
+    const { userId } = req.params;
     // TODO didn't return populated genres and platform fields yet
     //populating only fields needed
-    const userColl = await User.findById(id)
+    const userColl = await User.findById(userId)
       .select('owned wishlist favorites')
       .populate(
         'owned wishlist favorites',
@@ -51,14 +51,15 @@ async function getOneGame(req, res) {
 // TODO refactor after authentication for middleware obtained id (or API?)
 async function addOwnedGame(req, res) {
   try {
-    const { id } = req.params;
+    const { userId } = req.params;
+    console.log(userId);
     const game = await Game.findOne({ id: req.body.id }).populate({
       path: 'genres platforms'
     });
     if (!game) {
       let newGame = await Game.create(req.body);
       await User.findByIdAndUpdate(
-        id,
+        userId,
         { $push: { owned: { $each: [newGame._id], $position: 0 } } }, //$position works only with $each
         { new: true }
       );
@@ -71,7 +72,7 @@ async function addOwnedGame(req, res) {
       res.status(201).send({ added: newGame, message: 'Added to collection!' });
     } else {
       await User.findByIdAndUpdate(
-        id,
+        userId,
         { $push: { owned: game._id } },
         { new: true }
       );
@@ -86,11 +87,27 @@ async function addOwnedGame(req, res) {
   }
 }
 
-async function removeOwnedGame(req, res) {}
+async function removeOwnedGame(req, res) {
+  const { userId } = req.params;
+  const { _id } = req.body;
+  try {
+    const updated = await User.findByIdAndUpdate(
+      userId,
+      { $pull: { owned: _id } },
+      { new: true }
+    );
+    console.log(updated);
+    res.status(200).send(updated);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error, message: 'Server error, try again' });
+  }
+}
 
 module.exports = {
   createUser,
   addOwnedGame,
+  removeOwnedGame,
   getUserGames,
   getOneGame
 };

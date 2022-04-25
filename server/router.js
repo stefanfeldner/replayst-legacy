@@ -8,20 +8,23 @@ const {
   createUser,
   getUserGames,
   addOwnedGame,
+  removeOwnedGame,
   getOneGame
 } = require('./controllers/user');
 
 router.post('/register', createUser);
 
-router.get('/list/:id', getUserGames);
+router.get('/list/:userId', getUserGames);
 
 router.get('/game/:id', getOneGame);
 
 router.put(
-  '/owned/:id',
+  '/owned/:userId',
   populateWithGenres,
   populateWithPlatforms,
   addOwnedGame
 );
+
+router.patch('/owned/:userId', removeOwnedGame);
 
 module.exports = router;

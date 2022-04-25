@@ -5,9 +5,9 @@ const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
   //const [nextUrl, setNextUrl] = useState(''); //TODO pagination
-  const [tiles, setOwnedTiles] = useState([]);
-  const [wishlist, setWishlist] = useState([]);
-  const [favorites, setFavorites] = useState([]);
+  const [tiles, setOwnedTiles] = useState([]); // OWNED
+  const [wishlist, setWishlist] = useState([]); // WL
+  const [favorites, setFavorites] = useState([]); // FAV
   const ownedIds = tiles && tiles.map((tile) => tile.id);
   const wishIds = wishlist && wishlist.map((game) => game.id);
   const favsIds = favorites && favorites.map((game) => game.id);
