@@ -50,17 +50,18 @@ async function getOneGame(req, res) {
 // could be changed to add game and specify the property field in the body of the request?
 // TODO refactor after authentication for middleware obtained id (or API?)
 async function addOwnedGame(req, res) {
+  console.log('IN CONTROLER');
   try {
     const { userId } = req.params;
-    console.log(userId);
-    const game = await Game.findOne({ id: req.body.id }).populate({
+    const { list } = req.body;
+    const game = await Game.findOne({ id: req.body.game.id }).populate({
       path: 'genres platforms'
     });
     if (!game) {
       let newGame = await Game.create(req.body);
       await User.findByIdAndUpdate(
         userId,
-        { $push: { owned: { $each: [newGame._id], $position: 0 } } }, //$position works only with $each
+        { $push: { [list]: { $each: [newGame._id], $position: 0 } } }, //$position works only with $each
         { new: true }
       );
       newGame = await newGame.populate({ path: 'genres platforms' });
