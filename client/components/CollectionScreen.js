@@ -4,13 +4,8 @@ import GameList from './GameList';
 import { UserContext } from './UserContext';
 //import { fetchMore } from '../services/ApiClient';
 
-export default function CollectionScreen(
-  {
-    /*tiles, ownedIds*/
-  }
-) {
-  //const [nextUrl, setNextUrl] = useState(''); //TODO pagination
-  const { owned, ownedIds } = useContext(UserContext);
+export default function CollectionScreen() {
+  const { owned } = useContext(UserContext);
   const [tiles] = owned;
   useEffect(() => {}, [tiles]);
 
@@ -26,13 +21,7 @@ export default function CollectionScreen(
       {!tiles ? (
         <Text style={styles.testDesc}>Loading...</Text>
       ) : (
-        <GameList
-          style={styles.list}
-          tiles={tiles}
-          ownedIds={ownedIds}
-          // infiniteScroll={infiniteScroll}
-          // nextUrl={nextUrl}
-        />
+        <GameList style={styles.list} tiles={tiles} />
       )}
     </View>
   );

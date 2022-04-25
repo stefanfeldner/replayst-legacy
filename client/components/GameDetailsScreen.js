@@ -7,7 +7,7 @@ import { UserContext } from './UserContext';
 
 export default function GameDetailsScreen(props) {
   const [game, setGame] = useState(null);
-  //const { ownedIds /*setOwnedTiles*/ } = props.route.params;
+
   const { ownedIds } = useContext(UserContext);
   // check if the games is in the collection and make the call accordingly
   const match = ownedIds.some((id) => id === props.route.params.id);
@@ -28,8 +28,7 @@ export default function GameDetailsScreen(props) {
           <UpdateCollection
             match={match}
             game={game}
-            setGame={setGame}
-            //setOwnedTiles={setOwnedTiles}
+            //setGame={setGame} // logic ready for platform ownership feature
           />
           {game.developers.map((dev) => (
             <Text style={styles.textCol} key={dev.id}>

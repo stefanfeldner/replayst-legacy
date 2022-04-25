@@ -4,6 +4,7 @@ import { getUserCollection } from '../services/DbClient';
 const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
+  //const [nextUrl, setNextUrl] = useState(''); //TODO pagination
   const [tiles, setOwnedTiles] = useState([]);
   const ownedIds = tiles && tiles.map((tile) => tile.id);
 

@@ -11,7 +11,7 @@ import { searchGamesFromAPI } from '../services/ApiClient';
 
 const HomeStack = createNativeStackNavigator();
 
-function Home({ ownedIds, setOwnedTiles }) {
+function Home() {
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [nextSearchUrl, setNextSearchUrl] = useState('');
@@ -20,10 +20,17 @@ function Home({ ownedIds, setOwnedTiles }) {
 
   function handleOnSubmit() {
     searchGamesFromAPI(search).then((res) => {
-      setNextSearchUrl(res.next);
-      setSearchResults(res.results);
-      listViewRef.current.scrollToOffset({ offset: 0, animated: true }); // flatlist auto-scroll to top
-      setSearch('');
+      if (searchResults.length)
+        listViewRef.current.scrollToOffset({ offset: 0, animated: true }); // flatlist auto-scroll to top
+      // setTimout necessary cause searchGameBar renders in the same screen,
+      // if deep in the infinite scoll it fires again before reaching the top of the bar.
+      // TODO Better solution would be render each result list in a new screen
+      //(no need to trigger scroll to top) and save search history on search page
+      setTimeout(() => {
+        setNextSearchUrl(res.next);
+        setSearchResults(res.results);
+        setSearch('');
+      }, 100);
     });
   }
 
@@ -32,9 +39,7 @@ function Home({ ownedIds, setOwnedTiles }) {
       <HomeStack.Navigator>
         <HomeStack.Screen
           name="Home"
-          children={() => (
-            <HomeScreen /*ownedIds={ownedIds} setOwnedTiles={setOwnedTiles}*/ />
-          )}
+          component={HomeScreen}
           options={({ navigation }) => ({
             headerTintColor: '#dedbd6',
             headerStyle: { backgroundColor: '#20150d' },
@@ -58,11 +63,14 @@ function Home({ ownedIds, setOwnedTiles }) {
           name="SearchScreen"
           children={() => (
             <SearchScreen
-              ownedIds={ownedIds}
-              setOwnedTiles={setOwnedTiles}
-              tiles={searchResults} // WARNING --> NEEDED A PROP NAME CHANGE
-              nextUrl={nextSearchUrl} // --> SAME AS ABOVE
-              setNextUrl={setNextSearchUrl} // --> SAME AS ABOVE
+              searchResults={searchResults}
+              setSearchResults={setSearchResults}
+              nextSearchUrl={nextSearchUrl}
+              setNextSearchUrl={setNextSearchUrl}
+              // tiles={searchResults} // WARNING --> NEEDED A PROP NAME CHANGE
+              // seTiles={setSearchResults} // --> SAME AS ABOVE (needed for infinite loop?)
+              // nextUrl={nextSearchUrl} // --> SAME AS ABOVE
+              // setNextUrl={setNextSearchUrl} // --> SAME AS ABOVE
               listViewRef={listViewRef}
             />
           )}

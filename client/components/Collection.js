@@ -4,12 +4,12 @@ import CollectionScreen from './CollectionScreen';
 
 const CollectionStack = createNativeStackNavigator();
 
-function Collection({ tiles, ownedIds }) {
+function Collection() {
   return (
     <CollectionStack.Navigator>
       <CollectionStack.Screen
         name="Collection"
-        children={() => <CollectionScreen tiles={tiles} ownedIds={ownedIds} />}
+        children={() => <CollectionScreen />}
         options={{
           headerTintColor: '#dedbd6',
           headerStyle: { backgroundColor: '#20150d' }

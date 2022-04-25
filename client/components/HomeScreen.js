@@ -3,7 +3,7 @@ import { View, StyleSheet, Text } from 'react-native';
 import GameList from './GameList';
 import { getPopularGames, fetchMore } from '../services/ApiClient';
 
-export default function HomeScreen({ ownedIds, setOwnedTiles }) {
+export default function HomeScreen() {
   const [tiles, setTiles] = useState([]);
   const [nextUrl, setNextUrl] = useState('');
   useEffect(() => {
@@ -32,8 +32,6 @@ export default function HomeScreen({ ownedIds, setOwnedTiles }) {
           tiles={tiles}
           infiniteScroll={infiniteScroll}
           nextUrl={nextUrl}
-          ownedIds={ownedIds}
-          setOwnedTiles={setOwnedTiles}
         />
       )}
     </View>

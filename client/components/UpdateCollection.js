@@ -7,7 +7,6 @@ import { UserContext } from './UserContext';
 export default function UpdateCollection({
   game,
   //setGame, // logic for platform ownership feature
-  //setOwnedTiles,
   match
 }) {
   const [isAdded, setIsAdded] = useState(match);
@@ -23,7 +22,7 @@ export default function UpdateCollection({
             !isAdded
               ? addGameToCollection(userId, game).then((res) => {
                   // setGame(res.added); // logic ready for platform ownership feature
-                  console.log(res);
+                  //console.log(res); // --> after a while it breaks by itself!
                   setIsAdded(!isAdded);
                   setOwnedTiles((prev) => [
                     {
