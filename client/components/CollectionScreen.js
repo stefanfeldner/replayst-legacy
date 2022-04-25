@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import GameList from './GameList';
 import { UserContext } from './UserContext';
@@ -7,6 +7,7 @@ import { UserContext } from './UserContext';
 export default function CollectionScreen() {
   const { owned } = useContext(UserContext);
   const [tiles] = owned;
+  // const [toRender, setToRender] = useState()
   useEffect(() => {}, [tiles]);
 
   // TODO UNNECESSARY WOUT PAGINATION

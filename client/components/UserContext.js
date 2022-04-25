@@ -5,6 +5,7 @@ const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
   //const [nextUrl, setNextUrl] = useState(''); //TODO pagination
+  const [toRender, setToRender] = useState([]); // to be rendered on user side
   const [owned, setOwned] = useState([]); // OWNED
   const [wishlist, setWishlist] = useState([]); // WL
   const [favorites, setFavorites] = useState([]); // FAV
@@ -13,6 +14,7 @@ const UserProvider = ({ children }) => {
   const favsIds = favorites && favorites.map((game) => game.id);
 
   const value = {
+    toRender: [toRender, setToRender],
     owned: [owned, setOwned],
     wishlist: [wishlist, setWishlist],
     favorites: [favorites, setFavorites],

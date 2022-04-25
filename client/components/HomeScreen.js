@@ -31,6 +31,7 @@ export default function HomeScreen() {
         <GameList
           style={styles.list}
           tiles={tiles}
+          isFromHome={true}
           infiniteScroll={infiniteScroll}
           nextUrl={nextUrl}
         />

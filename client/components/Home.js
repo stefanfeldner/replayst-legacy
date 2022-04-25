@@ -15,7 +15,6 @@ function Home() {
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [nextSearchUrl, setNextSearchUrl] = useState('');
-
   let listViewRef = useRef();
 
   function handleOnSubmit() {
