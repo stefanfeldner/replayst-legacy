@@ -64,7 +64,6 @@ async function addGameToUser(req, res) {
         { new: true }
       );
       newGame = await newGame.populate({ path: 'genres platforms' });
-      console.log('NEW GAME ', newGame);
       // TODO sends back owned games keys, should I send back the whole list
       // or maybe just the new game tile elements to be rendered? NO, BECAUSE GAMES OWNED CAN ONLY BE ADDED FROM
       // the API SIDE, things will change for favorites/wishlist, unless I want to graphically update the frontend
