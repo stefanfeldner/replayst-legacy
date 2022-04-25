@@ -15,6 +15,7 @@ export default function HomeScreen() {
       .then(console.log('\nUSE EFFETCT AND API CALL\n')); // TODO delete line
   }, []);
 
+  //TODO modify infinite scroll to be list-length aware
   function infiniteScroll(url) {
     fetchMore(url).then((res) =>
       setTiles((prev) => [...prev, ...res.results], setNextUrl(res.next))
