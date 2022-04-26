@@ -34,14 +34,14 @@ function GameList({
   const fadeIn = () => {
     Animated.timing(fadeAnim, {
       toValue: 1,
-      duration: 200,
+      duration: 35,
       useNativeDriver: true
     }).start();
   };
   const fadeOut = type => {
     Animated.timing(fadeAnim, {
       toValue: 0,
-      duration: 300,
+      duration: 135,
       useNativeDriver: true
     }).start(() => {
       if (type === 'add') add();
@@ -52,25 +52,28 @@ function GameList({
 
   return (
     <SafeAreaView style={styles.container}>
-      <Animated.View style={{ opacity: fadeAnim }}>
-        <FlatList
-          data={tiles}
-          extraData={fontSize}
-          ref={listViewRef}
-          key={cols}
-          numColumns={cols}
-          initialNumToRender={4}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => <GameTile game={item} cols={cols} />}
-          maxToRenderPerBatch={3}
-          onEndReached={() => {
-            console.log('fired');
-            if (nextUrl) return infiniteScroll(nextUrl); //UNCOMMENT TO ACTIVATE INFINITE SCROLL
-          }} // <-- when we call a function directly in JSX we need to put it in a callback function!!!
-          onEndReachedThreshold={0.1} // TODO check how many times it gets fired with the active infinite scroll
-          ListHeaderComponent={isFromCollection ? GameListHeader : null}
-        />
-      </Animated.View>
+      <FlatList
+        data={tiles}
+        extraData={fontSize}
+        ref={listViewRef}
+        key={cols}
+        numColumns={cols}
+        initialNumToRender={4}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item }) => (
+          <Animated.View style={{ opacity: fadeAnim, flex: 1 }}>
+            <GameTile game={item} cols={cols} />
+          </Animated.View>
+        )}
+        maxToRenderPerBatch={3}
+        onEndReached={() => {
+          console.log('fired');
+          if (nextUrl) return infiniteScroll(nextUrl); //UNCOMMENT TO ACTIVATE INFINITE SCROLL
+        }} // <-- when we call a function directly in JSX we need to put it in a callback function!!!
+        onEndReachedThreshold={0.1} // TODO check how many times it gets fired with the active infinite scroll
+        ListHeaderComponent={isFromCollection ? GameListHeader : null}
+      />
+
       <View style={styles.buttons}>
         <Pressable onPress={() => cols > 1 && fadeOut('add')}>
           <MaterialIcons
