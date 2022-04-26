@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
 import GameList from './GameList';
 import { fetchMore } from '../services/ApiClient';
+import { Fontisto } from '@expo/vector-icons';
+import { PALETTE } from '../services/theme';
 
 function SearchScreen({
   searchResults,
@@ -24,7 +26,8 @@ function SearchScreen({
   return (
     <View style={styles.container}>
       {!searchResults.length ? (
-        <Text style={{ color: '#fff' }}>SEARCH LIST HERE</Text>
+        // <Text style={{ color: '#fff' }}>SEARCH LIST HERE</Text>
+        <Fontisto name="search" size={150} color="#71797E" />
       ) : (
         <GameList
           style={styles.list}
@@ -44,7 +47,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'rgb(24, 16, 9)',
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   list: {
     marginTop: 50

@@ -1,5 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
-import { Image, StyleSheet, Text, ScrollView, View } from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  ScrollView,
+  View,
+  ActivityIndicator
+} from 'react-native';
 import { fetchOne } from '../services/ApiClient';
 import { DateTime } from 'luxon';
 import UpdateCollection from './UpdateCollection';
@@ -27,10 +34,12 @@ export default function GameDetailsScreen(props) {
     fetchOne(props.route.params.id, source).then(res => setGame(res));
   }, []);
 
+  const whitespace = ' ';
+
   return (
     <View style={styles.container}>
       {!game ? (
-        <Text style={{ color: 'white' }}>Loading...</Text>
+        <ActivityIndicator size="large" color={PALETTE.one} />
       ) : (
         <ScrollView>
           <Image source={{ uri: game.background_image }} style={styles.image} />
@@ -63,26 +72,49 @@ export default function GameDetailsScreen(props) {
               //setGame={setGame} // TODO for platform ownership feature
             />
           </View>
-          {game.developers.map(dev => (
-            <Text style={styles.textCol} key={dev.id}>
-              {dev.name}
+          <View style={styles.bodyText}>
+            <Text style={[styles.title, styles.textCol]}>{game.name}</Text>
+            <View style={styles.devs}>
+              {game.developers.map(dev => (
+                <Text style={[styles.textCol, styles.devs]} key={dev.id}>
+                  {dev.name}
+                </Text>
+              ))}
+            </View>
+            <View style={styles.details}>
+              <View>
+                <View>
+                  <Text style={styles.field}>Genres</Text>
+                  {game.genres.map(genre => (
+                    <Text style={styles.textCol} key={genre.id}>
+                      {genre.name}
+                    </Text>
+                  ))}
+                </View>
+                <View style={{ flexDirection: 'row' }}>
+                  <Text style={styles.field}>
+                    Release date:{whitespace}
+                    <Text style={[styles.textCol, { fontSize: 12 }]}>
+                      {DateTime.fromISO(game.released).toLocaleString()}
+                    </Text>
+                  </Text>
+                </View>
+              </View>
+              <View>
+                <Text style={styles.field}>Platforms</Text>
+                {game.platforms.map(p => (
+                  <Text style={styles.textCol} key={p.id}>
+                    {p.name}
+                  </Text>
+                ))}
+              </View>
+            </View>
+
+            <Text style={styles.field}>ABOUT:</Text>
+            <Text style={[styles.textCol, styles.description]}>
+              {game.description}
             </Text>
-          ))}
-          <Text style={[styles.title, styles.textCol]}>{game.name}</Text>
-          {game.genres.map(genre => (
-            <Text style={styles.textCol} key={genre.id}>
-              {genre.name}
-            </Text>
-          ))}
-          {game.platforms.map(p => (
-            <Text style={styles.textCol} key={p.id}>
-              {p.name}
-            </Text>
-          ))}
-          <Text style={styles.textCol}>
-            Release date: {DateTime.fromISO(game.released).toLocaleString()}
-          </Text>
-          <Text style={[styles.textCol, styles.desc]}>{game.description}</Text>
+          </View>
         </ScrollView>
       )}
     </View>
@@ -101,12 +133,45 @@ const styles = StyleSheet.create({
     aspectRatio: 1.25
   },
   title: {
-    fontSize: 24
+    fontSize: 28,
+    fontWeight: '500',
+    textAlign: 'center',
+    position: 'relative',
+    bottom: 6
+  },
+  field: {
+    color: PALETTE.four,
+    paddingBottom: 4,
+    paddingRight: 2,
+    paddingVertical: 8,
+    fontSize: 15
+  },
+  list: {
+    padding: 2
+  },
+  details: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  devs: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 5,
+    fontSize: 12,
+    flexWrap: 'wrap'
+  },
+  releaseDate: {
+    position: 'relative',
+    top: 5,
+    fontSize: 12
+  },
+  description: {
+    paddingTop: 10
   },
   textCol: {
     color: PALETTE.one
   },
-  desc: {
+  bodyText: {
     padding: 15
   },
   buttons: {
