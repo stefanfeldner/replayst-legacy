@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -19,14 +19,20 @@ function GameList({
   listViewRef,
   isFromCollection
 }) {
+  const [cols, setCols] = useState(1);
+  const [fontSize, setFontSize] = useState(18);
+
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
         data={tiles}
+        extraData={fontSize}
         ref={listViewRef}
+        key={cols}
+        numColumns={cols}
         initialNumToRender={4}
         keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => <GameTile game={item} />}
+        renderItem={({ item }) => <GameTile game={item} cols={cols} />}
         maxToRenderPerBatch={3}
         onEndReached={() => {
           console.log('fired');
@@ -36,11 +42,31 @@ function GameList({
         ListHeaderComponent={isFromCollection ? GameListHeader : null}
       />
       <View style={styles.buttons}>
-        <Pressable>
-          <MaterialIcons name="add" size={26} color={PALETTE.three} />
+        <Pressable
+          onPress={() =>
+            cols > 1 &&
+            setCols(prev => prev - 1) &&
+            setFontSize(prev => prev + 2)
+          }
+        >
+          <MaterialIcons
+            name="add"
+            size={26}
+            color={cols > 1 ? PALETTE.two : 'gray'}
+          />
         </Pressable>
-        <Pressable>
-          <MaterialIcons name="remove" size={26} color={PALETTE.three} />
+        <Pressable
+          onPress={() =>
+            cols < 3 &&
+            setCols(prev => prev + 1) &&
+            setFontSize(prev => prev - 2)
+          }
+        >
+          <MaterialIcons
+            name="remove"
+            size={26}
+            color={cols < 3 ? PALETTE.two : 'gray'}
+          />
         </Pressable>
       </View>
     </SafeAreaView>

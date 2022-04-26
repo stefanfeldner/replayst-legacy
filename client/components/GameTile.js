@@ -1,25 +1,36 @@
 import { Image, View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { memo } from 'react';
+import { PALETTE } from '../services/theme';
 
-function GameTile({ game }) {
+function GameTile({ game, cols }) {
   const navigation = useNavigation();
+
   return (
-    <TouchableOpacity
-      onPress={() => {
-        console.log('click');
-        navigation.navigate('Details', {
-          id: game.id
-        });
-      }}
-    >
-      <View style={styles.container}>
-        <Image source={{ uri: game.background_image }} style={styles.tile} />
-        <View style={styles.desc}>
-          <Text style={styles.title}>{game.name}</Text>
+    <View style={styles.container}>
+      <TouchableOpacity
+        onPress={() => {
+          console.log('click');
+          navigation.navigate('Details', {
+            id: game.id
+          });
+        }}
+      >
+        <View style={styles.tileContainer}>
+          <Image source={{ uri: game.background_image }} style={styles.pic} />
+          <View style={styles.desc}>
+            <Text
+              style={[
+                styles.title,
+                { fontSize: cols === 1 ? 18 : 18 / cols + 6 }
+              ]}
+            >
+              {game.name}
+            </Text>
+          </View>
         </View>
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </View>
   );
 }
 
@@ -27,12 +38,15 @@ export default memo(GameTile);
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1
+  },
+  tileContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     margin: 10
   },
-  tile: {
+  pic: {
     aspectRatio: 2,
     width: '100%',
     borderTopLeftRadius: 10,
@@ -41,8 +55,9 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    padding: 10,
-    color: 'rgb(222, 219, 214)'
+    paddingVertical: '2.5%',
+    color: PALETTE.one,
+    fontWeight: '500'
   },
   desc: {
     flex: 1,

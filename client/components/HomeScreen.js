@@ -47,11 +47,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center'
   },
-  testDesc: {
-    color: 'rgb(222, 219, 214)',
-    fontSize: 18,
-    marginHorizontal: 15
-  },
   list: {
     marginTop: 50
   }

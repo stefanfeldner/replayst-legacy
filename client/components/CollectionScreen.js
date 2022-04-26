@@ -29,19 +29,8 @@ export default function CollectionScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#110d07',
     flex: 1,
-    justifyContent: 'center'
-  },
-  logo: {
-    width: 305,
-    height: 159,
-    marginBottom: 10
-  },
-  testDesc: {
-    color: 'rgb(222, 219, 214)',
-    fontSize: 18,
-    marginHorizontal: 15
+    backgroundColor: '#110d07'
   },
   list: {
     marginTop: 50
