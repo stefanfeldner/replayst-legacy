@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { PALETTE } from '../services/theme';
 import { UserContext } from './UserContext';
@@ -13,9 +13,24 @@ export default function GameListHeader() {
 
   return (
     <View style={styles.container}>
-      <GameListHeaderButton list={coll} listName={'owned'} />
-      <GameListHeaderButton list={favs} listName={'favorites'} />
-      <GameListHeaderButton list={wish} listName={'wishlist'} />
+      <GameListHeaderButton
+        list={coll}
+        listName={'owned'}
+        iconed={'safe-square-outline'}
+        icon={'safe-square'}
+      />
+      <GameListHeaderButton
+        list={favs}
+        listName={'favorites'}
+        iconed={'heart-outline'}
+        icon={'heart'}
+      />
+      <GameListHeaderButton
+        list={wish}
+        listName={'wishlist'}
+        iconed={'star-outline'}
+        icon={'star'}
+      />
     </View>
   );
 }
