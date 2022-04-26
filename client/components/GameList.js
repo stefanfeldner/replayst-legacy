@@ -1,11 +1,11 @@
-import { memo, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
   FlatList,
   View,
   Pressable,
-  Text
+  Animated
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { PALETTE } from '../services/theme';
@@ -21,47 +21,65 @@ function GameList({
 }) {
   const [cols, setCols] = useState(1);
   const [fontSize, setFontSize] = useState(18);
+  const fadeAnim = useRef(new Animated.Value(1)).current;
+
+  const add = () => {
+    setCols(prev => prev - 1);
+    setFontSize(prev => prev + 2);
+  };
+  const remove = () => {
+    setCols(prev => prev + 1);
+    setFontSize(prev => prev - 2);
+  };
+  const fadeIn = () => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 200,
+      useNativeDriver: true
+    }).start();
+  };
+  const fadeOut = type => {
+    Animated.timing(fadeAnim, {
+      toValue: 0,
+      duration: 300,
+      useNativeDriver: true
+    }).start(() => {
+      if (type === 'add') add();
+      else remove();
+      fadeIn();
+    });
+  };
 
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
-        data={tiles}
-        extraData={fontSize}
-        ref={listViewRef}
-        key={cols}
-        numColumns={cols}
-        initialNumToRender={4}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => <GameTile game={item} cols={cols} />}
-        maxToRenderPerBatch={3}
-        onEndReached={() => {
-          console.log('fired');
-          if (nextUrl) return infiniteScroll(nextUrl); //UNCOMMENT TO ACTIVATE INFINITE SCROLL
-        }} // <-- when we call a function directly in JSX we need to put it in a callback function!!!
-        onEndReachedThreshold={0.1} // TODO check how many times it gets fired with the active infinite scroll
-        ListHeaderComponent={isFromCollection ? GameListHeader : null}
-      />
+      <Animated.View style={{ opacity: fadeAnim }}>
+        <FlatList
+          data={tiles}
+          extraData={fontSize}
+          ref={listViewRef}
+          key={cols}
+          numColumns={cols}
+          initialNumToRender={4}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => <GameTile game={item} cols={cols} />}
+          maxToRenderPerBatch={3}
+          onEndReached={() => {
+            console.log('fired');
+            if (nextUrl) return infiniteScroll(nextUrl); //UNCOMMENT TO ACTIVATE INFINITE SCROLL
+          }} // <-- when we call a function directly in JSX we need to put it in a callback function!!!
+          onEndReachedThreshold={0.1} // TODO check how many times it gets fired with the active infinite scroll
+          ListHeaderComponent={isFromCollection ? GameListHeader : null}
+        />
+      </Animated.View>
       <View style={styles.buttons}>
-        <Pressable
-          onPress={() =>
-            cols > 1 &&
-            setCols(prev => prev - 1) &&
-            setFontSize(prev => prev + 2)
-          }
-        >
+        <Pressable onPress={() => cols > 1 && fadeOut('add')}>
           <MaterialIcons
             name="add"
             size={26}
             color={cols > 1 ? PALETTE.two : 'gray'}
           />
         </Pressable>
-        <Pressable
-          onPress={() =>
-            cols < 3 &&
-            setCols(prev => prev + 1) &&
-            setFontSize(prev => prev - 2)
-          }
-        >
+        <Pressable onPress={() => cols < 3 && fadeOut('remove')}>
           <MaterialIcons
             name="remove"
             size={26}
