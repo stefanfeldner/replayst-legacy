@@ -45,7 +45,7 @@ export default SearchScreen;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'rgb(24, 16, 9)',
+    backgroundColor: PALETTE.six,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'

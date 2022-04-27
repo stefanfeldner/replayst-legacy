@@ -7,7 +7,7 @@ import { UserContext } from './UserContext';
 export default function CollectionScreen() {
   const { toRender } = useContext(UserContext);
   const [tiles] = toRender;
-  useEffect(() => {}, [tiles]);
+  // useEffect(() => {}, [tiles]); UNNECESSARY
 
   // TODO UNNECESSARY WOUT PAGINATION
   // function infiniteScroll(url) {
