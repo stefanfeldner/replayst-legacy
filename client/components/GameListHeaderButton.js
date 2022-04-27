@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Pressable, Text, View, StyleSheet } from 'react-native';
+import { Pressable, View, StyleSheet } from 'react-native';
 import { PALETTE } from '../services/theme';
 import { UserContext } from './UserContext';
 import { MaterialCommunityIcons } from '@expo/vector-icons';

@@ -44,7 +44,7 @@ export default function UpdateCollection({
               ]);
             })
           : removeFromCollection(userId, game._id, list).then(res => {
-              setIsAdded(!isAdded);
+              setIsAdded(prev => !prev);
               setList(prev => prev.filter(game => game._id !== res.id));
               renderedList === list &&
                 setGamesToRender(prev =>
