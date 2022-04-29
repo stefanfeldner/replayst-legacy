@@ -5,44 +5,52 @@ import {
   FlatList,
   View,
   Pressable,
-  Animated
+  Animated,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import { PALETTE } from '../services/theme';
-import GameListHeader from './GameListHeader';
-import GameTile from './GameTile';
+import { PALETTE } from '../../services/theme';
+import GameListHeader from '../GameListHeader/GameListHeader';
+import GameTile from '../GameTile/GameTile';
+
+interface Props {
+  tiles: any;
+  isFromCollection: any;
+  infiniteScroll?: any;
+  nextUrl?: any;
+  listViewRef?: any;
+}
 
 function GameList({
   tiles,
   infiniteScroll,
   nextUrl,
   listViewRef,
-  isFromCollection
-}) {
+  isFromCollection,
+}: Props) {
   const [cols, setCols] = useState(1);
   const [fontSize, setFontSize] = useState(18);
   const fadeAnim = useRef(new Animated.Value(1)).current;
 
   const add = () => {
-    setCols(prev => prev - 1);
-    setFontSize(prev => prev + 2);
+    setCols((prev) => prev - 1);
+    setFontSize((prev) => prev + 2);
   };
   const remove = () => {
-    setCols(prev => prev + 1);
-    setFontSize(prev => prev - 2);
+    setCols((prev) => prev + 1);
+    setFontSize((prev) => prev - 2);
   };
   const fadeIn = () => {
     Animated.timing(fadeAnim, {
       toValue: 1,
       duration: 35,
-      useNativeDriver: true
+      useNativeDriver: true,
     }).start();
   };
-  const fadeOut = type => {
+  const fadeOut = (type: string) => {
     Animated.timing(fadeAnim, {
       toValue: 0,
       duration: 135,
-      useNativeDriver: true
+      useNativeDriver: true,
     }).start(() => {
       if (type === 'add') add();
       else remove();
@@ -67,7 +75,6 @@ function GameList({
         )}
         maxToRenderPerBatch={3}
         onEndReached={() => {
-          console.log('fired');
           if (nextUrl) return infiniteScroll(nextUrl); //UNCOMMENT TO ACTIVATE INFINITE SCROLL
         }} // <-- when we call a function directly in JSX we need to put it in a callback function!!!
         onEndReachedThreshold={0.1} // TODO check how many times it gets fired with the active infinite scroll
@@ -98,7 +105,7 @@ export default memo(GameList);
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   buttons: {
     justifyContent: 'space-between',
@@ -112,12 +119,15 @@ const styles = StyleSheet.create({
     padding: 5,
     paddingVertical: 12,
     right: 22,
-    bottom: 24
+    bottom: 24,
   },
   plusButton: {
-    color: PALETTE.three
+    color: PALETTE.three,
   },
   minusBUtton: {
-    color: PALETTE.three
-  }
+    color: PALETTE.three,
+  },
+  list: {
+    marginTop: 50,
+  },
 });

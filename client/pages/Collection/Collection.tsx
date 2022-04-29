@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import GameDetailsScreen from '../GameDetailsScreen/GameDetailsScreen';
-import CollectionScreen from '../../components/CollectionScreen';
+import CollectionScreen from '../../components/CollectionScreen/CollectionScreen';
 import { PALETTE } from '../../services/theme';
 
 const CollectionStack = createNativeStackNavigator();

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import GameList from './GameList';
-import { getPopularGames, fetchMore } from '../services/ApiClient';
+import GameList from '../GameList/GameList';
+import { getPopularGames, fetchMore } from '../../services/ApiClient';
 
 export default function HomeScreen() {
   const [tiles, setTiles] = useState([]);

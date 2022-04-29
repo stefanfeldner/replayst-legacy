@@ -1,8 +1,8 @@
 import { useContext, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { PALETTE } from '../services/theme';
-import { UserContext } from './UserContext';
-import GameListHeaderButton from './GameListHeaderButton';
+import { PALETTE } from '../../services/theme';
+import { UserContext } from '../UserContext/UserContext';
+import GameListHeaderButton from '../GameListHeaderButton/GameListHeaderButton';
 
 export default function GameListHeader() {
   const { owned, favorites, wishlist } = useContext(UserContext);

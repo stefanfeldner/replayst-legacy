@@ -1,1 +1,1 @@
-// test main
+import Main from "./Main";

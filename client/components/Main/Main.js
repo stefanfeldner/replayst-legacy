@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../../pages/Home/Home';
 import Collection from '../../pages/Collection/Collection';
-import { UserProvider } from '../UserContext';
+import { UserProvider } from '../UserContext/UserContext';
 import { Ionicons } from '@expo/vector-icons';
 import { PALETTE } from '../../services/theme';
 const Tab = createBottomTabNavigator();

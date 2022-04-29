@@ -9,8 +9,8 @@ import {
 } from 'react-native';
 import { fetchOne } from '../../services/ApiClient';
 import { DateTime } from 'luxon';
-import UpdateCollection from '../../components/UpdateCollection';
-import { UserContext } from '../../components/UserContext';
+import UpdateCollection from '../../components/UpdateCollection/UpdateCollection';
+import { UserContext } from '../../components/UserContext/UserContext';
 import { PALETTE } from '../../services/theme';
 
 export default function GameDetailsScreen(props) {
