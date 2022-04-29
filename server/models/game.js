@@ -21,17 +21,3 @@ const newGame = new Schema({
 const Game = mongoose.model('Game', newGame);
 
 module.exports = Game;
-
-// module.exports = {
-//   id: Number,
-//   name: String,
-//   slug: String,
-//   description: String,
-//   metacritic: Number,
-//   released: String,
-//   background_image: String,
-//   website: String,
-//   genres: [Genre],
-//   platforms: [Platform],
-//   developers: [Developer]
-// };
