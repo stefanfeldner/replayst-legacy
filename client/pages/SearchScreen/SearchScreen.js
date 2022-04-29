@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-import GameList from '../../components/GameList';
+import GameList from '../../components/GameList/GameList';
 import { fetchMore } from '../../services/ApiClient';
 import { Fontisto } from '@expo/vector-icons';
 import { PALETTE } from '../../services/theme';

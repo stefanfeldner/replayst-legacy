@@ -1,7 +1,7 @@
 import { Image, View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { memo } from 'react';
-import { PALETTE } from '../services/theme';
+import { PALETTE } from '../../services/theme';
 
 function GameTile({ game, cols }) {
   const navigation = useNavigation();
@@ -10,7 +10,6 @@ function GameTile({ game, cols }) {
     <View style={styles.container}>
       <TouchableOpacity
         onPress={() => {
-          console.log('click');
           navigation.navigate('Details', {
             id: game.id
           });

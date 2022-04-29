@@ -1,11 +1,11 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
-import HomeScreen from '../../components/HomeScreen';
+import HomeScreen from '../../components/HomeScreen/HomeScreen';
 import GameDetailsScreen from '../GameDetailsScreen/GameDetailsScreen';
 import SearchScreen from '../SearchScreen/SearchScreen';
 import { Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import SearchGameBar from '../../components/SearchGameBar';
+import SearchGameBar from '../../components/SearchGameBar/SearchGameBar';
 import { useRef, useState } from 'react';
 import { searchGamesFromAPI } from '../../services/ApiClient';
 

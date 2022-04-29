@@ -1,0 +1,1 @@
+import GameList from "./GameList";

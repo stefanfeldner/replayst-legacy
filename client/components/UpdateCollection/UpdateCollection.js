@@ -2,11 +2,11 @@ import { useState, useContext } from 'react';
 import { Pressable } from 'react-native';
 import {
   addGameToCollection,
-  removeFromCollection
-} from '../services/DbClient';
+  removeFromCollection,
+} from '../../services/DbClient';
 import { Ionicons } from '@expo/vector-icons';
-import { PALETTE } from '../services/theme';
-import { UserContext } from './UserContext';
+import { PALETTE } from '../../services/theme';
+import { UserContext } from '../UserContext/UserContext';
 
 // TODO handle the remove from collection case, with an alert for accidental press
 export default function UpdateCollection({
@@ -16,39 +16,38 @@ export default function UpdateCollection({
   setList,
   list,
   addIcon,
-  removeIcon
+  removeIcon,
 }) {
   const [isAdded, setIsAdded] = useState(match);
   const { rendered, toRender } = useContext(UserContext);
   const [renderedList] = rendered;
   const [gamesToRender, setGamesToRender] = toRender;
 
-  const userId =
-    /* vic: '6266679c68159251ea6f845d';  filo:*/ '626add893f286892111c9490'; // TODO make it dynamic by user
+  const userId = '626add893f286892111c9490'; // TODO make it dynamic by user
   return (
     <Pressable
       onPress={() =>
         !isAdded
-          ? addGameToCollection(userId, game, list).then(res => {
+          ? addGameToCollection(userId, game, list).then((res) => {
               // setGame(res.added); // logic ready for platform ownership feature
               // console.log(res); // --> after a while it breaks by itself!
               setIsAdded(!isAdded);
-              setList(prev => [
+              setList((prev) => [
                 {
                   _id: res.added._id,
                   background_image: res.added.background_image,
                   id: res.added.id,
-                  name: res.added.name
+                  name: res.added.name,
                 },
-                ...prev
+                ...prev,
               ]);
             })
-          : removeFromCollection(userId, game._id, list).then(res => {
-              setIsAdded(prev => !prev);
-              setList(prev => prev.filter(game => game._id !== res.id));
+          : removeFromCollection(userId, game._id, list).then((res) => {
+              setIsAdded((prev) => !prev);
+              setList((prev) => prev.filter((game) => game._id !== res.id));
               renderedList === list &&
-                setGamesToRender(prev =>
-                  prev.filter(game => game._id !== res.id)
+                setGamesToRender((prev) =>
+                  prev.filter((game) => game._id !== res.id)
                 );
             })
       }

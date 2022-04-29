@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { Pressable, View, StyleSheet } from 'react-native';
-import { PALETTE } from '../services/theme';
-import { UserContext } from './UserContext';
+import { PALETTE } from '../../services/theme';
+import { UserContext } from '../UserContext/UserContext';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function GameListHeaderButton({ list, listName, icon, iconed }) {
