@@ -1,4 +1,4 @@
-import { memo, useEffect, useRef, useState } from 'react';
+import { memo, useRef, useState } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -14,7 +14,7 @@ import GameTile from '../GameTile/GameTile';
 
 interface Props {
   tiles: any;
-  isFromCollection: any;
+  isFromCollection?: any;
   infiniteScroll?: any;
   nextUrl?: any;
   listViewRef?: any;
@@ -27,8 +27,8 @@ function GameList({
   listViewRef,
   isFromCollection,
 }: Props) {
-  const [cols, setCols] = useState(1);
-  const [fontSize, setFontSize] = useState(18);
+  const [cols, setCols] = useState<number>(1);
+  const [fontSize, setFontSize] = useState<number>(18);
   const fadeAnim = useRef(new Animated.Value(1)).current;
 
   const add = () => {

@@ -2,36 +2,40 @@ import { useEffect, useState } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import GameList from '../GameList/GameList';
 import { getPopularGames, fetchMore } from '../../services/ApiClient';
+import { Game } from '../../types/Game';
 
 export default function HomeScreen() {
-  const [tiles, setTiles] = useState([]);
-  const [nextUrl, setNextUrl] = useState('');
+  const [tiles, setTiles] = useState<Game[]>([]);
+  const [nextUrl, setNextUrl] = useState<string>('');
+
   useEffect(() => {
-    getPopularGames()
-      .then(res => {
+    getPopularGames().then((res) => {
+      // res.next && results only available on Explore page
+      if (res && res.next) {
         setNextUrl(res.next);
         setTiles(res.results);
-      })
-      .then(console.log('\nUSE EFFETCT AND API CALL\n')); // TODO delete line
+      }
+    });
   }, []);
 
   //TODO modify infinite scroll to be list-length aware
-  function infiniteScroll(url) {
+  function infiniteScroll(url: string) {
     if (nextUrl) {
-      fetchMore(url).then(res =>
-        setTiles(prev => [...prev, ...res.results], setNextUrl(res.next))
-      );
+      fetchMore(url).then((res) => {
+        if (res) {
+          setTiles((prev) => [...prev, ...res.results]);
+          setNextUrl(res.next)
+        }
+      });
     }
-    // setState accepts a callback function as a 2nd argument that gets executed once the new state is set
   }
 
   return (
     <View style={styles.container}>
       {!tiles ? (
-        <Text style={styles.testDesc}>Loading...</Text>
+        <Text>Loading...</Text>
       ) : (
         <GameList
-          style={styles.list}
           tiles={tiles}
           infiniteScroll={infiniteScroll}
           nextUrl={nextUrl}
@@ -45,9 +49,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#110d07',
     flex: 1,
-    justifyContent: 'center'
-  },
-  list: {
-    marginTop: 50
+    justifyContent: 'center',
   }
 });

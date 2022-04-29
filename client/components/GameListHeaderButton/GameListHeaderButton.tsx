@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Pressable, View, StyleSheet } from 'react-native';
 import { PALETTE } from '../../services/theme';
 import { UserContext } from '../UserContext/UserContext';
-import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Game } from '../../types/Game';
 
 interface Props {

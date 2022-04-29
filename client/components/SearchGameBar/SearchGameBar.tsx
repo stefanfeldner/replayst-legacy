@@ -1,7 +1,13 @@
 import { StyleSheet } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 
-function SearchGameBar({ search, setSearch, handleOnSubmit }) {
+interface Props {
+  search: string;
+  setSearch: () => {};
+  handleOnSubmit: () => {};
+}
+
+function SearchGameBar({ search, setSearch, handleOnSubmit }: Props) {
   return (
     <Searchbar
       style={styles.bar}
@@ -26,6 +32,6 @@ const styles = StyleSheet.create({
     position: 'relative',
     right: 20,
     top: 5.5,
-    backgroundColor: '#000'
-  }
+    backgroundColor: '#000',
+  },
 });

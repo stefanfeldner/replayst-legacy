@@ -12,7 +12,7 @@ function Main() {
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
+            let iconName: any = '';
 
             if (route.name === 'My Collection') {
               iconName = focused ? 'ios-home' : 'ios-home-outline';
@@ -30,7 +30,7 @@ function Main() {
           tabBarActiveBackgroundColor: PALETTE.five,
           tabBarInactiveBackgroundColor: PALETTE.five,
           initialRouteName: 'My Collection',
-          headerShown: false
+          headerShown: false,
         })}
       >
         <Tab.Screen name="My Collection" component={Collection} />

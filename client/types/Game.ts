@@ -1,11 +1,8 @@
 export interface Game {
-  id: String;
-  background_image: String;
-  metacritic: Number;
-  name: String;
-  released: String;
+  _id: string;
+  id: string;
+  background_image: string;
+  metacritic: number;
+  name: string;
+  released: string;
 }
-
-// export interface GameToRender {
-  
-// }

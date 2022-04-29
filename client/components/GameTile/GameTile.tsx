@@ -2,17 +2,26 @@ import { Image, View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { memo } from 'react';
 import { PALETTE } from '../../services/theme';
+import { Game } from '../../types/Game';
 
-function GameTile({ game, cols }) {
+interface Props {
+  game: Game;
+  cols: number;
+}
+
+function GameTile({ game, cols }: Props) {
   const navigation = useNavigation();
-
+  
   return (
     <View style={styles.container}>
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate('Details', {
-            id: game.id
-          });
+          navigation.navigate(
+            'Details' as never,
+            {
+              id: game.id,
+            } as never
+          );
         }}
       >
         <View style={styles.tileContainer}>
@@ -21,7 +30,7 @@ function GameTile({ game, cols }) {
             <Text
               style={[
                 styles.title,
-                { fontSize: cols === 1 ? 18 : 18 / cols + 6 }
+                { fontSize: cols === 1 ? 18 : 18 / cols + 6 },
               ]}
             >
               {game.name}
@@ -37,26 +46,26 @@ export default memo(GameTile);
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   tileContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    margin: 10
+    margin: 10,
   },
   pic: {
     aspectRatio: 2,
     width: '100%',
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
-    marginTop: 10
+    marginTop: 10,
   },
   title: {
     fontSize: 18,
     paddingVertical: '2.5%',
     color: PALETTE.one,
-    fontWeight: '500'
+    fontWeight: '500',
   },
   desc: {
     flex: 1,
@@ -65,6 +74,6 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: 'rgb(32, 21, 13)',
     borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10
-  }
+    borderBottomRightRadius: 10,
+  },
 });

@@ -30,7 +30,6 @@ export default function GameDetailsScreen(props) {
   const source = ownedMatch || wishMatch || favMatch ? 'DB' : 'API';
 
   useEffect(() => {
-    console.log(source);
     fetchOne(props.route.params.id, source).then(res => setGame(res));
   }, []);
 
