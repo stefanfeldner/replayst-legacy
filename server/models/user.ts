@@ -1,3 +1,4 @@
+export {};
 const mongoose = require('./');
 
 const { Schema } = mongoose;
