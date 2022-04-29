@@ -5,16 +5,23 @@ import {
   Text,
   ScrollView,
   View,
-  ActivityIndicator
+  ActivityIndicator,
 } from 'react-native';
 import { fetchOne } from '../../services/ApiClient';
 import { DateTime } from 'luxon';
 import UpdateCollection from '../../components/UpdateCollection/UpdateCollection';
 import { UserContext } from '../../components/UserContext/UserContext';
 import { PALETTE } from '../../services/theme';
+import { Game, Platform, Platforms } from '../../types/Game';
 
-export default function GameDetailsScreen(props) {
-  const [game, setGame] = useState(null);
+// TODO: types for navigation prop
+interface Props {
+  navigation: any;
+  route: any;
+}
+
+export default function GameDetailsScreen(props: Props) {
+  const [game, setGame] = useState<Game>();
 
   const { owned, ownedIds, wishlist, wishIds, favorites, favsIds } =
     useContext(UserContext);
@@ -24,13 +31,13 @@ export default function GameDetailsScreen(props) {
   const [favs, setFavs] = favorites;
 
   // check if the games is in the collection and make the call accordingly
-  const ownedMatch = ownedIds.some(id => id === props.route.params.id);
-  const wishMatch = wishIds.some(id => id === props.route.params.id);
-  const favMatch = favsIds.some(id => id === props.route.params.id);
+  const ownedMatch = ownedIds.some((id) => id === props.route.params.id);
+  const wishMatch = wishIds.some((id) => id === props.route.params.id);
+  const favMatch = favsIds.some((id) => id === props.route.params.id);
   const source = ownedMatch || wishMatch || favMatch ? 'DB' : 'API';
 
   useEffect(() => {
-    fetchOne(props.route.params.id, source).then(res => setGame(res));
+    fetchOne(props.route.params.id, source).then((res) => setGame(res));
   }, []);
 
   const whitespace = ' ';
@@ -74,17 +81,18 @@ export default function GameDetailsScreen(props) {
           <View style={styles.bodyText}>
             <Text style={[styles.title, styles.textCol]}>{game.name}</Text>
             <View style={styles.devs}>
-              {game.developers.map(dev => (
-                <Text style={[styles.textCol, styles.devs]} key={dev.id}>
-                  {dev.name}
-                </Text>
-              ))}
+              {game &&
+                game.developers.map((dev) => (
+                  <Text style={[styles.textCol, styles.devs]} key={dev.id}>
+                    {dev.name}
+                  </Text>
+                ))}
             </View>
             <View style={styles.details}>
               <View>
                 <View>
                   <Text style={styles.field}>Genres</Text>
-                  {game.genres.map(genre => (
+                  {game.genres.map((genre) => (
                     <Text style={styles.textCol} key={genre.id}>
                       {genre.name}
                     </Text>
@@ -101,17 +109,20 @@ export default function GameDetailsScreen(props) {
               </View>
               <View>
                 <Text style={styles.field}>Platforms</Text>
-                {game.platforms.map(p => (
-                  <Text style={styles.textCol} key={p.id}>
-                    {p.name}
-                  </Text>
-                ))}
+                {game.platforms &&
+                  game.platforms.map((p: Platform) => {
+                    return (
+                      <Text style={styles.textCol} key={p.id}>
+                        {p.name}
+                      </Text>
+                    );
+                  })}
               </View>
             </View>
 
             <Text style={styles.field}>ABOUT:</Text>
             <Text style={[styles.textCol, styles.description]}>
-              {game.description}
+              {game.description && game.description}
             </Text>
           </View>
         </ScrollView>
@@ -125,57 +136,57 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: PALETTE.five,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   image: {
     width: '100%',
-    aspectRatio: 1.25
+    aspectRatio: 1.25,
   },
   title: {
     fontSize: 28,
     fontWeight: '500',
     textAlign: 'center',
     position: 'relative',
-    bottom: 6
+    bottom: 6,
   },
   field: {
     color: PALETTE.four,
     paddingBottom: 4,
     paddingRight: 2,
     paddingVertical: 8,
-    fontSize: 15
+    fontSize: 15,
   },
   list: {
-    padding: 2
+    padding: 2,
   },
   details: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   devs: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingVertical: 5,
     fontSize: 12,
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
   },
   releaseDate: {
     position: 'relative',
     top: 5,
-    fontSize: 12
+    fontSize: 12,
   },
   description: {
-    paddingTop: 10
+    paddingTop: 10,
   },
   textCol: {
-    color: PALETTE.one
+    color: PALETTE.one,
   },
   bodyText: {
-    padding: 15
+    padding: 15,
   },
   buttons: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    padding: 10
-  }
+    padding: 10,
+  },
 });
