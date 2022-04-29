@@ -17,7 +17,7 @@ export async function searchGamesFromAPI(key) {
   return fetch(`${apiURL}/games?${apiKEY}&search=${key}&page_size=40`)
     .then((res) => (res.status < 400 ? res : Promise.reject(res)))
     .then((res) => res.json())
-    .then((res) => filterTileResult(res))
+   // .then((res) => filterTileResult(res))
     .catch((err) => console.error(err, err.message));
 }
 
