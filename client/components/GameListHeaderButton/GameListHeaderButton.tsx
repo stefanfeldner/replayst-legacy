@@ -2,9 +2,22 @@ import { useContext } from 'react';
 import { Pressable, View, StyleSheet } from 'react-native';
 import { PALETTE } from '../../services/theme';
 import { UserContext } from '../UserContext/UserContext';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
+import { Game } from '../../types/Game';
 
-export default function GameListHeaderButton({ list, listName, icon, iconed }) {
+interface Props {
+  list: Game[];
+  listName: String;
+  icon: React.ComponentProps<typeof MaterialCommunityIcons>['name'];
+  iconed: React.ComponentProps<typeof MaterialCommunityIcons>['name'];
+}
+
+export default function GameListHeaderButton({
+  list,
+  listName,
+  icon,
+  iconed,
+}: Props) {
   const { rendered, toRender } = useContext(UserContext);
   const [renderedList, setRenderedList] = rendered;
   const [games, setToRender] = toRender;
@@ -23,7 +36,7 @@ export default function GameListHeaderButton({ list, listName, icon, iconed }) {
       <View
         style={[
           styles.image,
-          { backgroundColor: isToggled ? PALETTE.four : PALETTE.five }
+          { backgroundColor: isToggled ? PALETTE.four : PALETTE.five },
         ]}
       >
         <MaterialCommunityIcons
@@ -45,10 +58,10 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   text: {
     color: PALETTE.one,
-    fontSize: 16
-  }
+    fontSize: 16,
+  },
 });

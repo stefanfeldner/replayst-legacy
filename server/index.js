@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 
 //TODO add specific CORS logic
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "http://localhost:19006",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   preflightContinue: false,
   optionsSuccessStatus: 204

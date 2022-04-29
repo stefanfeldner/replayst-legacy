@@ -8,11 +8,6 @@ export default function CollectionScreen() {
   const { toRender }: { toRender: [Game[], Function], } = useContext(UserContext);
   const [tiles] = toRender;
 
-  console.log(useContext(UserContext));
-
-  console.log('toRender', toRender);
-  // console.log('tiles', tiles);
-
   return (
     <View style={styles.container}>
       {!tiles ? (
