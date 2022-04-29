@@ -1,4 +1,4 @@
-const mongoose = require('./');
+const mongoose = require('.');
 const Developer = require('./developer');
 
 const { Schema } = mongoose;
