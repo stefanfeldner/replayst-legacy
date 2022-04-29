@@ -14,7 +14,7 @@ async function createUser(req, res) {
     const newUser = await User.create({ ...req.body, password: pswd });
     res.status(201).send(newUser); // TODO don't send back all user info
   } catch (err) {
-    res.status(400).send({ error, message: 'Error, please retry' });
+    res.status(400).send({ err, message: 'Error, please retry' });
   }
 }
 

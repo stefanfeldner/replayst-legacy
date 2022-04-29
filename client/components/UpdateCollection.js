@@ -24,7 +24,7 @@ export default function UpdateCollection({
   const [gamesToRender, setGamesToRender] = toRender;
 
   const userId =
-    /* vic: '6266679c68159251ea6f845d';  filo:*/ '6261e0b712592ddafe9b6aa2'; // TODO make it dynamic by user
+    /* vic: '6266679c68159251ea6f845d';  filo:*/ '626add893f286892111c9490'; // TODO make it dynamic by user
   return (
     <Pressable
       onPress={() =>
