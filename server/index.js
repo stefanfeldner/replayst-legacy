@@ -7,7 +7,16 @@ const app = Express();
 
 const PORT = process.env.PORT || 3000;
 
-app.use(cors()).use(morgan('short')).use(Express.json()).use(router);
+//TODO add specific CORS logic
+const corsOptions = {
+  origin: "http://localhost:3000",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  preflightContinue: false,
+  optionsSuccessStatus: 204
+}
+
+app.use(cors(corsOptions)).use(morgan('short')).use(Express.json()).use(router);
+
 
 app.listen(PORT, () => {
   console.log(`Up and running at http://localhost:${PORT}`);
