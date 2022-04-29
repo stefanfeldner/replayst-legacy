@@ -40,10 +40,14 @@ const UserProvider = ({ children }: Props) => {
     wishIds: wishIds,
     favsIds: favsIds,
   };
+  
   // call user collection at loading, rerenders only on value change
   const userId: String = '626add893f286892111c9490';
+  
   useEffect(() => {
     getUserCollection(userId).then((res) => {
+      console.log(res);
+      
       if (!res.owned) return;
       // setNextUrl(res.next); // TODO ONLY FOR PAGINATION, to eventually implement on the backend
       setToRender(res.owned);
