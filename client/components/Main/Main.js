@@ -1,9 +1,9 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Home from './Home';
-import Collection from './Collection';
-import { UserProvider } from './UserContext';
+import Home from '../../pages/Home/Home';
+import Collection from '../../pages/Collection/Collection';
+import { UserProvider } from '../UserContext';
 import { Ionicons } from '@expo/vector-icons';
-import { PALETTE } from '../services/theme';
+import { PALETTE } from '../../services/theme';
 const Tab = createBottomTabNavigator();
 
 function Main() {

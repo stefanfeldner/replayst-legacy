@@ -7,11 +7,11 @@ import {
   View,
   ActivityIndicator
 } from 'react-native';
-import { fetchOne } from '../services/ApiClient';
+import { fetchOne } from '../../services/ApiClient';
 import { DateTime } from 'luxon';
-import UpdateCollection from './UpdateCollection';
-import { UserContext } from './UserContext';
-import { PALETTE } from '../services/theme';
+import UpdateCollection from '../../components/UpdateCollection';
+import { UserContext } from '../../components/UserContext';
+import { PALETTE } from '../../services/theme';
 
 export default function GameDetailsScreen(props) {
   const [game, setGame] = useState(null);

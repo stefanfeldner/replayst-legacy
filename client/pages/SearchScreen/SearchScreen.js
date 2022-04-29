@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
-import GameList from './GameList';
-import { fetchMore } from '../services/ApiClient';
+import GameList from '../../components/GameList';
+import { fetchMore } from '../../services/ApiClient';
 import { Fontisto } from '@expo/vector-icons';
-import { PALETTE } from '../services/theme';
+import { PALETTE } from '../../services/theme';
 
 function SearchScreen({
   searchResults,
