@@ -36,12 +36,11 @@ export default function UpdateCollection({
 
   const userId: string = '626add893f286892111c9490'; // TODO make it dynamic by user
   return (
-    <Pressable
+    <Pressable testID='toggleIcon'
       onPress={() =>
         !isAdded
           ? addGameToCollection(userId, game, list).then((res) => {
               // setGame(res.added); // logic ready for platform ownership feature
-              // console.log(res); // --> after a while it breaks by itself!
               setIsAdded(!isAdded);
               setList((prev: Game[]) => [
                 {
