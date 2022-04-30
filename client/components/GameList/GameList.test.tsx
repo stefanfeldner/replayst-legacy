@@ -1,6 +1,7 @@
 import GameList from './GameList';
 import { render } from '@testing-library/react-native';
 import { Game } from '../../types/Game';
+import { NavigationContainer } from '@react-navigation/native';
 
 const tiles: Game[] = [
   {
@@ -23,9 +24,25 @@ const tiles: Game[] = [
   },
 ];
 
-test('FlatList should render Items', () => {
-  const { getByText } = render(<GameList tiles={tiles} />);
+test('FlatList should render the given two items', () => {
+  const { queryByText } = render(
+    <NavigationContainer>
+      <GameList tiles={tiles} />
+    </NavigationContainer>
+  );
   
-  expect(getByText('Terraria')).toBeDefined;
-  expect(getByText('Limbo')).toBeDefined;
+  expect(queryByText('Terraria')).toBeDefined();
+  expect(queryByText('Limbo')).toBeDefined();
+  expect(queryByText('NotThere')).toBeNull();
+});
+
+test('FlatList should render nothing', () => {
+  const { queryByText,  } = render(
+    <NavigationContainer>
+      <GameList tiles={[]} />
+    </NavigationContainer>
+  );
+
+  expect(queryByText('Terraria')).toBeNull();
+  expect(queryByText('Limbo')).toBeNull();
 });
