@@ -1,0 +1,225 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#110d07",
+      "flex": 1,
+    }
+  }
+>
+  <RCTSafeAreaView
+    emulateUnlessSupported={true}
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <RCTScrollView
+      ListHeaderComponent={[Function]}
+      data={Array []}
+      disableVirtualization={false}
+      extraData={18}
+      getItem={[Function]}
+      getItemCount={[Function]}
+      horizontal={false}
+      initialNumToRender={4}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={3}
+      onContentSizeChange={[Function]}
+      onEndReached={[Function]}
+      onEndReachedThreshold={0.1}
+      onLayout={[Function]}
+      onMomentumScrollEnd={[Function]}
+      onScroll={[Function]}
+      onScrollBeginDrag={[Function]}
+      onScrollEndDrag={[Function]}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      stickyHeaderIndices={Array []}
+      updateCellsBatchingPeriod={50}
+      viewabilityConfigCallbackPairs={Array []}
+      windowSize={21}
+    >
+      <View>
+        <View
+          onLayout={[Function]}
+        >
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+                "justifyContent": "space-around",
+                "marginTop": 20,
+              }
+            }
+          >
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "borderBottomLeftRadius": 10,
+                      "borderBottomRightRadius": 10,
+                      "borderTopLeftRadius": 10,
+                      "borderTopRightRadius": 10,
+                      "height": 35,
+                      "justifyContent": "center",
+                      "width": 110,
+                    },
+                    Object {
+                      "backgroundColor": "#20150d",
+                    },
+                  ]
+                }
+              >
+                <Text />
+              </View>
+            </View>
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "borderBottomLeftRadius": 10,
+                      "borderBottomRightRadius": 10,
+                      "borderTopLeftRadius": 10,
+                      "borderTopRightRadius": 10,
+                      "height": 35,
+                      "justifyContent": "center",
+                      "width": 110,
+                    },
+                    Object {
+                      "backgroundColor": "#20150d",
+                    },
+                  ]
+                }
+              >
+                <Text />
+              </View>
+            </View>
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "borderBottomLeftRadius": 10,
+                      "borderBottomRightRadius": 10,
+                      "borderTopLeftRadius": 10,
+                      "borderTopRightRadius": 10,
+                      "height": 35,
+                      "justifyContent": "center",
+                      "width": 110,
+                    },
+                    Object {
+                      "backgroundColor": "#20150d",
+                    },
+                  ]
+                }
+              >
+                <Text />
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </RCTScrollView>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#20150d",
+          "borderBottomLeftRadius": 20,
+          "borderBottomRightRadius": 20,
+          "borderTopLeftRadius": 20,
+          "borderTopRightRadius": 20,
+          "bottom": 24,
+          "justifyContent": "space-between",
+          "padding": 5,
+          "paddingVertical": 12,
+          "position": "absolute",
+          "right": 22,
+        }
+      }
+    >
+      <View
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+      >
+        <Text />
+      </View>
+      <View
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+      >
+        <Text />
+      </View>
+    </View>
+  </RCTSafeAreaView>
+</View>
+`;

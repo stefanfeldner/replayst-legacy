@@ -1,24 +1,33 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import GameList from '../../components/GameList/GameList';
 import { fetchMore } from '../../services/ApiClient';
 import { Fontisto } from '@expo/vector-icons';
 import { PALETTE } from '../../services/theme';
+import { Game, SearchResultsInfiniteScrollRes } from '../../types/Game';
+import { Dispatch, SetStateAction } from 'react';
+
+interface Props {
+  searchResults: Game[];
+  setSearchResults: Dispatch<SetStateAction<Game[]>>;
+  nextSearchUrl: string | null;
+  setNextSearchUrl: Dispatch<SetStateAction<string | null>>;
+  listViewRef: React.MutableRefObject<FlatList<any> | undefined>;
+}
 
 function SearchScreen({
   searchResults,
   setSearchResults,
   nextSearchUrl,
   setNextSearchUrl,
-  listViewRef
-}) {
+  listViewRef,
+}: Props) {
   // INFINITE SCROLL END OF API LIST-AWARE
-  function infiniteScroll(url) {
+  function infiniteScroll(url: string) {
     if (nextSearchUrl) {
-      fetchMore(url).then(res => {
-        setSearchResults(
-          prev => [...prev, ...res.results],
-          setNextSearchUrl(res.next)
-        );
+      fetchMore(url).then((res: void | SearchResultsInfiniteScrollRes) => {
+        if (!res) return;
+        setSearchResults((prev: Game[]) => [...prev, ...res.results]);
+        setNextSearchUrl(res.next);
       });
     }
   }
@@ -30,7 +39,6 @@ function SearchScreen({
         <Fontisto name="search" size={150} color="#71797E" />
       ) : (
         <GameList
-          style={styles.list}
           tiles={searchResults}
           nextUrl={nextSearchUrl}
           infiniteScroll={infiniteScroll}
@@ -48,9 +56,6 @@ const styles = StyleSheet.create({
     backgroundColor: PALETTE.six,
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
-  list: {
-    marginTop: 50
-  }
 });

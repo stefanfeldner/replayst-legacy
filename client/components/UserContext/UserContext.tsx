@@ -42,7 +42,7 @@ const UserProvider = ({ children }: Props) => {
   };
   
   // call user collection at loading, rerenders only on value change
-  const userId: String = '626add893f286892111c9490';
+  const userId: string = '626add893f286892111c9490';
   
   useEffect(() => {
     getUserCollection(userId).then((res) => {

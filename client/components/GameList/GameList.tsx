@@ -11,12 +11,13 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { PALETTE } from '../../services/theme';
 import GameListHeader from '../GameListHeader/GameListHeader';
 import GameTile from '../GameTile/GameTile';
+import { Game } from '../../types/Game';
 
 interface Props {
-  tiles: any;
-  isFromCollection?: any;
+  tiles: Game[];
+  isFromCollection?: boolean;
   infiniteScroll?: any;
-  nextUrl?: any;
+  nextUrl?: string | null;
   listViewRef?: any;
 }
 

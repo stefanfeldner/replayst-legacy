@@ -1,13 +1,16 @@
+import { Dispatch, SetStateAction } from 'react';
 import { StyleSheet } from 'react-native';
 import { Searchbar } from 'react-native-paper';
+import { Game } from '../../types/Game';
 
 interface Props {
   search: string;
-  setSearch: () => {};
-  handleOnSubmit: () => {};
+  setSearch: Dispatch<SetStateAction<string>>;
+  handleOnSubmit: () => void;
+  setSearchResults: Dispatch<SetStateAction<Game[]>>;
 }
 
-function SearchGameBar({ search, setSearch, handleOnSubmit }: Props) {
+function SearchGameBar({ search, setSearch, handleOnSubmit, setSearchResults }: Props) {
   return (
     <Searchbar
       style={styles.bar}

@@ -81,7 +81,7 @@ export default function GameDetailsScreen(props: Props) {
           <View style={styles.bodyText}>
             <Text style={[styles.title, styles.textCol]}>{game.name}</Text>
             <View style={styles.devs}>
-              {game &&
+              {game && game.developers &&
                 game.developers.map((dev) => (
                   <Text style={[styles.textCol, styles.devs]} key={dev.id}>
                     {dev.name}
@@ -92,7 +92,7 @@ export default function GameDetailsScreen(props: Props) {
               <View>
                 <View>
                   <Text style={styles.field}>Genres</Text>
-                  {game.genres.map((genre) => (
+                  {game.genres && game.genres.map((genre) => (
                     <Text style={styles.textCol} key={genre.id}>
                       {genre.name}
                     </Text>
