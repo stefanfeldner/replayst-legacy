@@ -28,15 +28,14 @@ const game = {
   __v: 0,
 };
 
-const list: Game[] = [];
 const match = false;
-const setList = jest.fn((game) => list.push(game));
+const setList = jest.fn();
 const listName = 'favorites';
 const addIcon = 'ios-heart-outline';
 const removeIcon = 'ios-heart';
 
-test.only('should add game to right collection', () => {
-  const { getByTestId } = render(
+test('should add game to favorites', async () => {
+  const { findByTestId } = render(
     <UpdateCollection
       game={game}
       match={match}
@@ -47,11 +46,11 @@ test.only('should add game to right collection', () => {
     />
   );
 
-  const toggleIcon = getByTestId('toggleIcon');
-  console.log(toggleIcon);
+  const toggleIcon = await findByTestId('toggleIcon');
 
-  fireEvent.press(toggleIcon);
-  console.log(list);
+  await act(async () => {
+    await fireEvent.press(toggleIcon);
+  });
 
-  expect(list.length).toBe(1);
+  expect(setList).toHaveBeenCalledTimes(1);
 });

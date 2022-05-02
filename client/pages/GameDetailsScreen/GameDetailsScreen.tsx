@@ -23,6 +23,9 @@ interface Props {
 export default function GameDetailsScreen(props: Props) {
   const [game, setGame] = useState<Game>();
 
+  console.log(props.navigation);
+  
+
   const { owned, ownedIds, wishlist, wishIds, favorites, favsIds } =
     useContext(UserContext);
 
@@ -40,8 +43,6 @@ export default function GameDetailsScreen(props: Props) {
     fetchOne(props.route.params.id, source).then((res) => setGame(res));
   }, []);
 
-  const whitespace = ' ';
-
   return (
     <View style={styles.container}>
       {!game ? (
@@ -51,6 +52,7 @@ export default function GameDetailsScreen(props: Props) {
           <Image source={{ uri: game.background_image }} style={styles.image} />
           <View style={styles.buttons}>
             <UpdateCollection
+              data-testID='toggleIcon'
               match={favMatch}
               game={game}
               list={'favorites'}
@@ -60,6 +62,7 @@ export default function GameDetailsScreen(props: Props) {
               //setGame={setGame} // TODO for platform ownership feature
             />
             <UpdateCollection
+              data-testID='toggleIcon'
               match={wishMatch}
               game={game}
               list={'wishlist'}
@@ -69,6 +72,7 @@ export default function GameDetailsScreen(props: Props) {
               //setGame={setGame} // TODO for platform ownership feature
             />
             <UpdateCollection
+              data-testID='toggleIcon'
               match={ownedMatch}
               game={game}
               list={'owned'}
@@ -100,7 +104,7 @@ export default function GameDetailsScreen(props: Props) {
                 </View>
                 <View style={{ flexDirection: 'row' }}>
                   <Text style={styles.field}>
-                    Release date:{whitespace}
+                    Release date:&nbsp;
                     <Text style={[styles.textCol, { fontSize: 12 }]}>
                       {DateTime.fromISO(game.released).toLocaleString()}
                     </Text>
