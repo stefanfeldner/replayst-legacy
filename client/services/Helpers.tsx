@@ -1,5 +1,8 @@
-export function filterTileResult(res) {
-  const basicTiles = res.results.map((game) => {
+import { FetchResult, Game, Platforms } from "../types/Game";
+
+// any here is huge game object
+export function filterTileResult(res: any) {
+  const basicTiles = res.results.map((game: Game) => {
     return {
       id: game.id,
       name: game.name,
@@ -13,8 +16,9 @@ export function filterTileResult(res) {
   return toPass;
 }
 
-export function filterSingleGameResult(res) {
-  const platformList = res.platforms.map((single) => single.platform);
+// any here is huge game object
+export function filterSingleGameResult(res: any) {
+  const platformList = res.platforms.map((single: Platforms) => single.platform);
   let filteredDesc = res.description.replace(/<[^>]*>?/gm, '');
   filteredDesc = filteredDesc.slice().replace(/(&#39;s)/gm, '');
 
@@ -31,8 +35,6 @@ export function filterSingleGameResult(res) {
     platforms: platformList,
     developers: res.developers
   };
-
-  //console.log(JSON.stringify(game)); // TODO delete log
 
   return game;
 }

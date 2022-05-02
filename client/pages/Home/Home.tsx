@@ -3,29 +3,31 @@ import { NavigationContainer } from '@react-navigation/native';
 import HomeScreen from '../../components/HomeScreen/HomeScreen';
 import GameDetailsScreen from '../GameDetailsScreen/GameDetailsScreen';
 import SearchScreen from '../SearchScreen/SearchScreen';
-import { Pressable } from 'react-native';
+import { FlatList, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import SearchGameBar from '../../components/SearchGameBar/SearchGameBar';
 import { useRef, useState } from 'react';
 import { searchGamesFromAPI } from '../../services/ApiClient';
+import { Game, SearchResultType } from '../../types/Game';
 
 const HomeStack = createNativeStackNavigator();
 
 function Home() {
-  const [search, setSearch] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
-  const [nextSearchUrl, setNextSearchUrl] = useState('');
-  let listViewRef = useRef();
+  const [search, setSearch] = useState<string>('');
+  const [searchResults, setSearchResults] = useState<Game[]>([]);
+  const [nextSearchUrl, setNextSearchUrl] = useState<string | null>('');
+  let listViewRef = useRef<FlatList>();
 
   function handleOnSubmit() {
-    searchGamesFromAPI(search).then((res) => {
-      if (searchResults.length)
+    searchGamesFromAPI(search).then((res: SearchResultType | undefined) => {
+      if (searchResults.length && listViewRef.current)
         listViewRef.current.scrollToOffset({ offset: 0, animated: true }); // flatlist auto-scroll to top
       // setTimout necessary cause searchGameBar renders in the same screen,
       // if deep in the infinite scoll it fires again before reaching the top of the bar.
       // TODO Better solution would be render each result list in a new screen
       //(no need to trigger scroll to top) and save search history on search page
       setTimeout(() => {
+        if (!res) return;
         setNextSearchUrl(res.next);
         setSearchResults(res.results);
         setSearch('');

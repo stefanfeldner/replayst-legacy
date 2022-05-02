@@ -1,7 +1,16 @@
+import { Dispatch, SetStateAction } from 'react';
 import { StyleSheet } from 'react-native';
 import { Searchbar } from 'react-native-paper';
+import { Game } from '../../types/Game';
 
-function SearchGameBar({ search, setSearch, handleOnSubmit }) {
+interface Props {
+  search: string;
+  setSearch: Dispatch<SetStateAction<string>>;
+  handleOnSubmit: () => void;
+  setSearchResults: Dispatch<SetStateAction<Game[]>>;
+}
+
+function SearchGameBar({ search, setSearch, handleOnSubmit, setSearchResults }: Props) {
   return (
     <Searchbar
       style={styles.bar}
@@ -26,6 +35,6 @@ const styles = StyleSheet.create({
     position: 'relative',
     right: 20,
     top: 5.5,
-    backgroundColor: '#000'
-  }
+    backgroundColor: '#000',
+  },
 });

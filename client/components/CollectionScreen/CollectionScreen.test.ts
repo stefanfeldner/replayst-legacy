@@ -1,1 +1,0 @@
-import CollectionScreen from "./CollectionScreen";

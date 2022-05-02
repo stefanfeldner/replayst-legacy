@@ -1,1 +1,0 @@
-import UpdateCollection from "./UpdateCollection";

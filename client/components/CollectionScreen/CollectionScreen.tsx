@@ -7,7 +7,7 @@ import { Game } from '../../types/Game';
 export default function CollectionScreen() {
   const { toRender }: { toRender: [Game[], Function], } = useContext(UserContext);
   const [tiles] = toRender;
-
+  
   return (
     <View style={styles.container}>
       {!tiles ? (

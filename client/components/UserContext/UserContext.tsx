@@ -20,9 +20,9 @@ interface Props {
 }
 
 const UserProvider = ({ children }: Props) => {
-  //const [nextUrl, setNextUrl] = useState<String>(''); //TODO pagination
+  //const [nextUrl, setNextUrl] = useState<string>(''); //TODO pagination
   const [toRender, setToRender] = useState<Game[]>([]); // to be rendered on user side
-  const [rendered, setRendered] = useState<String>('owned');
+  const [rendered, setRendered] = useState<string>('owned');
   const [owned, setOwned] = useState<Game[]>([]); // OWNED
   const [wishlist, setWishlist] = useState<Game[]>([]); // WL
   const [favorites, setFavorites] = useState<Game[]>([]); // FAV
@@ -42,12 +42,10 @@ const UserProvider = ({ children }: Props) => {
   };
   
   // call user collection at loading, rerenders only on value change
-  const userId: String = '626add893f286892111c9490';
+  const userId: string = '626add893f286892111c9490';
   
   useEffect(() => {
     getUserCollection(userId).then((res) => {
-      console.log(res);
-      
       if (!res.owned) return;
       // setNextUrl(res.next); // TODO ONLY FOR PAGINATION, to eventually implement on the backend
       setToRender(res.owned);

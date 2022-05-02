@@ -7,6 +7,17 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { PALETTE } from '../../services/theme';
 import { UserContext } from '../UserContext/UserContext';
+import { Game } from '../../types/Game';
+
+interface Props {
+  game: Game;
+  match: boolean;
+  setList: Function;
+  addIcon: string;
+  list: string;
+  removeIcon: string;
+  setGame?: Function;
+}
 
 // TODO handle the remove from collection case, with an alert for accidental press
 export default function UpdateCollection({
@@ -17,22 +28,21 @@ export default function UpdateCollection({
   list,
   addIcon,
   removeIcon,
-}) {
-  const [isAdded, setIsAdded] = useState(match);
+}: Props) {
+  const [isAdded, setIsAdded] = useState<boolean>(match);
   const { rendered, toRender } = useContext(UserContext);
   const [renderedList] = rendered;
   const [gamesToRender, setGamesToRender] = toRender;
 
-  const userId = '626add893f286892111c9490'; // TODO make it dynamic by user
+  const userId: string = '626add893f286892111c9490'; // TODO make it dynamic by user
   return (
-    <Pressable
+    <Pressable testID='toggleIcon'
       onPress={() =>
         !isAdded
           ? addGameToCollection(userId, game, list).then((res) => {
               // setGame(res.added); // logic ready for platform ownership feature
-              // console.log(res); // --> after a while it breaks by itself!
               setIsAdded(!isAdded);
-              setList((prev) => [
+              setList((prev: Game[]) => [
                 {
                   _id: res.added._id,
                   background_image: res.added.background_image,
@@ -44,18 +54,18 @@ export default function UpdateCollection({
             })
           : removeFromCollection(userId, game._id, list).then((res) => {
               setIsAdded((prev) => !prev);
-              setList((prev) => prev.filter((game) => game._id !== res.id));
+              setList((prev: Game[]) => prev.filter((game) => game._id !== res.id));
               renderedList === list &&
-                setGamesToRender((prev) =>
+                setGamesToRender((prev: Game[]) =>
                   prev.filter((game) => game._id !== res.id)
                 );
             })
       }
     >
       {isAdded ? (
-        <Ionicons name={removeIcon} size={28} color={PALETTE.one} />
+        <Ionicons name={removeIcon as any} size={28} color={PALETTE.one} />
       ) : (
-        <Ionicons name={addIcon} size={28} color={PALETTE.four} />
+        <Ionicons name={addIcon as any} size={28} color={PALETTE.four} />
       )}
     </Pressable>
   );
