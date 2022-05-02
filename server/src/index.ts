@@ -7,7 +7,6 @@ import config from 'config';
 
 const app = Express();
 
-const PORT:number = config.get<number>('PORT')|| 3000;
 
 // TODO add specific CORS logic --> This works with the iphone simulator if run using xCode
 const corsOptions = {
@@ -19,6 +18,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions)).use(morgan('short')).use(Express.json()).use(router);
 
+const PORT:number = config.get<number>('PORT')|| 3000;
 
 app.listen(PORT, () => {
   // tslint:disable-next-line:no-console

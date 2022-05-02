@@ -19,11 +19,9 @@
     "@types/config": "^0.0.41",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
-    "@types/lodash": "^4.14.182",
     "@types/morgan": "^1.9.3",
     "@types/nanoid": "^3.0.0",
     "@types/node": "^16.11.33",
-    "@types/pino": "^7.0.5",
     "eslint": "^8.13.0",
     "eslint-plugin-json": "^3.1.0",
     "nodemon": "^2.0.15",
@@ -38,6 +36,7 @@
     "express": "^4.17.3",
     "mongoose": "^6.3.0",
     "morgan": "^1.10.0",
-    "node-config": "^0.0.2"
+    "node-config": "^0.0.2",
+    "eslint": "^8.13.0"
   }
 }
