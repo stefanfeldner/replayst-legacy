@@ -34,7 +34,7 @@ const listName = 'favorites';
 const addIcon = 'ios-heart-outline';
 const removeIcon = 'ios-heart';
 
-test('should add game to favorites', async () => {
+test('should call setter function', async () => {
   const { findByTestId } = render(
     <UpdateCollection
       game={game}
@@ -45,12 +45,10 @@ test('should add game to favorites', async () => {
       removeIcon={removeIcon}
     />
   );
-
   const toggleIcon = await findByTestId('toggleIcon');
-
   await act(async () => {
     await fireEvent.press(toggleIcon);
   });
-
   expect(setList).toHaveBeenCalledTimes(1);
+  expect(toggleIcon).toBeDefined();
 });

@@ -1,5 +1,6 @@
 import { FetchResult, Game, SearchResultType } from '../types/Game';
 import { filterTileResult, filterSingleGameResult } from './Helpers';
+const axios = require('axios').default;
 
 const apiKEY = process.env.API_KEY;
 const apiURL = process.env.API_URL;
@@ -41,14 +42,12 @@ export async function fetchMore(url: string) {
 export async function fetchOne(id: number, source: string) {
   try {
     if (source === 'DB') {
-      const res = await fetch(`${baseURL}/game/${id}`);
-      const game: Game = await res.json();
-      return game;
+      const game = await axios.get(`${baseURL}/game/${id}`);
+      return game.data;
     } else {
-      const res = await fetch(`${apiURL}/games/${id}?${apiKEY}`);
-      const game = await res.json();
-      filterSingleGameResult(game);
-      return game;
+      const game = await axios.get(`${apiURL}/games/${id}?${apiKEY}`);
+      filterSingleGameResult(game.data);
+      return game.data;
     }
   } catch (error) {
     console.error(error);

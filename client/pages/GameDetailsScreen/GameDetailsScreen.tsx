@@ -23,9 +23,6 @@ interface Props {
 export default function GameDetailsScreen(props: Props) {
   const [game, setGame] = useState<Game>();
 
-  console.log(props.navigation);
-  
-
   const { owned, ownedIds, wishlist, wishIds, favorites, favsIds } =
     useContext(UserContext);
 
@@ -40,19 +37,26 @@ export default function GameDetailsScreen(props: Props) {
   const source = ownedMatch || wishMatch || favMatch ? 'DB' : 'API';
 
   useEffect(() => {
-    fetchOne(props.route.params.id, source).then((res) => setGame(res));
+    (async () => {
+      const game = await fetchOne(props.route.params.id, source);
+      setGame(game);
+    })();
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID="fullView">
       {!game ? (
-        <ActivityIndicator size="large" color={PALETTE.one} />
+        <ActivityIndicator
+          size="large"
+          color={PALETTE.one}
+          testID="activityIndicator"
+        />
       ) : (
         <ScrollView>
           <Image source={{ uri: game.background_image }} style={styles.image} />
           <View style={styles.buttons}>
             <UpdateCollection
-              data-testID='toggleIcon'
+              data-testid="toggleIcons"
               match={favMatch}
               game={game}
               list={'favorites'}
@@ -62,7 +66,7 @@ export default function GameDetailsScreen(props: Props) {
               //setGame={setGame} // TODO for platform ownership feature
             />
             <UpdateCollection
-              data-testID='toggleIcon'
+              data-testid="toggleIcons"
               match={wishMatch}
               game={game}
               list={'wishlist'}
@@ -72,7 +76,7 @@ export default function GameDetailsScreen(props: Props) {
               //setGame={setGame} // TODO for platform ownership feature
             />
             <UpdateCollection
-              data-testID='toggleIcon'
+              data-testid="toggleIcons"
               match={ownedMatch}
               game={game}
               list={'owned'}
@@ -85,7 +89,8 @@ export default function GameDetailsScreen(props: Props) {
           <View style={styles.bodyText}>
             <Text style={[styles.title, styles.textCol]}>{game.name}</Text>
             <View style={styles.devs}>
-              {game && game.developers &&
+              {game &&
+                game.developers &&
                 game.developers.map((dev) => (
                   <Text style={[styles.textCol, styles.devs]} key={dev.id}>
                     {dev.name}
@@ -96,11 +101,12 @@ export default function GameDetailsScreen(props: Props) {
               <View>
                 <View>
                   <Text style={styles.field}>Genres</Text>
-                  {game.genres && game.genres.map((genre) => (
-                    <Text style={styles.textCol} key={genre.id}>
-                      {genre.name}
-                    </Text>
-                  ))}
+                  {game.genres &&
+                    game.genres.map((genre) => (
+                      <Text style={styles.textCol} key={genre.id}>
+                        {genre.name}
+                      </Text>
+                    ))}
                 </View>
                 <View style={{ flexDirection: 'row' }}>
                   <Text style={styles.field}>

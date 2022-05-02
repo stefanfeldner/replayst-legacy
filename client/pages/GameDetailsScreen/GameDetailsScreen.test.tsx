@@ -1,5 +1,5 @@
 import GameDetailsScreen from './GameDetailsScreen';
-import { render } from '@testing-library/react-native';
+import { render, waitFor } from '@testing-library/react-native';
 
 const route = {
   key: 'Details-voZoAg-94IMmyqnnHlzwE',
@@ -9,17 +9,10 @@ const route = {
   },
 };
 
-test('should render correctly', () => {
-  const tree = render(<GameDetailsScreen route={route} navigation={''} />);
-  expect(tree).toMatchSnapshot();
+it('should render game name', async () => {
+  const { findByText } = render(
+    <GameDetailsScreen route={route} navigation={[]} />
+  );
+  const title = await findByText('Limbo');
+  expect(title).toBeDefined();
 });
-
-// TODO: Find out why it's not finding anything...
-// test('should find three collection buttons', async () => {
-//   const { findAllByTestId } = render(
-//     <GameDetailsScreen route={route} navigation={[]} />
-//   );
-//   const buttons = await findAllByTestId('toggleIcon');
-//   console.log('button length: ', buttons);
-//   expect(buttons.length).toBe(3);
-// });
