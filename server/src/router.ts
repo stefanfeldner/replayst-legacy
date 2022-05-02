@@ -1,6 +1,7 @@
 import {Express, Request, Response} from "express"
+import middleware from './middleware'
 
-import { populateWithGenres, populateWithPlatforms } from '../middleware/helpers';
+import { populateWithGenres, populateWithPlatforms } from 'middleware';
 
 import {
   createUser,
@@ -8,7 +9,7 @@ import {
   addGameToUser,
   removeOwnedGame,
   getOneGame
-} from './controllers/user';
+} from 'controllers';
 
 function routes(router: Express) {
   router.post('/register',(req: Request, res: Response) => createUser);

@@ -1,7 +1,9 @@
+import {Express, Request, Response, NextFunction} from 'express'
+
 const Genre = require('../models/genre');
 const Platform = require('../models/platform');
 
-async function populateWithGenres(req, res, next) {
+async function populateWithGenres(req: Request, res: Response, next: NextFunction) {
   try {
     const genIds = req.body.game.genres.map(genre => genre.id);
     const genres = await Genre.find({ id: { $in: genIds } });
@@ -14,7 +16,7 @@ async function populateWithGenres(req, res, next) {
 }
 
 // CHECK FUNCTIONALITY OF FRONTEND FILTERING, OTHERWISE PASS API OBJECT TO DB
-async function populateWithPlatforms(req, res, next) {
+async function populateWithPlatforms(req: Request, res: Response, next: NextFunction) {
   try {
     const platIds = req.body.game.platforms.map(p => p.id);
     const platforms = await Platform.find({ id: { $in: platIds } });
@@ -26,4 +28,4 @@ async function populateWithPlatforms(req, res, next) {
   }
 }
 
-module.exports = { populateWithGenres, populateWithPlatforms };
+export * from './helpers'

@@ -2,10 +2,13 @@ require('dotenv').config();
 import Express from "express";
 import cors from "cors";
 import morgan from "morgan";
-import router from "./router"
+import router from "./router";
+
+import config from 'config';
+
 const app = Express();
 
-const PORT:number = process.env.PORT || 3000;
+const PORT:number = config.get<number>('PORT')|| 3000;
 
 // TODO add specific CORS logic --> This works with the iphone simulator if run using xCode
 const corsOptions = {
