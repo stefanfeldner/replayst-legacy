@@ -1,17 +1,17 @@
 import mongoose from "mongoose";
 
-export interface platformInterface extends mongoose.Document {
+export interface PlatformInterface extends mongoose.Document {
   id: number,
   slug: string,
   name: string
 };
 
-const newPlatform = new mongoose.Schema<platformInterface>({
+const newPlatform = new mongoose.Schema<PlatformInterface>({
   id: Number,
   slug: String,
   name: String
 });
 
-const Platform = mongoose.model<platformInterface>('Platform', newPlatform);
+const Platform = mongoose.model<PlatformInterface>('Platform', newPlatform);
 
 export { Platform }

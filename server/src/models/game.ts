@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
-import { Genre, genreInterface} from "./genre";
-import { Developer, developerInterface } from "./developer";
-import { Platform, platformInterface } from "./platform";
+import { Genre, GenreInterface} from "./genre";
+import { Developer, DeveloperInterface } from "./developer";
+import { Platform, PlatformInterface } from "./platform";
 
-export interface gameInterface extends mongoose.Document {
+export interface GameInterface extends mongoose.Document {
   id: number,
   name: string,
   slug: string,
@@ -12,12 +12,12 @@ export interface gameInterface extends mongoose.Document {
   released: string,
   background_image: string,
   website: string,
-  genres: genreInterface, //{type: ref: 'Genre' }
-  platforms: platformInterface, //{type: ref: 'Genre' }
-  developers: developerInterface //[Developer]
+  genres: GenreInterface, // {type: ref: 'Genre' }
+  platforms: PlatformInterface, // {type: ref: 'Genre' }
+  developers: DeveloperInterface // [Developer]
 }
 
-const newGame = new mongoose.Schema<gameInterface>({
+const newGame = new mongoose.Schema<GameInterface>({
   id: Number,
   name: String,
   slug: String,
@@ -28,10 +28,10 @@ const newGame = new mongoose.Schema<gameInterface>({
   website: String,
   genres: [{ type: mongoose.Types.ObjectId, ref: 'Genre' }],
   platforms: [{ type: mongoose.Types.ObjectId, ref: 'Platform' }],
-  developers: [{ type: mongoose.Types.ObjectId, ref: 'Developer' }] //[Developer]
+  developers: [{ type: mongoose.Types.ObjectId, ref: 'Developer' }] // [Developer]
   // developers: [{ type: Schema.Types.ObjectId, ref: 'Developer' }] // TO REFACTOR IN PRODUCTION
 });
 
-const Game = mongoose.model<gameInterface>('Game', newGame);
+const Game = mongoose.model<GameInterface>('Game', newGame);
 
 export { Game }

@@ -2,12 +2,13 @@ import {Express, Request, Response} from "express";
 import bcrypt from 'bcrypt';
 import config from "config";
 
-import { Game, gameInterface } from "../models/game"; 
-import { User, userInterface } from "../models/user"; 
+import { Game, GameInterface } from "../models/game";
+import { User, UserInterface } from "../models/user";
+import log from "../utils/logger";
 
 export async function createUser(req: Request, res: Response) {
   const { email, password } = req.body;
-  const user:userInterface = await User.findOne({ email });
+  const user:UserInterface = await User.findOne({ email });
   if (user) {
     return res.status(409).send({ error: '409', message: 'Wrong credentials' });
   }
@@ -27,7 +28,7 @@ export async function getUserGames(req: Request, res: Response) {
   try {
     const { userId } = req.params;
     // TODO didn't return populated genres and platform fields yet
-    //populating only fields needed
+    // populating only fields needed
     const userColl = await User.findById(userId)
       .select('owned wishlist favorites')
       .populate(
@@ -43,7 +44,7 @@ export async function getUserGames(req: Request, res: Response) {
 export async function getOneGame(req: Request, res: Response) {
   try {
     const { id } = req.params;
-    const game: gameInterface = await Game.findOne({ id }).populate('genres platforms');
+    const game: GameInterface = await Game.findOne({ id }).populate('genres platforms');
     res.status(200).send(game);
   } catch (err: any) {
     res.status(500).send({ err, message: 'Server error, try again' });
@@ -56,14 +57,14 @@ export async function addGameToUser(req: Request, res: Response) {
   try {
     const { userId } = req.params;
     const { list } = req.body;
-    const game: gameInterface = await Game.findOne({ id: req.body.game.id }).populate({
+    const game: GameInterface = await Game.findOne({ id: req.body.game.id }).populate({
       path: 'genres platforms'
     });
     if (!game) {
-      let newGame: gameInterface = await Game.create(req.body.game);
+      let newGame: GameInterface = await Game.create(req.body.game);
       await User.findByIdAndUpdate(
         userId,
-        { $push: { [list]: { $each: [newGame._id], $position: 0 } } }, //$position works only with $each
+        { $push: { [list]: { $each: [newGame._id], $position: 0 } } }, // $position works only with $each
         { new: true }
       );
       newGame = await newGame.populate({ path: 'genres platforms' });
@@ -101,7 +102,7 @@ export async function removeOwnedGame(req: Request, res: Response) {
 
     res.status(200).send({ id: _id }); // TODO no need to send the full user, just send back the _id
   } catch (error: any) {
-    console.error(error);
+    log.error(error);
     res.status(500).send({ error, message: 'Server error, try again' });
   }
 }

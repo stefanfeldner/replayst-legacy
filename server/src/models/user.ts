@@ -1,18 +1,18 @@
 import mongoose from "mongoose";
-import { Game, gameInterface } from "./game";
+import { Game, GameInterface } from "./game";
 
-export interface userInterface extends mongoose.Document {
+export interface UserInterface extends mongoose.Document {
   email: string,
   nickname: string,
   name: string,
   surname: string,
   password: string,
-  owned: gameInterface //[{ type: Schema.Types.ObjectId, ref: 'Game' }], // TODO PLATFORM HIGHLIGHT [{ game :{ type: Schema.Types.ObjectId, ref: 'Game' }, platforms: [platforms]]
-  wishlist: gameInterface //[{ type: Schema.Types.ObjectId, ref: 'Game' }],
-  favorites: gameInterface //[{ type: Schema.Types.ObjectId, ref: 'Game' }]
+  owned: GameInterface // [{ type: Schema.Types.ObjectId, ref: 'Game' }], // TODO PLATFORM HIGHLIGHT [{ game :{ type: Schema.Types.ObjectId, ref: 'Game' }, platforms: [platforms]]
+  wishlist: GameInterface // [{ type: Schema.Types.ObjectId, ref: 'Game' }],
+  favorites: GameInterface // [{ type: Schema.Types.ObjectId, ref: 'Game' }]
 };
 
-const newUser = new mongoose.Schema<userInterface>({
+const newUser = new mongoose.Schema<UserInterface>({
   email: { type: String, required: true },
   nickname: String,
   name: { type: String, required: true },
@@ -23,6 +23,6 @@ const newUser = new mongoose.Schema<userInterface>({
   favorites: [{ type: mongoose.Types.ObjectId, ref: 'Game' }]
 });
 
-const User = mongoose.model<userInterface>('User', newUser);
+const User = mongoose.model<UserInterface>('User', newUser);
 
 export { User }
