@@ -1,26 +1,29 @@
-const User = require('../models/user');
-const Game = require('../models/game');
-const bcrypt = require('bcrypt');
+import {Express, Request, Response} from "express";
+import bcrypt from 'bcrypt';
+import config from "config";
 
-async function createUser(req, res) {
+import { Game, gameInterface } from "../models/game"; 
+import { User, userInterface } from "../models/user"; 
+
+export async function createUser(req: Request, res: Response) {
   const { email, password } = req.body;
-  const user = await User.findOne({ email });
+  const user:userInterface = await User.findOne({ email });
   if (user) {
     return res.status(409).send({ error: '409', message: 'Wrong credentials' });
   }
   try {
     if (password === '') throw new Error();
-    const pswd = await bcrypt.hash(password, +process.env.SALT);
+    const pswd = await bcrypt.hash(password, config.get('salt'));
     const newUser = await User.create({ ...req.body, password: pswd });
     res.status(201).send(newUser); // TODO don't send back all user info
-  } catch (err) {
+  } catch (err: any) {
     res.status(400).send({ err, message: 'Error, please retry' });
   }
 }
 
 // refactored query with populated method
 // TODO refactor after authentication for middleware obtained id (or API?)
-async function getUserGames(req, res) {
+export async function getUserGames(req: Request, res: Response) {
   try {
     const { userId } = req.params;
     // TODO didn't return populated genres and platform fields yet
@@ -32,32 +35,32 @@ async function getUserGames(req, res) {
         'id name metacritic released background_image'
       );
     res.status(200).send(userColl);
-  } catch (err) {
+  } catch (err: any) {
     res.status(500).send({ err, message: 'Server error, try again' });
   }
 }
 
-async function getOneGame(req, res) {
+export async function getOneGame(req: Request, res: Response) {
   try {
     const { id } = req.params;
-    const game = await Game.findOne({ id }).populate('genres platforms');
+    const game: gameInterface = await Game.findOne({ id }).populate('genres platforms');
     res.status(200).send(game);
-  } catch (err) {
+  } catch (err: any) {
     res.status(500).send({ err, message: 'Server error, try again' });
   }
 }
 
 // could be changed to add game and specify the property field in the body of the request?
 // TODO refactor after authentication for middleware obtained id (or API?)
-async function addGameToUser(req, res) {
+export async function addGameToUser(req: Request, res: Response) {
   try {
     const { userId } = req.params;
     const { list } = req.body;
-    const game = await Game.findOne({ id: req.body.game.id }).populate({
+    const game: gameInterface = await Game.findOne({ id: req.body.game.id }).populate({
       path: 'genres platforms'
     });
     if (!game) {
-      let newGame = await Game.create(req.body.game);
+      let newGame: gameInterface = await Game.create(req.body.game);
       await User.findByIdAndUpdate(
         userId,
         { $push: { [list]: { $each: [newGame._id], $position: 0 } } }, //$position works only with $each
@@ -81,12 +84,12 @@ async function addGameToUser(req, res) {
       // ---> what if the user clicks on the tile again? <---
       res.status(201).send({ added: game, message: 'Added to collection!' });
     }
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).send({ error, message: 'Server error, try again' });
   }
 }
 
-async function removeOwnedGame(req, res) {
+export async function removeOwnedGame(req: Request, res: Response) {
   const { userId } = req.params;
   const { _id, list } = req.body;
   try {
@@ -97,16 +100,8 @@ async function removeOwnedGame(req, res) {
     );
 
     res.status(200).send({ id: _id }); // TODO no need to send the full user, just send back the _id
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
     res.status(500).send({ error, message: 'Server error, try again' });
   }
 }
-
-module.exports = {
-  createUser,
-  addGameToUser,
-  removeOwnedGame,
-  getUserGames,
-  getOneGame
-};

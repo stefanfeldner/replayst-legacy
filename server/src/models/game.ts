@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import { genreInterface } from "./genre";
-import developerInterface from "./developer";
-import { platformInterface } from "./platform";
+import { Genre, genreInterface} from "./genre";
+import { Developer, developerInterface } from "./developer";
+import { Platform, platformInterface } from "./platform";
 
 export interface gameInterface extends mongoose.Document {
   id: number,
@@ -26,12 +26,12 @@ const newGame = new mongoose.Schema<gameInterface>({
   released: String,
   background_image: String,
   website: String,
-  genres: [{ type: Schema.Types.ObjectId, ref: 'genreInterface' }],
-  platforms: [{ type: Schema.Types.ObjectId, ref: 'platformInterface' }],
-  developers: [{ type: Schema.Types.ObjectId, ref: 'developerInterface' }] //[Developer]
+  genres: [{ type: mongoose.Types.ObjectId, ref: 'Genre' }],
+  platforms: [{ type: mongoose.Types.ObjectId, ref: 'Platform' }],
+  developers: [{ type: mongoose.Types.ObjectId, ref: 'Developer' }] //[Developer]
   // developers: [{ type: Schema.Types.ObjectId, ref: 'Developer' }] // TO REFACTOR IN PRODUCTION
 });
 
 const Game = mongoose.model<gameInterface>('Game', newGame);
 
-export default Game;
+export { Game }

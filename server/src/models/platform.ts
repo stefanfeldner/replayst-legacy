@@ -14,4 +14,4 @@ const newPlatform = new mongoose.Schema<platformInterface>({
 
 const Platform = mongoose.model<platformInterface>('Platform', newPlatform);
 
-export default Platform
+export { Platform }

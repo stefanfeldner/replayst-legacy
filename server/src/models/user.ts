@@ -1,18 +1,28 @@
-const mongoose = require('.');
+import mongoose from "mongoose";
+import { Game, gameInterface } from "./game";
 
-const { Schema } = mongoose;
+export interface userInterface extends mongoose.Document {
+  email: string,
+  nickname: string,
+  name: string,
+  surname: string,
+  password: string,
+  owned: gameInterface //[{ type: Schema.Types.ObjectId, ref: 'Game' }], // TODO PLATFORM HIGHLIGHT [{ game :{ type: Schema.Types.ObjectId, ref: 'Game' }, platforms: [platforms]]
+  wishlist: gameInterface //[{ type: Schema.Types.ObjectId, ref: 'Game' }],
+  favorites: gameInterface //[{ type: Schema.Types.ObjectId, ref: 'Game' }]
+};
 
-const newUser = new Schema({
+const newUser = new mongoose.Schema<userInterface>({
   email: { type: String, required: true },
   nickname: String,
   name: { type: String, required: true },
   surname: String,
   password: { type: String, required: true },
-  owned: [{ type: Schema.Types.ObjectId, ref: 'Game' }], // TODO PLATFORM HIGHLIGHT [{ game :{ type: Schema.Types.ObjectId, ref: 'Game' }, platforms: [platforms]]
-  wishlist: [{ type: Schema.Types.ObjectId, ref: 'Game' }],
-  favorites: [{ type: Schema.Types.ObjectId, ref: 'Game' }]
+  owned: [{ type: mongoose.Types.ObjectId, ref: 'Game' }], // TODO PLATFORM HIGHLIGHT [{ game :{ type: Schema.Types.ObjectId, ref: 'Game' }, platforms: [platforms]]
+  wishlist: [{ type: mongoose.Types.ObjectId, ref: 'Game' }],
+  favorites: [{ type: mongoose.Types.ObjectId, ref: 'Game' }]
 });
 
-const User = mongoose.model('User', newUser);
+const User = mongoose.model<userInterface>('User', newUser);
 
-module.exports = User;
+export { User }

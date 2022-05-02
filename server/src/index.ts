@@ -1,4 +1,3 @@
-require('dotenv').config();
 import Express from "express";
 import cors from "cors";
 import morgan from "morgan";

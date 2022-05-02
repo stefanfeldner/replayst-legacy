@@ -6,4 +6,12 @@ export interface developerInterface extends mongoose.Document  {
   slug: string
 };
 
-export default developerInterface;
+const newDeveloper = new mongoose.Schema<developerInterface>({
+  id: Number,
+  slug: String,
+  name: String
+});
+
+const Developer = mongoose.model<developerInterface>('Platform',  newDeveloper);
+
+export { Developer }

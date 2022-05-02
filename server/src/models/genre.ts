@@ -14,4 +14,4 @@ const newGenre = new mongoose.Schema<genreInterface>({
 
 const Genre = mongoose.model<genreInterface>('Genre', newGenre);
 
-export default Genre
+export { Genre }
