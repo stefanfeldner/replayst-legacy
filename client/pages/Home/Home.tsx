@@ -18,21 +18,18 @@ function Home() {
   const [nextSearchUrl, setNextSearchUrl] = useState<string | null>('');
   let listViewRef = useRef<FlatList>();
 
-  function handleOnSubmit() {
-    searchGamesFromAPI(search).then((res: SearchResultType | undefined) => {
-      if (searchResults.length && listViewRef.current)
-        listViewRef.current.scrollToOffset({ offset: 0, animated: true }); // flatlist auto-scroll to top
-      // setTimout necessary cause searchGameBar renders in the same screen,
-      // if deep in the infinite scoll it fires again before reaching the top of the bar.
-      // TODO Better solution would be render each result list in a new screen
-      //(no need to trigger scroll to top) and save search history on search page
+  async function handleOnSubmit() {
+    const results = await searchGamesFromAPI(search);
+    if (searchResults.length && listViewRef.current) {
+      listViewRef.current.scrollToOffset({ offset: 0, animated: true });
+      
       setTimeout(() => {
-        if (!res) return;
-        setNextSearchUrl(res.next);
-        setSearchResults(res.results);
+        if (!results) return;
+        setNextSearchUrl(results.next);
+        setSearchResults(results.results);
         setSearch('');
       }, 100);
-    });
+    }
   }
 
   return (
@@ -48,7 +45,7 @@ function Home() {
               <Pressable onPress={() => navigation.navigate('SearchScreen')}>
                 <Ionicons name="search" size={20} color="#dedbd6" />
               </Pressable>
-            )
+            ),
           })}
         />
         <HomeStack.Screen
@@ -57,7 +54,7 @@ function Home() {
           options={{
             headerBackTitle: '',
             headerTintColor: '#dedbd6',
-            headerStyle: { backgroundColor: '#20150d' }
+            headerStyle: { backgroundColor: '#20150d' },
           }}
         />
         <HomeStack.Screen
@@ -68,10 +65,6 @@ function Home() {
               setSearchResults={setSearchResults}
               nextSearchUrl={nextSearchUrl}
               setNextSearchUrl={setNextSearchUrl}
-              // tiles={searchResults} // WARNING --> NEEDED A PROP NAME CHANGE
-              // seTiles={setSearchResults} // --> SAME AS ABOVE (needed for infinite loop?)
-              // nextUrl={nextSearchUrl} // --> SAME AS ABOVE
-              // setNextUrl={setNextSearchUrl} // --> SAME AS ABOVE
               listViewRef={listViewRef}
             />
           )}
@@ -86,7 +79,7 @@ function Home() {
                 setSearchResults={setSearchResults}
                 handleOnSubmit={handleOnSubmit}
               />
-            )
+            ),
           }}
         />
       </HomeStack.Navigator>

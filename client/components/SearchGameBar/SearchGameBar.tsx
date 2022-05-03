@@ -10,7 +10,12 @@ interface Props {
   setSearchResults: Dispatch<SetStateAction<Game[]>>;
 }
 
-function SearchGameBar({ search, setSearch, handleOnSubmit, setSearchResults }: Props) {
+function SearchGameBar({
+  search,
+  setSearch,
+  handleOnSubmit,
+  setSearchResults,
+}: Props) {
   return (
     <Searchbar
       style={styles.bar}
