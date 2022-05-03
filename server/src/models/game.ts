@@ -32,6 +32,4 @@ const newGame = new mongoose.Schema<GameInterface>({
   // developers: [{ type: Schema.Types.ObjectId, ref: 'Developer' }] // TO REFACTOR IN PRODUCTION
 });
 
-const Game = mongoose.model<GameInterface>('Game', newGame);
-
-export { Game }
+export const Game = mongoose.model<GameInterface>('Game', newGame);

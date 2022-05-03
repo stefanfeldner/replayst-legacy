@@ -44,7 +44,7 @@ export async function getUserGames(req: Request, res: Response) {
 export async function getOneGame(req: Request, res: Response) {
   try {
     const { id } = req.params;
-    const game: GameInterface = await Game.findOne({ id }).populate('genres platforms');
+    const game: GameInterface = await Game.findOne({ id: +id }).populate('genres platforms');
     res.status(200).send(game);
   } catch (err: any) {
     res.status(500).send({ err, message: 'Server error, try again' });
