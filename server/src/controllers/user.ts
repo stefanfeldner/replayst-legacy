@@ -57,23 +57,33 @@ export async function addGameToUser(req: Request, res: Response) {
   try {
     const { userId } = req.params;
     const { list } = req.body;
-    const game: GameInterface = await Game.findOne({ id: req.body.game.id }).populate({
+    const game: GameInterface = await Game.findOne({ id: +req.body.game.id }).populate({
       path: 'genres platforms'
     });
     if (!game) {
+      // tslint:disable-next-line:no-console
+      console.log('before create', game)
       let newGame: GameInterface = await Game.create(req.body.game);
+      // tslint:disable-next-line:no-console
+      console.log('before', newGame)
       await User.findByIdAndUpdate(
         userId,
         { $push: { [list]: { $each: [newGame._id], $position: 0 } } }, // $position works only with $each
         { new: true }
-      );
-      newGame = await newGame.populate({ path: 'genres platforms' });
+        );
+        // tslint:disable-next-line:no-console
+        console.log('mid', newGame)
+        newGame = await newGame.populate({ path: 'genres platforms' });
+        // tslint:disable-next-line:no-console
+        console.log('end', newGame)
       // TODO sends back owned games keys, should I send back the whole list
       // or maybe just the new game tile elements to be rendered? NO, BECAUSE GAMES OWNED CAN ONLY BE ADDED FROM
       // the API SIDE, things will change for favorites/wishlist, unless I want to graphically update the frontend
       // when added to collection.
       res.status(201).send({ added: newGame, message: 'Added to collection!' });
     } else {
+      // tslint:disable-next-line:no-console
+      console.log('else block')
       await User.findByIdAndUpdate(
         userId,
         { $push: { [list]: game._id } },

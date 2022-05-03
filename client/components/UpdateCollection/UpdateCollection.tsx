@@ -36,12 +36,17 @@ export default function UpdateCollection({
 
   const userId: string = '626add893f286892111c9490'; // TODO make it dynamic by user
   return (
-    <Pressable testID='toggleIcon'
-      onPress={() =>
-        !isAdded
+    <Pressable
+      testID="toggleIcon"
+      onPress={() => {
+        console.log(userId, game, list);
+        
+        return !isAdded
           ? addGameToCollection(userId, game, list).then((res) => {
               // setGame(res.added); // logic ready for platform ownership feature
               setIsAdded(!isAdded);
+              console.log(res);
+
               setList((prev: Game[]) => [
                 {
                   _id: res.added._id,
@@ -54,13 +59,15 @@ export default function UpdateCollection({
             })
           : removeFromCollection(userId, game._id, list).then((res) => {
               setIsAdded((prev) => !prev);
-              setList((prev: Game[]) => prev.filter((game) => game._id !== res.id));
+              setList((prev: Game[]) =>
+                prev.filter((game) => game._id !== res.id)
+              );
               renderedList === list &&
                 setGamesToRender((prev: Game[]) =>
                   prev.filter((game) => game._id !== res.id)
                 );
-            })
-      }
+            });
+      }}
     >
       {isAdded ? (
         <Ionicons name={removeIcon as any} size={28} color={PALETTE.one} />
