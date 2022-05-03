@@ -11,7 +11,7 @@ interface Props {
 
 function GameTile({ game, cols }: Props) {
   const navigation = useNavigation();
-  
+
   return (
     <View style={styles.container}>
       <TouchableOpacity

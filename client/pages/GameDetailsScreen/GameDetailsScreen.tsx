@@ -56,34 +56,28 @@ export default function GameDetailsScreen(props: Props) {
           <Image source={{ uri: game.background_image }} style={styles.image} />
           <View style={styles.buttons}>
             <UpdateCollection
-              data-testid="toggleIcons"
               match={favMatch}
               game={game}
               list={'favorites'}
               setList={setFavs}
               addIcon={'ios-heart-outline'}
               removeIcon={'ios-heart'}
-              //setGame={setGame} // TODO for platform ownership feature
             />
             <UpdateCollection
-              data-testid="toggleIcons"
               match={wishMatch}
               game={game}
               list={'wishlist'}
               setList={setWish}
               addIcon={'ios-star-outline'}
               removeIcon={'ios-star'}
-              //setGame={setGame} // TODO for platform ownership feature
             />
             <UpdateCollection
-              data-testid="toggleIcons"
               match={ownedMatch}
               game={game}
               list={'owned'}
               setList={setPwned}
               addIcon={'ios-add-circle-outline'}
               removeIcon={'ios-checkmark-circle'}
-              //setGame={setGame} // TODO for platform ownership feature
             />
           </View>
           <View style={styles.bodyText}>
@@ -120,9 +114,9 @@ export default function GameDetailsScreen(props: Props) {
               <View>
                 <Text style={styles.field}>Platforms</Text>
                 {game.platforms &&
-                  game.platforms.map((p: Platform) => {
+                  game.platforms.map((p: Platform, index: number) => {
                     return (
-                      <Text style={styles.textCol} key={p.id}>
+                      <Text style={styles.textCol} key={index}>
                         {p.name}
                       </Text>
                     );

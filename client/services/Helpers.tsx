@@ -1,4 +1,4 @@
-import { FetchResult, Game, Platforms } from "../types/Game";
+import { Game, Platforms } from "../types/Game";
 
 // any here is huge game object
 export function filterTileResult(res: any) {
