@@ -9,6 +9,7 @@ let page = 1; // for dynamic pagination, no need for it atm cause we are given t
 
 export async function getPopularGames() {
   try {
+    console.log(`${apiURL}, ${apiKEY}`)
     const res = await fetch(`${apiURL}/games?${apiKEY}&${page}&page_size=40`);
     const popularGames: FetchResult = await res.json();
     return filterTileResult(popularGames);

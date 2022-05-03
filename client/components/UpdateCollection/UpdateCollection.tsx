@@ -49,7 +49,7 @@ export default function UpdateCollection({
                   id: res.added.id,
                   name: res.added.name,
                 },
-                ...prev,
+                ...prev
               ]);
             })
           : removeFromCollection(userId, game._id, list).then((res) => {
