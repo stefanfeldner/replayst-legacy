@@ -1,8 +1,8 @@
 import Express from "express";
 import cors from "cors";
 import morgan from "morgan";
-
 import config from 'config';
+
 import connect from "./utils/connect";
 import log from "./utils/logger";
 import routes from "./router";
@@ -10,8 +10,6 @@ import routes from "./router";
 
 const app = Express();
 
-
-// TODO add specific CORS logic --> This works with the iphone simulator if run using xCode
 const corsOptions = {
   origin: "http://localhost:19006",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",

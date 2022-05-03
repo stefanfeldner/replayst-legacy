@@ -14,7 +14,6 @@ export async function populateWithGenres(req: Request, res: Response, next: Next
   }
 }
 
-// CHECK FUNCTIONALITY OF FRONTEND FILTERING, OTHERWISE PASS API OBJECT TO DB
 export async function populateWithPlatforms(req: Request, res: Response, next: NextFunction) {
   try {
     const platIds: number[]  = req.body.game.platforms.map((p: PlatformInterface ) => p.id);

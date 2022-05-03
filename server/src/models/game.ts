@@ -29,7 +29,6 @@ const newGame = new mongoose.Schema<GameInterface>({
   genres: [{ type: mongoose.Types.ObjectId, ref: 'Genre' }],
   platforms: [{ type: mongoose.Types.ObjectId, ref: 'Platform' }],
   developers: [{ type: mongoose.Types.ObjectId, ref: 'Developer' }] // [Developer]
-  // developers: [{ type: Schema.Types.ObjectId, ref: 'Developer' }] // TO REFACTOR IN PRODUCTION
 });
 
 export const Game = mongoose.model<GameInterface>('Game', newGame);
