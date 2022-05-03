@@ -40,7 +40,7 @@ export async function getUserGames(req: Request, res: Response) {
 export async function getOneGame(req: Request, res: Response) {
   try {
     const { id } = req.params;
-    const game: GameInterface = await Game.findOne({ id: +id }).populate('genres platforms'); 
+    const game: GameInterface = await Game.findOne({ id: +id }).populate('genres platforms');
     res.status(200).send(game);
   } catch (err: any) {
     res.status(500).send({ err, message: 'Server error, try again' });
@@ -58,7 +58,7 @@ export async function addGameToUser(req: Request, res: Response) {
       let newGame: GameInterface = await Game.create(req.body.game);
       await User.findByIdAndUpdate(
         userId,
-        { $push: { [list]: { $each: [newGame._id], $position: 0 } } }, 
+        { $push: { [list]: { $each: [newGame._id], $position: 0 } } },
         { new: true }
       );
       newGame = await newGame.populate({ path: 'genres platforms' });
@@ -78,7 +78,7 @@ export async function addGameToUser(req: Request, res: Response) {
 
 export async function removeOwnedGame(req: Request, res: Response) {
   const { userId } = req.params;
-  const { _id, list } = req.body; //: {_id: number list: }
+  const { _id, list } = req.body; // : {_id: number list: }
   try {
     await User.findByIdAndUpdate(
       userId,
