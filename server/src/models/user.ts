@@ -7,7 +7,7 @@ export interface UserInterface extends mongoose.Document {
   name: string,
   surname: string,
   password: string,
-  owned: GameInterface // [{ type: Schema.Types.ObjectId, ref: 'Game' }], // TODO PLATFORM HIGHLIGHT [{ game :{ type: Schema.Types.ObjectId, ref: 'Game' }, platforms: [platforms]]
+  owned: GameInterface // [{ type: Schema.Types.ObjectId, ref: 'Game' }], 
   wishlist: GameInterface // [{ type: Schema.Types.ObjectId, ref: 'Game' }],
   favorites: GameInterface // [{ type: Schema.Types.ObjectId, ref: 'Game' }]
 };
@@ -18,7 +18,7 @@ const newUser = new mongoose.Schema<UserInterface>({
   name: { type: String, required: true },
   surname: String,
   password: { type: String, required: true },
-  owned: [{ type: mongoose.Types.ObjectId, ref: 'Game' }], // TODO PLATFORM HIGHLIGHT [{ game :{ type: Schema.Types.ObjectId, ref: 'Game' }, platforms: [platforms]]
+  owned: [{ type: mongoose.Types.ObjectId, ref: 'Game' }], //[{ game :{ type: Schema.Types.ObjectId, ref: 'Game' }, platforms: [platforms]]
   wishlist: [{ type: mongoose.Types.ObjectId, ref: 'Game' }],
   favorites: [{ type: mongoose.Types.ObjectId, ref: 'Game' }]
 });
