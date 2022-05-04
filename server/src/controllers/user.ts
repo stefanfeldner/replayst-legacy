@@ -1,20 +1,23 @@
-import { Request, Response} from "express";
+import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
-import config from "config";
+import config from 'config';
 
-import { Game, GameInterface } from "../models/game";
-import { User, UserInterface } from "../models/user";
-import log from "../utils/logger";
+import { Game, GameInterface } from '../models/game';
+import { User, UserInterface } from '../models/user';
+import log from '../utils/logger';
 
 export async function createUser(req: Request, res: Response) {
-  const { email, password }: {email: string, password: string} = req.body;
-  const user:UserInterface = await User.findOne({ email });
+  const { email, password }: { email: string; password: string } = req.body;
+  const user: UserInterface = await User.findOne({ email });
   if (user) {
     return res.status(409).send({ error: '409', message: 'Wrong credentials' });
   }
   try {
     if (password === '') throw new Error();
-    const pswd: string = await bcrypt.hash(password, config.get<number>('salt'));
+    const pswd: string = await bcrypt.hash(
+      password,
+      config.get<number>('salt')
+    );
     const newUser = await User.create({ ...req.body, password: pswd });
     res.status(201).send(newUser);
   } catch (err: any) {
@@ -51,19 +54,31 @@ export async function addGameToUser(req: Request, res: Response) {
   try {
     const { userId } = req.params;
     const { list } = req.body;
-    const game: GameInterface = await Game.findOne({ id: req.body.game.id }).populate({
-      path: 'genres platforms'
+    const game: GameInterface = await Game.findOne({
+      id: +req.body.game.id,
+    }).populate({
+      path: 'genres platforms',
     });
     if (!game) {
+      // tslint:disable-next-line:no-console
+      console.log('before create', game);
       let newGame: GameInterface = await Game.create(req.body.game);
+      // tslint:disable-next-line:no-console
+      console.log('before', newGame);
       await User.findByIdAndUpdate(
         userId,
         { $push: { [list]: { $each: [newGame._id], $position: 0 } } },
         { new: true }
       );
+      // tslint:disable-next-line:no-console
+      console.log('mid', newGame);
       newGame = await newGame.populate({ path: 'genres platforms' });
+      // tslint:disable-next-line:no-console
+      console.log('end', newGame);
       res.status(201).send({ added: newGame, message: 'Added to collection!' });
     } else {
+      // tslint:disable-next-line:no-console
+      console.log('else block');
       await User.findByIdAndUpdate(
         userId,
         { $push: { [list]: game._id } },

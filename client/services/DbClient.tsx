@@ -19,8 +19,11 @@ export async function addGameToCollection(
   try {
     const res = await fetch(`${baseURL}/owned/${user}`, {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ game: game, list: list }),
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ game, list }),
     });
     const addedGame = await res.json();
     return addedGame;
