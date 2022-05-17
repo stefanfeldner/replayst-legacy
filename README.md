@@ -1,6 +1,6 @@
 # Replayst Legacy Project
 
-This project was created by [grampassonnia](https://github.com/grampassonnia) and improved by [MrBroadie](https://github.com/MrBroadie), and [stefanfeldner](https://github.com/stefanfeldner).
+This project was created by [grampassonnia](https://github.com/grampassonnia) and improved by [MrBroadie](https://github.com/MrBroadie), and [stefanfeldner](https://github.com/stefanfeldner) during the legacy project week.
 
 ## What is replayst?
 
