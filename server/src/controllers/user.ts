@@ -95,7 +95,7 @@ export async function addGameToUser(req: Request, res: Response) {
 
 export async function removeOwnedGame(req: Request, res: Response) {
   const { userId } = req.params;
-  const { _id, list } = req.body; //: {_id: number list: }
+  const { _id, list } = req.body; // : {_id: number list: }
   try {
     await User.findByIdAndUpdate(
       userId,

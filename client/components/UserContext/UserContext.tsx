@@ -46,6 +46,8 @@ const UserProvider = ({ children }: Props) => {
   
   useEffect(() => {
     getUserCollection(userId).then((res) => {
+      console.log('res', res);
+      
       if (!res.owned) return;
       // setNextUrl(res.next); // TODO ONLY FOR PAGINATION, to eventually implement on the backend
       setToRender(res.owned);
