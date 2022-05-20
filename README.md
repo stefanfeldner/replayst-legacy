@@ -1,14 +1,21 @@
 # Replayst Legacy Project
 
-This project was created by [grampassonnia](https://github.com/grampassonnia) and improved by [MrBroadie](https://github.com/MrBroadie), and [stefanfeldner](https://github.com/stefanfeldner) during the legacy project week.
-
 ## What is replayst?
 
 Replayst is a Full Stack Mobile application, that helps you to manage your video game collections, save your favorite games, learn more about them, and find new and interesting games to play in a list coming from the RAWG Video Games Database API.
 
 ### Tech Stack
 
-Replayst was built with React Native and Expo using Node.js with Express.js as the backend and MongoDB as its database.
+- TypeScript
+  
+- React Native with Expo
+  
+- Node.js with Expess.js
+  
+- MongoDb
+  
+- RAWG Video Games Database API
+  
 
 ### Improvements
 
@@ -20,3 +27,42 @@ Here are some impressions of the app:
 
 ![Details Page](./detail.png)
 ![Api Results](./api.png)
+
+### Setup Environment Variables
+
+Server
+
+```bash
+PORT = 3000
+LOCALDB = mongodb://localhost:PORT/NAME
+SALT = 10
+```
+
+Client
+
+```bash
+API_KEY=key=KEY
+API_URL=https://api.rawg.io/api
+```
+
+### Starting
+
+Server
+
+```bash
+npm run build # will build the typescript files
+npm run start # to start the server
+```
+
+To get the client up and running, you can run these commands:
+
+```bash
+npm run start # will start expo
+npm run android # will start android emulator
+npm run ios # will start ios emulator
+npm run web # will start a web emulator
+```
+
+### Contributors
+
+This project was created by [grampassonnia](https://github.com/grampassonnia) and improved by [MrBroadie](https://github.com/MrBroadie), and [stefanfeldner](https://github.com/stefanfeldner) during the legacy project week.
