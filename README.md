@@ -6,16 +6,14 @@ Replayst is a Full Stack Mobile application, that helps you to manage your video
 
 ### Tech Stack
 
-- TypeScript
-  
-- React Native with Expo
-  
-- Node.js with Expess.js
-  
-- MongoDb
-  
-- RAWG Video Games Database API
-  
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![React Native](https://img.shields.io/badge/react_native-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![Expo](https://img.shields.io/badge/expo-1C1E24?style=for-the-badge&logo=expo&logoColor=#D04A37)
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
+![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)  
+
+The data comes from the RAWG Video Games Database API.
 
 ### Improvements
 
